@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/28 13:30:21 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/28 16:13:24 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	ft_check_specifier(char **str, t_flags *flags, va_list ap)
 	else if (**str == 'u')
 		return (ft_putnbr(ft_get_nbr_u(ap, flags)));
 	else if (**str == 'x')
-		return (ft_puthex(va_arg(ap, unsigned int), 0, flags));
+		return (ft_puthex(ft_get_nbr_u(ap, flags), 0, flags));
 	else if (**str == 'X')
-		return (ft_puthex(va_arg(ap, unsigned int), 1, flags));
+		return (ft_puthex(ft_get_nbr_u(ap, flags), 1, flags));
 	return (0);
 }
 
@@ -39,10 +39,22 @@ int	ft_check_specifier(char **str, t_flags *flags, va_list ap)
 
 int	ft_handle(char **str, t_flags *flags, va_list ap)
 {
+	int flag;
+
+	flag = 0;
+	while (**str == ' ')
+	{
+		(*str)++;
+		flag = 1;
+	}
 	ft_init_flags(flags);
-	while (ft_handle_flags(str, flags) || ft_handle_width(str, flags, ap)
-		   || ft_handle_precision(str, flags, ap)
-		   || ft_handle_length(str, flags));
+	if (flag)
+		flags->space = 1;
+	while (ft_handle_flags(str, flags));
+
+	ft_handle_width(str, flags, ap);
+	ft_handle_precision(str, flags, ap);
+	ft_handle_length(str, flags);
 	if (ft_isalpha(**str) || **str == '%')
 		return (ft_check_specifier(str, flags, ap));
 	return (0);

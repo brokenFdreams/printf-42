@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:58:59 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/27 17:05:10 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/28 14:28:58 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_init_flags(t_flags *flags)
 ** Handle flags
 */
 
-int		ft_handle_flags(char **str, t_flags	*flags)
+int		ft_handle_flags(char **str, t_flags *flags)
 {
 	if (**str == '0')
 		flags->zero = 1;
@@ -50,9 +50,11 @@ int		ft_handle_flags(char **str, t_flags	*flags)
 	(*str)++;
 	return (1);
 }
+
 /*
 ** Handle min field width
 */
+
 int		ft_handle_width(char **str, t_flags *flags, va_list ap)
 {
 	int	width;
@@ -90,39 +92,36 @@ int		ft_handle_precision(char **str, t_flags *flags, va_list ap)
 {
 	int	precision;
 
-	if (**str == '.')
-	{
-		(*str)++;
-		if (!ft_isdigit(**str) && **str != '*')
-		{	
-			flags->precision = -1;
-			return (1);
-		}
-		if (**str == '*')
-			precision = va_arg(ap, int);
-		else
-			precision = ft_atoi(*str);
-		flags->precision = precision;
-		if (flags->precision < 0 && flags->precision != -1)
-			flags->precision = 0;
-		if (**str == '*')
-			precision = 1;
-		else if (precision == 0)
-			(*str)++;
-		while (precision > 0)
-		{
-			precision /= 10;
-			(*str)++;
-		}
+	if (**str != '.')
+		return (0);
+	(*str)++;
+	flags->precision = -1;
+	if (!ft_isdigit(**str) && **str != '*')
 		return (1);
+	if (**str == '*')
+		precision = va_arg(ap, int);
+	else
+		precision = ft_atoi(*str);
+	flags->precision = precision;
+	if (flags->precision < 0 && flags->precision != -1)
+		flags->precision = 0;
+	if (**str == '*')
+		precision = 1;
+	else if (precision == 0)
+		(*str)++;
+	while (precision > 0)
+	{
+		precision /= 10;
+		(*str)++;
 	}
-	return (0);
+	return (1);
 }
 
 /*
 ** Handle length
 ** ft_length(char **str, t_flags *flags, int length, int size)
 */
+
 int		ft_handle_length(char **str, t_flags *flags)
 {
 	if (**str == 'h' && *(*str + 1) == 'h')

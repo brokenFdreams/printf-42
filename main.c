@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/28 13:41:09 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/28 15:27:16 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main(int argc, char **argv)
 */
 	ft_printf("mine %hhu\n", 300);
 	printf("origin %hhu\n", 300);
-	ft_printf("mine %u\n", 2147483647);
-	printf("origin %u\n", 2147483647);
+	ft_printf("mine %d\n", 2147483648);
+	printf("origin %d\n", 2147483648);
 //	ft_printf("mine 0x64 %x [%X]\n", c, c);
 //	printf("original 0x64 %x [%X]\n", c, c);
 //	ft_printf("mine 100 %x [%X]\n", k, k);
