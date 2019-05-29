@@ -6,13 +6,13 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 16:19:37 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/27 17:09:43 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/29 13:26:50 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_puthex(unsigned int num, int flag, t_flags *flags)
+char	*ft_puthex(va_list ap, int flag, t_flags *flags)
 {
 	char			*str;
 	int				count;

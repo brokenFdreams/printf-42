@@ -6,30 +6,34 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/28 16:13:24 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/29 13:43:59 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_check_specifier(char **str, t_flags *flags, va_list ap)
+char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 {
 	if (**str == '%')
-		return (ft_putstr("%", flags));
-	else if (**str == 's' || **str == 'S')
-		return (ft_putstr(va_arg(ap, char*), flags));
+		return (ft_get_str("%", flags, 0));
+	else if (**str == 's')
+		return (ft_get_str(ap, flags, 0));
+	else if (**str == 'S')
+		return (ft_get_str(ap, flags, 1));
 	else if (**str == 'd')
-		return (ft_putnbr(ft_get_nbr(ap, flags)));
-	else if (**str == 'c' || **str == 'C')
-		return (ft_putchar((char)va_arg(ap, int)));
+		return (ft_get_nbr(ap, flags));
+	else if (**str == 'c')
+		return (ft_get_char(ap, 0));
+	else if (**str == 'C')
+		return (ft_get_char(ap, 1));
 	else if (**str == 'f')
-		return (ft_putdouble(ft_get_double(ap, flags), flags));
+		return (ft_get_double(ap, flags));
 	else if (**str == 'u')
-		return (ft_putnbr(ft_get_nbr_u(ap, flags)));
+		return (ft_get_nbr_u(ap, flags));
 	else if (**str == 'x')
-		return (ft_puthex(ft_get_nbr_u(ap, flags), 0, flags));
+		return (ft_get_hex(ap, 0, flags));
 	else if (**str == 'X')
-		return (ft_puthex(ft_get_nbr_u(ap, flags), 1, flags));
+		return (ft_get_hex(ap, 1, flags));
 	return (0);
 }
 
@@ -37,7 +41,7 @@ int	ft_check_specifier(char **str, t_flags *flags, va_list ap)
 ** [flags][min field width][precision][length][specifier]
 */
 
-int	ft_handle(char **str, t_flags *flags, va_list ap)
+char	*ft_handle(char **str, t_flags *flags, va_list ap)
 {
 	int flag;
 
@@ -60,25 +64,49 @@ int	ft_handle(char **str, t_flags *flags, va_list ap)
 	return (0);
 }
 
+char	*ft_handle_space(char **str, t_flags *flags)
+{
+	int 	i;
+	char	*save;
+
+	i = 0;
+	while (str[i] != '%' && str[i])
+		i++;
+	if (!(save = (char*)malloc(sizeof(char) * (i + 1))))
+		ft_error();
+	save = ft_strncpy(save, str, i);
+	*str = (*str) + i - 1;
+	flags->bytes += i;
+	return (save);
+}
+
 int	ft_printf(char *str, ...)
 {
 	va_list	ap;
-	int		bytes;
 	t_flags	flags;
+	char	*save;
+	char	*tmp;
 
 	va_start(ap, str);
 	bytes = 0;
+	flags->bytes = 0;
+	flags->buffer_size = 1;
 	while (*str)
 	{
 		if (*str == '%')
 		{
 			str++;
-			bytes += ft_handle(&str, &flags, ap);
+			save = ft_handle(&str, &flags, ap);
 		}
 		else
-			bytes += ft_putchar(*str);
+			save = ft_handle_space(&str, &flags);
 		str++;
+		tmp = flags->output;
+		flags->output = ft_strjoin(flags->output, tmp);
+		flags->output = ft_strjoin(flags->output, save);
+		ft_strdel(tmp);
+		ft_strdel(save);
 	}
 	va_end(ap);
-	return (bytes);
+	return (flags->bytes);
 }

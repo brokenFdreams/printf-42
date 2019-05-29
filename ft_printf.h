@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/28 14:15:25 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/29 15:28:16 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdint.h>
+# include "libft.h"
 
 # define LENGTH_HH 1
 # define LENGTH_H 2
@@ -37,21 +38,18 @@ typedef struct	s_flags
 	int			width;
 	int			precision;
 	int			length;
+	int			bytes;
+	int			buffer_size;
+	char		*output;
 }				t_flags;
 
-int				ft_isdigit(int c);
-int				ft_isalpha(int c);
-int				ft_printf(char *str, ...);
-int				ft_putchar(char c);
-int				ft_putstr(char *str, t_flags *flags);
-int				ft_putnbr(intmax_t nbr);
-int				ft_putnbr_u(uintmax_t nbr);
-int				ft_putdouble(long double d, t_flags *flags);
-int				ft_puthex(unsigned int num, int flag, t_flags *flags);
-int				ft_atoi(const char *str);
-intmax_t		ft_get_nbr(va_list ap, t_flags *flags);
-uintmax_t		ft_get_nbr_u(va_list ap, t_flags *flags);
-long double		ft_get_double(va_list ap, t_flags *flags);
+int				ft_fill_nbr_f(char **save, int size, t_flags *flags);
+char			*ft_get_nbr(va_list ap, t_flags *flags);
+char			*ft_get_nbr_u(va_list ap, t_flags *flags);
+char			*ft_get_double(va_list ap, t_flags *flags);
+char			*ft_get_hex(va_list ap, t_flags *flags);
+char			*ft_get_str(char *str, t_flags *flags);
+char			*ft_get_char(va_list ap, t_flags *flags);
 void			ft_error(va_list ap);
 void			ft_strdel(char **as);
 void			ft_init_flags(t_flags *flags);

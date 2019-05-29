@@ -2,6 +2,6 @@
 
 int main(void)
 {
-	printf("% 0-+d", 10);
+	printf("%5.1f", 10.0);
 	return (0);
 }

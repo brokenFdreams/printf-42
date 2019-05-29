@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_check_flags.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 14:52:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/27 16:57:35 by fsinged          ###   ########.fr       */
+/*   Created: 2019/05/29 14:04:39 by fsinged           #+#    #+#             */
+/*   Updated: 2019/05/29 14:07:16 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_isdigit(int c)
+void	ft_check_nbr_f(t_flags *flags)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	if (flags->plus)
+		flags->space = 0;
+	if (flags->minus)
+		flags->zero = 0;
 }
