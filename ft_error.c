@@ -6,14 +6,13 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 15:18:16 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/24 15:36:15 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/29 16:59:54 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_error(va_list ap)
+void	ft_error()
 {
-	va_end(ap);
 	exit(0);
 }

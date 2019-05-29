@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/29 13:43:59 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/29 15:36:58 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 		return (ft_get_str(ap, flags, 0));
 	else if (**str == 'S')
 		return (ft_get_str(ap, flags, 1));
-	else if (**str == 'd')
+	else if (**str == 'd' || **str == 'i')
 		return (ft_get_nbr(ap, flags));
 	else if (**str == 'c')
 		return (ft_get_char(ap, 0));
