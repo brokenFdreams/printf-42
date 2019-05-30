@@ -6,11 +6,11 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 14:35:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/29 16:26:25 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/30 16:39:21 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../../includes/ft_printf.h"
 
 int			ft_length_nbr(intmax_t nbr)
 {
@@ -98,5 +98,5 @@ char		*ft_get_nbr(va_list ap, t_flags *flags)
 		nbr = (size_t)va_arg(ap, size_t);
 	else
 		nbr = (int)va_arg(ap, int);
-	return (ft_itoa_nbr(nbr));
+	return (ft_itoa_nbr(nbr, flags));
 }

@@ -6,17 +6,17 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:11:44 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/30 12:11:47 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/30 16:38:34 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../../includes/ft_printf.h"
 
 /*
 ** itoa for uintmax_t
 */
 
-char		*ft_itoa_u(uintmax_t nbr)
+static char	*ft_itoa_u(uintmax_t nbr)
 {
 	int		i;
 	int		size;
@@ -39,7 +39,7 @@ char		*ft_itoa_u(uintmax_t nbr)
 ** itoa for intmax_t
 */
 
-char		*ft_itoa_d(intmax_t nbr, t_flags *flags)
+static char	*ft_itoa_d(intmax_t nbr, t_flags *flags)
 {
 	int		i;
 	int		size;
@@ -66,7 +66,7 @@ char		*ft_itoa_d(intmax_t nbr, t_flags *flags)
 	return (save);
 }
 
-char		*ft_fill_d_flags(char *num, char *ost, t_flags *flags)
+static char	*ft_fill_d_flags(char *num, char *ost, t_flags *flags)
 {
 	char	*save;
 	int		i;

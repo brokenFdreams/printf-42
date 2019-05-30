@@ -6,16 +6,16 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/29 15:36:58 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/30 16:27:10 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 {
 	if (**str == '%')
-		return (ft_get_str("%", flags, 0));
+		return (ft_get_percent(flags));
 	else if (**str == 's')
 		return (ft_get_str(ap, flags, 0));
 	else if (**str == 'S')
@@ -23,17 +23,17 @@ char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 	else if (**str == 'd' || **str == 'i')
 		return (ft_get_nbr(ap, flags));
 	else if (**str == 'c')
-		return (ft_get_char(ap, 0));
+		return (ft_get_char(ap, flags, 0));
 	else if (**str == 'C')
-		return (ft_get_char(ap, 1));
+		return (ft_get_char(ap, flags, 1));
 	else if (**str == 'f')
 		return (ft_get_double(ap, flags));
 	else if (**str == 'u')
 		return (ft_get_nbr_u(ap, flags));
 	else if (**str == 'x')
-		return (ft_get_hex(ap, 0, flags));
+		return (ft_get_hex(ap, flags, 0));
 	else if (**str == 'X')
-		return (ft_get_hex(ap, 1, flags));
+		return (ft_get_hex(ap, flags, 1));
 	return (0);
 }
 
@@ -70,11 +70,11 @@ char	*ft_handle_space(char **str, t_flags *flags)
 	char	*save;
 
 	i = 0;
-	while (str[i] != '%' && str[i])
+	while ((*str)[i] != '%' && (*str)[i])
 		i++;
 	if (!(save = (char*)malloc(sizeof(char) * (i + 1))))
 		ft_error();
-	save = ft_strncpy(save, str, i);
+	save = ft_strncpy(save, *str, i);
 	*str = (*str) + i - 1;
 	flags->bytes += i;
 	return (save);
@@ -88,9 +88,7 @@ int	ft_printf(char *str, ...)
 	char	*tmp;
 
 	va_start(ap, str);
-	bytes = 0;
-	flags->bytes = 0;
-	flags->buffer_size = 1;
+	flags.bytes = 0;
 	while (*str)
 	{
 		if (*str == '%')
@@ -101,12 +99,13 @@ int	ft_printf(char *str, ...)
 		else
 			save = ft_handle_space(&str, &flags);
 		str++;
-		tmp = flags->output;
-		flags->output = ft_strjoin(flags->output, tmp);
-		flags->output = ft_strjoin(flags->output, save);
-		ft_strdel(tmp);
-		ft_strdel(save);
+		tmp = flags.output;
+		flags.output = ft_strjoin(flags.output, tmp);
+		flags.output = ft_strjoin(flags.output, save);
+		ft_strdel(&tmp);
+		ft_strdel(&save);
 	}
+	write(1, save, flags.bytes + 1);
 	va_end(ap);
-	return (flags->bytes);
+	return (flags.bytes);
 }

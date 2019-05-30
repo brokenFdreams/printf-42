@@ -6,19 +6,26 @@
 #    By: fsinged <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/17 15:47:32 by fsinged           #+#    #+#              #
-#    Updated: 2019/05/29 12:58:38 by fsinged          ###   ########.fr        #
+#    Updated: 2019/05/30 16:33:42 by fsinged          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libftprintf.a
-SRCS = ft_printf.c \
-ft_putdouble.c \
-ft_puthex.c \
-ft_get_nbr.c \
-ft_get_double.c \
-ft_error.c \
-ft_flags.c \
-ft_length_flag.c
+PATH = ./src/types/
+SPATH = ./src/
+FLAGS = -Wall -Wextra -Werror
+SRCS = $(SPATH)ft_printf.c \
+$(PATH)ft_get_double.c \
+$(PATH)ft_get_hex.c \
+$(PATH)ft_get_nbr.c \
+$(PATH)ft_get_double.c \
+$(PATH)ft_get_str.c \
+$(PATH)ft_get_char.c \
+$(PATH)ft_get_percent.c \
+$(SPATH)ft_error.c \
+$(SPATH)ft_check_flags.c \
+$(SPATH)ft_flags.c \
+$(SPATH)ft_length_flag.c
 LIBFT = ./libft/
 LIB = ./libft/libft.a
 OBJ = $(SRCS:.c=.o)
