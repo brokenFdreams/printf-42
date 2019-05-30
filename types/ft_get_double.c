@@ -6,20 +6,47 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:11:44 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/29 16:59:29 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/30 12:11:47 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoa_d(intmax_t nbr)
+/*
+** itoa for uintmax_t
+*/
+
+char		*ft_itoa_u(uintmax_t nbr)
+{
+	int		i;
+	int		size;
+	char	*save;
+
+	size = ft_length_u(nbr);
+	if (!(save = (char*)malloc(sizeof(char) * size)))
+		ft_error();
+	i = size - 2;
+	while (nbr / 10 || nbr % 10)
+	{
+		save[i--] = nbr % 10 + '0';
+		nbr /= 10;
+	}
+	save[size - 1] = '\0';
+	return (save);
+}
+
+/*
+** itoa for intmax_t
+*/
+
+char		*ft_itoa_d(intmax_t nbr, t_flags *flags)
 {
 	int		i;
 	int		size;
 	int		flag;
 	char	*save;
 
-	size = ft_length_nbr(nbr);
+	size = ft_length_d(nbr);
 	flag = nbr < 0 ? -1 : 1;
 	if (!flag || flags->plus)
 		size++;
@@ -36,11 +63,10 @@ char	*ft_itoa_d(intmax_t nbr)
 	else if (flags->plus)
 		save[i] = '+';
 	save[size - 1] = '\0';
-	flag->plus = 0;
 	return (save);
 }
 
-char	*ft_fill_d_flags(char *num, char *ost, t_flags *flags)
+char		*ft_fill_d_flags(char *num, char *ost, t_flags *flags)
 {
 	char	*save;
 	int		i;
@@ -49,17 +75,15 @@ char	*ft_fill_d_flags(char *num, char *ost, t_flags *flags)
 	size = ft_strlen(num + flags->precision + 2);
 	if (!(save = ft_strnew(flags->width + 1)))
 		ft_error();
+	i = 0;
 	while (size <= flags->width)
 	{
 		if (flags->minus)
-		{
-			if (flags->zero)
-				save[i] = '0';
-			else
-				save[i] = ' ';
-		}
-		else
 			save[size + i - 1] = ' ';
+		else if (flags->zero)
+			save[i] = '0';
+		else
+			save[i] = ' ';
 		i++;
 	}
 	save = ft_strjoin(save, num);
@@ -70,7 +94,13 @@ char	*ft_fill_d_flags(char *num, char *ost, t_flags *flags)
 	return (save);
 }
 
-char	*ft_itoa_double(long doubel nbr, t_flags *flags)
+/*
+** itoa for double
+** count integer and remainder
+** and then return char* with flags
+*/
+
+static char	*ft_itoa_double(long double nbr, t_flags *flags)
 {
 	intmax_t	num;
 	uintmax_t	ost;
@@ -81,20 +111,24 @@ char	*ft_itoa_double(long doubel nbr, t_flags *flags)
 	if (flags->precision == 0)
 		flags->precision = 6;
 	precision = flags->precision;
-	if (d < 0)
-		d *= -1;
+	if (nbr < 0)
+		nbr *= -1;
 	ost = 0;
 	while (precision > 0)
 	{
-		d = d * 10;
-		ost = ost * 10 + (unsigned int)d;
-		d -= (int)d;
+		nbr = nbr * 10;
+		ost = ost * 10 + (unsigned int)nbr;
+		nbr -= (int)nbr;
 		precision--;
 	}
-	return (ft_fill_d_flags(ft_itoa_d(num), ft_itoa_d(ost), flags));
+	return (ft_fill_d_flags(ft_itoa_d(num, flags), ft_itoa_u(ost), flags));
 }
 
-char	*ft_get_double(va_list ap, t_flags *flags)
+/*
+** check length and then return result of ft_itoa_double
+*/
+
+char		*ft_get_double(va_list ap, t_flags *flags)
 {
 	long double nbr;
 

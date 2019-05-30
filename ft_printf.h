@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/29 15:28:16 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/30 11:58:36 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdint.h>
-# include "libft.h"
+# include "libft/libft.h"
 
 # define LENGTH_HH 1
 # define LENGTH_H 2
@@ -44,13 +44,15 @@ typedef struct	s_flags
 }				t_flags;
 
 int				ft_fill_nbr_f(char **save, int size, t_flags *flags);
+int				ft_length_u(uintmax_t nbr);
+int				ft_length_d(intmax_t nbr);
 char			*ft_get_nbr(va_list ap, t_flags *flags);
 char			*ft_get_nbr_u(va_list ap, t_flags *flags);
 char			*ft_get_double(va_list ap, t_flags *flags);
 char			*ft_get_hex(va_list ap, t_flags *flags);
 char			*ft_get_str(char *str, t_flags *flags);
 char			*ft_get_char(va_list ap, t_flags *flags);
-void			ft_error(va_list ap);
+void			ft_error();
 void			ft_strdel(char **as);
 void			ft_init_flags(t_flags *flags);
 int				ft_handle_flags(char **str, t_flags *flags);

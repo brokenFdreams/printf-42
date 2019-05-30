@@ -1,53 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_nbr_u.c                                     :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 15:06:17 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/30 12:33:41 by fsinged          ###   ########.fr       */
+/*   Created: 2019/05/24 16:19:37 by fsinged           #+#    #+#             */
+/*   Updated: 2019/05/30 12:52:48 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			ft_length_u(uintmax_t nbr)
+int		ft_length_x(uintmax_t nbr, t_flags flags)
 {
-	int	count;
+	int size;
 
-	while (nbr / 10 || nbr % 10)
+	size = 1;
+	if (flags->hash)
+		size += 2;
+	while ((num / 16) > 0)
 	{
-		count++;
-		nbr /= 10;
+		size++;
+		cnum /= 16;
 	}
-	return (count);
+	return (size);
 }
 
-static char	*ft_itoa_nbr(uintmax_t nbr, t_flags *flags)
+int		ft_fill_hex_f(char **save, int size, t_flags *flags)
 {
-	int		size;
+	int i;
+
+	i = 0;
+	if (!(*save = ft_strnew(flags->width + 1)))
+		ft_error();
+	while (size + i <= 
+
+}
+
+char	*ft_itoa_x(uintmax_t nbr, int flag, t_flags *flags)
+{
 	int		i;
+	int 	size;
 	char	*save;
 
-	size = ft_length_u(nbr);
+	size = ft_length_x(nbr, flags);
 	if (size <= flags->width)
-		ft_fill_nbr_f(&save, size, *flags);
-	else if (!(save = (char*)malloc(siezof(char) * size)))
-		ft_error();
-	i = size - 2;
-	while (nbr / 10 || nbr % 10)
-	{
-		save[i--] = nbr % 10 + '0';
-		nbr /= 10;
-	}
-	save[size - 1] = '\0';
-	return (save);
+		
 }
 
-char		*ft_get_nbr_u(va_list ap, t_flags *flags)
+char	*ft_get_hex(va_list ap, int flag, t_flags *flags)
 {
-	uintmax_t nbr;
+	uintmax_t	nbr;
 
 	if (flags->length == LENGTH_HH)
 		nbr = (unsigned char)va_arg(ap, unsigned int);
@@ -63,5 +67,23 @@ char		*ft_get_nbr_u(va_list ap, t_flags *flags)
 		nbr = va_arg(ap, size_t);
 	else
 		nbr = va_arg(ap, unsigned int);
-	return (ft_itoa_nbr(nbr, flags));
+	return (ft_itoa_x(nbr, flag, flags)
+/*
+	str = (char*)malloc(sizeof(char) * (count + 1));
+	str[count--] = '\0';
+	while (count >= 0)
+	{
+		cnum = num % 16;
+		num = num / 16;
+		if (cnum < 10)
+			str[count--] = cnum + '0';
+		else if (flag == 0)
+			str[count--] = cnum - 10 + 'a';
+		else
+			str[count--] = cnum - 10 + 'A';
+	}
+	cnum = ft_putstr(str, flags);
+	ft_strdel(&str);
+	return (cnum);
+*/
 }
