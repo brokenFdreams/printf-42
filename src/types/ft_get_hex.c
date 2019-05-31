@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 16:19:37 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/30 16:39:00 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/31 18:05:35 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_length_x(uintmax_t nbr, t_flags *flags)
 	size = 1;
 	if (flags->hash)
 		size += 2;
-	while ((nbr / 16) > 0)
+	while (nbr / 16 || nbr % 16)
 	{
 		size++;
 		nbr /= 16;
@@ -41,11 +41,16 @@ static int	ft_fill_hex_f(char **save, int size, t_flags *flags, int flag)
 			(*save)[1] = 'X';
 		else
 			(*save)[1] = 'x';
-		if (!(flags->minus))
-		{
-			i = 2;
-			size -= 2;
-		}
+		i = 2;
+		size -= 2;
+	}
+	else if (flags->hash)
+	{
+		(*save)[flags->width - size + 1] = '0';
+		if (flag)
+			(*save)[flags->width - size + 2] = 'X';
+		else
+			(*save)[flags->width - size + 2] = 'x';
 	}
 	while (size + i <= flags->width)
 	{
@@ -58,9 +63,8 @@ static int	ft_fill_hex_f(char **save, int size, t_flags *flags, int flag)
 		i++;
 	}
 	if (flags->minus)
-		return (size);
-	else
-		return (size + i);
+		return (size + 2);
+	return (size + i);
 }
 
 static char	*ft_itoa_x(uintmax_t nbr, t_flags *flags, int flag)
@@ -75,6 +79,14 @@ static char	*ft_itoa_x(uintmax_t nbr, t_flags *flags, int flag)
 		size = ft_fill_hex_f(&save, size, flags, flag);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
+	else if (flags->hash)
+	{
+		save[0] = '0';
+		if (flag)
+			save[1] = 'X';
+		else
+			save[1] = 'x';
+	}
 	i = size - 2;
 	while (nbr / 16 || nbr % 16)
 	{
@@ -87,7 +99,6 @@ static char	*ft_itoa_x(uintmax_t nbr, t_flags *flags, int flag)
 		else
 			save[i--] = num - 10 + 'A';
 	}
-	save[size -1] = '\0';
 	return (save);
 }
 

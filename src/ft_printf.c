@@ -6,11 +6,12 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/30 16:27:10 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/31 16:15:35 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 {
@@ -34,7 +35,7 @@ char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 		return (ft_get_hex(ap, flags, 0));
 	else if (**str == 'X')
 		return (ft_get_hex(ap, flags, 1));
-	return (0);
+	return (NULL);
 }
 
 /*
@@ -61,7 +62,7 @@ char	*ft_handle(char **str, t_flags *flags, va_list ap)
 	ft_handle_length(str, flags);
 	if (ft_isalpha(**str) || **str == '%')
 		return (ft_check_specifier(str, flags, ap));
-	return (0);
+	return (NULL);
 }
 
 char	*ft_handle_space(char **str, t_flags *flags)
@@ -72,11 +73,10 @@ char	*ft_handle_space(char **str, t_flags *flags)
 	i = 0;
 	while ((*str)[i] != '%' && (*str)[i])
 		i++;
-	if (!(save = (char*)malloc(sizeof(char) * (i + 1))))
+	if (!(save = ft_strnew(i)))
 		ft_error();
 	save = ft_strncpy(save, *str, i);
 	*str = (*str) + i - 1;
-	flags->bytes += i;
 	return (save);
 }
 
@@ -89,6 +89,7 @@ int	ft_printf(char *str, ...)
 
 	va_start(ap, str);
 	flags.bytes = 0;
+	flags.output = ft_strnew(flags.bytes + 1);
 	while (*str)
 	{
 		if (*str == '%')
@@ -100,12 +101,17 @@ int	ft_printf(char *str, ...)
 			save = ft_handle_space(&str, &flags);
 		str++;
 		tmp = flags.output;
+		flags.bytes += ft_strlen(save);
+		flags.output = ft_strnew(flags.bytes + 1);
 		flags.output = ft_strjoin(flags.output, tmp);
-		flags.output = ft_strjoin(flags.output, save);
+		if (save)
+		{
+			flags.output = ft_strjoin(flags.output, save);
+			ft_strdel(&save);
+		}	
 		ft_strdel(&tmp);
-		ft_strdel(&save);
 	}
-	write(1, save, flags.bytes + 1);
+	write(1, flags.output, flags.bytes);
 	va_end(ap);
 	return (flags.bytes);
 }

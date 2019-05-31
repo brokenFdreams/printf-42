@@ -6,7 +6,7 @@
 #    By: fsinged <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/17 15:47:32 by fsinged           #+#    #+#              #
-#    Updated: 2019/05/30 16:33:42 by fsinged          ###   ########.fr        #
+#    Updated: 2019/05/31 14:33:49 by fsinged          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -35,7 +35,7 @@ all:$(NAME)
 
 $(NAME):
 	@make -C $(LIBFT)
-	@gcc -c $(SRCS) $(LIB) -I $(HEADER)
+	@gcc -c $(SRCS) $(LIB) -I $(HEADER) -o $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 

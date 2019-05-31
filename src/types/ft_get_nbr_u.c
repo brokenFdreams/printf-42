@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:06:17 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/30 16:39:43 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/05/31 17:07:58 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int			ft_length_u(uintmax_t nbr)
 {
 	int	count;
 
+	count = 1;
 	while (nbr / 10 || nbr % 10)
 	{
 		count++;
@@ -32,8 +33,8 @@ static char	*ft_itoa_nbr(uintmax_t nbr, t_flags *flags)
 
 	size = ft_length_u(nbr);
 	if (size <= flags->width)
-		ft_fill_nbr_f(&save, size, *flags);
-	else if (!(save = (char*)malloc(siezof(char) * size)))
+		size = ft_fill_nbr_f(&save, size, flags);
+	else if (!(save = ft_strnew(size)))
 		ft_error();
 	i = size - 2;
 	while (nbr / 10 || nbr % 10)
