@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_str.c                                       :+:      :+:    :+:   */
+/*   ft_get_percent.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/30 15:42:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/30 16:25:33 by fsinged          ###   ########.fr       */
+/*   Created: 2019/05/30 15:59:54 by fsinged           #+#    #+#             */
+/*   Updated: 2019/06/10 14:06:40 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
-char	*ft_get_str(va_list ap, t_flags *flags, int flag)
+char	*ft_get_percent(t_flags *flags)
 {
-	if (flag == 0)
-		return (va_arg(ap, char*));
-	return ("?");
+	return ("");
 }

@@ -6,11 +6,11 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:55:20 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/31 15:25:15 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/10 14:06:21 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 char	*ft_get_char(va_list ap, t_flags *flags, int flag)
 {

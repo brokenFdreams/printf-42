@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:58:59 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/30 16:27:01 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/10 15:39:56 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init_flags(t_flags *flags)
 	flags->space = 0;
 	flags->hash = 0;
 	flags->width = 0;
-	flags->precision = 0;
+	flags->precision = -1;
 	flags->length = 0;
 }
 
@@ -95,7 +95,6 @@ int		ft_handle_precision(char **str, t_flags *flags, va_list ap)
 	if (**str != '.')
 		return (0);
 	(*str)++;
-	flags->precision = -1;
 	if (!ft_isdigit(**str) && **str != '*')
 		return (1);
 	if (**str == '*')

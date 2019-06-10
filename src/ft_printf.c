@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/31 16:15:35 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/10 14:36:01 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_handle(char **str, t_flags *flags, va_list ap)
 	return (NULL);
 }
 
-char	*ft_handle_space(char **str, t_flags *flags)
+char	*ft_handle_space(char **str)
 {
 	int 	i;
 	char	*save;
@@ -98,7 +98,7 @@ int	ft_printf(char *str, ...)
 			save = ft_handle(&str, &flags, ap);
 		}
 		else
-			save = ft_handle_space(&str, &flags);
+			save = ft_handle_space(&str);
 		str++;
 		tmp = flags.output;
 		flags.bytes += ft_strlen(save);

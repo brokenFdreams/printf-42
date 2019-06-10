@@ -6,11 +6,11 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:11:44 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/30 16:38:34 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/10 15:42:09 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 /*
 ** itoa for uintmax_t
@@ -72,11 +72,11 @@ static char	*ft_fill_d_flags(char *num, char *ost, t_flags *flags)
 	int		i;
 	int		size;
 
-	size = ft_strlen(num + flags->precision + 2);
+	size = ft_strlen(num) + flags->precision + 2;
 	if (!(save = ft_strnew(flags->width + 1)))
 		ft_error();
 	i = 0;
-	while (size <= flags->width)
+	while (size + i <= flags->width)
 	{
 		if (flags->minus)
 			save[size + i - 1] = ' ';
@@ -87,7 +87,8 @@ static char	*ft_fill_d_flags(char *num, char *ost, t_flags *flags)
 		i++;
 	}
 	save = ft_strjoin(save, num);
-	save = ft_strjoin(save, ".");
+	if (flags->precision > 0)
+		save = ft_strjoin(save, ".");
 	save = ft_strjoin(save, ost);
 	ft_strdel(&num);
 	ft_strdel(&ost);
@@ -108,7 +109,7 @@ static char	*ft_itoa_double(long double nbr, t_flags *flags)
 
 	num = (intmax_t)nbr;
 	nbr -= num;
-	if (flags->precision == 0)
+	if (flags->precision == -1)
 		flags->precision = 6;
 	precision = flags->precision;
 	if (nbr < 0)
