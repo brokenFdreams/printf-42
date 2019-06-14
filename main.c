@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/14 15:05:04 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/14 16:45:10 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ int	main(void)
 	double l = 3.14;
 	int k = 100;
 
-	ft_printf("%-5d\n", 42);
-	ft_printf("%-5+d\n", 42);
-	ft_printf("%-0+5d\n", 42);
-	ft_printf("%-5+d\n", -42);
-	ft_printf("%-0+5d\n", -42);
+	ft_printf("%5d\n", -42);
+	ft_printf("%-15u\n", 4294967295);
 /*
 	ft_printf("mine double %7.1lf\n", l);
 	ft_printf("mine float %7.1f\n", (float)l);

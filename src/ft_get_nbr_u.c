@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:06:17 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/10 14:06:12 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/14 16:35:24 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int			ft_length_u(uintmax_t nbr)
 	int	count;
 
 	count = 1;
+	if (nbr == 0)
+		return (2);
 	while (nbr / 10 || nbr % 10)
 	{
 		count++;
@@ -33,23 +35,26 @@ static char	*ft_itoa_nbr(uintmax_t nbr, t_flags *flags)
 
 	size = ft_length_u(nbr);
 	if (size <= flags->width)
-		size = ft_fill_nbr_f(&save, size, flags);
+		size = ft_fill_nbr_f(&save, size, flags, 1);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
 	i = size - 2;
+	if (nbr == 0)
+		save[i--] = '0';
 	while (nbr / 10 || nbr % 10)
 	{
 		save[i--] = nbr % 10 + '0';
 		nbr /= 10;
 	}
-	save[size - 1] = '\0';
 	return (save);
 }
 
-char		*ft_get_nbr_u(va_list ap, t_flags *flags)
+char		*ft_get_nbr_u(va_list ap, t_flags *flags, char c)
 {
 	uintmax_t nbr;
 
+	if (c == 'U')
+		flags->length = LENGTH_L;
 	if (flags->length == LENGTH_HH)
 		nbr = (unsigned char)va_arg(ap, unsigned int);
 	else if (flags->length == LENGTH_H)

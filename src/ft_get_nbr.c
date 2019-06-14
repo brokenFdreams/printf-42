@@ -6,18 +6,19 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 14:35:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/14 15:12:42 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/14 16:44:10 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 int			ft_length_d(intmax_t nbr)
 {
 	int	count;
 
 	count = 1;
+	if (nbr == 0)
+		return (2);
 	while (nbr / 10 || nbr % 10)
 	{
 		count++;
@@ -26,11 +27,13 @@ int			ft_length_d(intmax_t nbr)
 	return (count);
 }
 
-int			ft_fill_nbr_f(char **save, int size, t_flags *flags)
+int			ft_fill_nbr_f(char **save, int size, t_flags *flags, int flag)
 {
 	int	i;
 
-	i = 0;
+	if ((flag == -1 || flags->plus) && !flags->minus
+		&& flags->zero && !flags->space)
+		size--;
 	if (!(*save = ft_strnew(flags->width + 1)))
 		ft_error();
 	while (size + i <= flags->width)
@@ -63,17 +66,21 @@ static char	*ft_itoa_d(intmax_t nbr, t_flags *flags)
 	flag = nbr < 0 ? -1 : 1;
 	if (flag == -1 || flags->plus)
 		size++;
-	if ((flags->space && flags->width == 0 && flag == 1 &&
+	if ((flags->space && flags->width == 0 && flag == 1 && !flags->plus &&
 		 (flags->width = size)) || size <= flags->width)
-		size = ft_fill_nbr_f(&save, size, flags);
+		size = ft_fill_nbr_f(&save, size, flags, flag);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
 	i = size - 2;
+	if (nbr == 0)
+		save[i--] = '0';
 	while (nbr / 10 || nbr % 10)
 	{
 		save[i--] = nbr % 10 * flag + '0';
 		nbr /= 10;
 	}
+	if (!flags->minus && flags->zero && !flags->space)
+		i = 0;
 	if (flag == -1)
 		save[i] = '-';
 	else if (flags->plus)

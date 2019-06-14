@@ -6,12 +6,11 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/14 15:18:47 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/14 16:22:55 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 /*
 ** Check specifier and run function for this specifier
@@ -33,8 +32,8 @@ char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 		return (ft_get_char(ap, flags, 1));
 	else if (**str == 'f')
 		return (ft_get_double(ap, flags));
-	else if (**str == 'u')
-		return (ft_get_nbr_u(ap, flags));
+	else if (**str == 'u' || **str == 'U')
+		return (ft_get_nbr_u(ap, flags, **str));
 	else if (**str == 'x')
 		return (ft_get_hex(ap, flags, 0));
 	else if (**str == 'X')
