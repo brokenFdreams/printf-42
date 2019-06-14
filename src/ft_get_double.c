@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:11:44 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/10 15:42:09 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/11 14:25:49 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ static char	*ft_itoa_u(uintmax_t nbr)
 	char	*save;
 
 	size = ft_length_u(nbr);
+	if (nbr == 0)
+		size++;
 	if (!(save = (char*)malloc(sizeof(char) * size)))
 		ft_error();
 	i = size - 2;
+	if (nbr == 0)
+		save[i] = '0';
 	while (nbr / 10 || nbr % 10)
 	{
 		save[i--] = nbr % 10 + '0';
@@ -47,12 +51,16 @@ static char	*ft_itoa_d(intmax_t nbr, t_flags *flags)
 	char	*save;
 
 	size = ft_length_d(nbr);
+	if (nbr == 0)
+		size++;
 	flag = nbr < 0 ? -1 : 1;
 	if (!flag || flags->plus)
 		size++;
 	if (!(save = (char*)malloc(sizeof(char) * size)))
 		ft_error();
 	i = size - 2;
+	if (nbr == 0)
+		save[i] = '0';
 	while (nbr / 10 || nbr % 10)
 	{
 		save[i--] = nbr % 10 + '0';
@@ -109,12 +117,16 @@ static char	*ft_itoa_double(long double nbr, t_flags *flags)
 
 	num = (intmax_t)nbr;
 	nbr -= num;
+	ost = 0;
 	if (flags->precision == -1)
 		flags->precision = 6;
+	else if (flags->precision == 0 &&
+			 ((int)(nbr * 10) > 5 || ((int)(nbr * 10) == 5 && num % 2 != 0)))
+		return (ft_fill_d_flags(ft_itoa_d(num + 1, flags),
+								ft_itoa_u(ost), flags));
 	precision = flags->precision;
 	if (nbr < 0)
 		nbr *= -1;
-	ost = 0;
 	while (precision > 0)
 	{
 		nbr = nbr * 10;
@@ -122,6 +134,13 @@ static char	*ft_itoa_double(long double nbr, t_flags *flags)
 		nbr -= (int)nbr;
 		precision--;
 	}
+	if (flags->precision > 0 && (ost + 1) % 10 == 0 &&
+		(((int)(nbr * 10) == 5 && ost % 2 != 0) || (int)(nbr * 10) > 5))
+			return (ft_fill_d_flags(ft_itoa_d(num + 1, flags),
+									ft_itoa_u(0), flags));
+	else if (flags->precision > 0 &&
+			 (((int)(nbr * 10) == 5 && ost % 2 != 0) || (int)(nbr * 10) > 5))
+			ost++;
 	return (ft_fill_d_flags(ft_itoa_d(num, flags), ft_itoa_u(ost), flags));
 }
 

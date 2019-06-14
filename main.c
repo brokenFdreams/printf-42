@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/10 15:42:46 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/14 15:05:04 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int	main(void)
 	double l = 3.14;
 	int k = 100;
 
+	ft_printf("%-5d\n", 42);
+	ft_printf("%-5+d\n", 42);
+	ft_printf("%-0+5d\n", 42);
+	ft_printf("%-5+d\n", -42);
+	ft_printf("%-0+5d\n", -42);
 /*
 	ft_printf("mine double %7.1lf\n", l);
 	ft_printf("mine float %7.1f\n", (float)l);
@@ -27,31 +32,28 @@ int	main(void)
 	printf("origin float %7.1f\n", (float)l);
 	printf("origin long double %7.1Lf\n", (long double)l);
 */
-	ft_printf("_______mine______\n");
-	ft_printf("mine 3.1 %.0lf\n", 3.1);
-    ft_printf("mine 3.2 %.0lf\n", 3.2);
-	ft_printf("mine 3.3 %.0lf\n", 3.3);
-	ft_printf("mine 3.4 %.0lf\n", 3.4);
-	ft_printf("mine 3.5 %.0lf\n", 3.5);
-	ft_printf("mine 3.6 %.0lf\n", 3.6);
-	ft_printf("mine 3.7 %.0lf\n", 3.7);
-	ft_printf("mine 3.8 %.0lf\n", 3.8);
-	ft_printf("mine 3.9 %.0lf\n", 3.9);
+/*
+	ft_printf("mine 3.15 %.1f\n", 0.15);
+	ft_printf("mine 3.25 %.1f\n", 0.25);
+    ft_printf("mine 3.35 %.1f\n", 0.35);
+    ft_printf("mine 3.45 %.1f\n", 0.45);
+    ft_printf("mine 3.55 %.1f\n", 0.55);
+    ft_printf("mine 3.65 %.1f\n", 0.65);
+    ft_printf("mine 3.75 %.1f\n", 0.75);
+    ft_printf("mine 3.85 %.1f\n", 0.85);
+    ft_printf("mine 3.95 %.1f\n", 0.95);
 
-	ft_printf("______origin______\n");
-	printf("origin 3.1 %.0lf\n", 2.1);
-    printf("origin 3.2 %.0lf\n", 2.2);
-	printf("origin 3.3 %.0lf\n", 2.3);
-	printf("origin 3.4 %.0lf\n", 2.4);
-	printf("origin 3.5 %.0lf\n", 2.5);
-    printf("origin 3.6 %.0lf\n", 2.6);
-	printf("origin 3.7 %.0lf\n", 2.7);
-	printf("origin 3.8 %.0lf\n", 2.8);
-    printf("origin 3.9 %.0lf\n", 2.9);
-
-
-
-
+	ft_printf("\n");
+	printf("origin 3.15 %.1f\n", 0.15);
+	printf("origin 3.25 %.1f\n", 0.25);
+	printf("origin 3.35 %.1f\n", 0.35);
+	printf("origin 3.45 %.1f\n", 0.45);
+	printf("origin 3.55 %.1f\n", 0.55);
+	printf("origin 3.65 %.1f\n", 0.65);
+	printf("origin 3.75 %.1f\n", 0.75);
+	printf("origin 3.85 %.1f\n", 0.85);
+	printf("origin 3.95 %.1f\n", 0.95);
+*/
 
 /*
 	ft_printf("mine %5hhu\n", 300);

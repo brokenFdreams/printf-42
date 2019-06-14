@@ -6,7 +6,7 @@
 #    By: fsinged <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/17 15:47:32 by fsinged           #+#    #+#              #
-#    Updated: 2019/06/10 14:21:17 by fsinged          ###   ########.fr        #
+#    Updated: 2019/06/11 15:07:43 by fsinged          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -33,22 +33,22 @@ LIB_SRCS_FILES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 	ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c \
 	ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c \
 	ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c
-LIB_SRCS = $(addpefix $(LIB_PATH), $(LIB_SRCS_FILES))
 LIB_OBJS_FILES = $(LIB_SRCS_FILES:.c=.o)
-LIB_OBJS = $(addprefix $(OBJS_PATH), $(LIB_OBJS_FILES))
+LIB_OBJS = $(addprefix $(LIB_PATH), $(LIB_OBJS_FILES))
 HEADER = -I ./includes/ft_printf.h
 
 all:$(NAME)
 
 $(NAME):$(SRCS)
-	@make -C $(LIBFT)
+	@make -C $(LIB_PATH)
 	@mkdir $(OBJS_PATH)
-	@gcc -c $(SRCS) $(LIB_SRCS) $(HEADER)
-	@mv $(LIB_OBJS_FILES) $(OBJS_FILES) $(OBJS_PATH)
+	@gcc -c $(SRCS) $(HEADER)
+	@mv $(OBJS_FILES) $(OBJS_PATH)
 	@ar rc $(NAME) $(OBJS) $(LIB_OBJS)
 	@ranlib $(NAME)
 
 clean:
+	@make fclean -C $(LIB_PATH)
 	@/bin/rm -rf $(OBJS_PATH)
 
 fclean:clean

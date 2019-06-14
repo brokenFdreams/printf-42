@@ -6,11 +6,12 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 14:35:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/10 14:06:02 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/14 15:12:42 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 int			ft_length_d(intmax_t nbr)
 {
@@ -36,7 +37,7 @@ int			ft_fill_nbr_f(char **save, int size, t_flags *flags)
 	{
 		if (!flags->minus)
 		{
-			if (flags->zero)
+			if (flags->zero && !flags->space)
 				(*save)[i] = '0';
 			else
 				(*save)[i] = ' ';
@@ -62,7 +63,8 @@ static char	*ft_itoa_d(intmax_t nbr, t_flags *flags)
 	flag = nbr < 0 ? -1 : 1;
 	if (flag == -1 || flags->plus)
 		size++;
-	if (size <= flags->width)
+	if ((flags->space && flags->width == 0 && flag == 1 &&
+		 (flags->width = size)) || size <= flags->width)
 		size = ft_fill_nbr_f(&save, size, flags);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
@@ -76,7 +78,6 @@ static char	*ft_itoa_d(intmax_t nbr, t_flags *flags)
 		save[i] = '-';
 	else if (flags->plus)
 		save[i] = '+';
-	save[size - 1] = '\0';
 	return (save);
 }
 

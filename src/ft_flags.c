@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:58:59 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/10 15:39:56 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/14 14:26:27 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_init_flags(t_flags *flags)
 	flags->zero = 0;
 	flags->minus = 0;
 	flags->plus = 0;
-	flags->space = 0;
 	flags->hash = 0;
+	flags->space = 0;
 	flags->width = 0;
 	flags->precision = -1;
 	flags->length = 0;
@@ -68,11 +68,15 @@ int		ft_handle_width(char **str, t_flags *flags, va_list ap)
 			{
 				flags->minus = 1;
 				width *= -1;
-			}
-			flags->width = width;
+			}else if (width == 0)
+				flags->zero = 1;
+			else if (width > flags->width)
+				flags->width = width;
 			width = 1;
 		}
-		else
+		else if (width == 0 && (width = 1))
+			flags->zero = 1;
+		else if (width > flags->width)
 			flags->width = width;
 		while (width > 0)
 		{

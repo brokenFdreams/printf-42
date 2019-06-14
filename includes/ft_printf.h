@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/10 14:09:09 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/14 14:32:45 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 
 # define LENGTH_HH 1
 # define LENGTH_H 2
-# define LENGTH_LL 3
-# define LENGTH_L 4
-# define LENGTH_LLL 5
+# define LENGTH_L 3
+# define LENGTH_LL 4
+# define LENGTH_J 5
 # define LENGTH_Z 6
-# define LENGTH_J 7
-# define LENGTH_T 8
+# define LENGTH_T 7
+# define LENGTH_LLL 8
 
 typedef struct	s_flags
 {
