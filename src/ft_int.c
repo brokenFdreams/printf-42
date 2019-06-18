@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/18 16:31:38 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/18 16:41:17 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** return the index. where we're gona place our nbr
 */
 
-char	*ft_int_width(char **save, int size, t_flags *flags, int sign)
+static char	*ft_int_width(char **save, int size, t_flags *flags, int sign)
 {
 	int i;
 

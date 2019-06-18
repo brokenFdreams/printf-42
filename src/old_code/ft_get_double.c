@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:11:44 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/18 13:10:08 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/18 16:53:41 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static char	*ft_itoa_d(intmax_t nbr, t_flags *flags)
 	int		flag;
 	char	*save;
 
-	flags->precision = 0;
 	size = ft_length_d(nbr);
 	if (nbr == 0)
 		size++;
