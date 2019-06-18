@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 14:35:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/14 16:44:10 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/18 13:10:31 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*ft_itoa_d(intmax_t nbr, t_flags *flags)
 	if (flag == -1 || flags->plus)
 		size++;
 	if ((flags->space && flags->width == 0 && flag == 1 && !flags->plus &&
-		 (flags->width = size)) || size <= flags->width)
+		(flags->width = size)) || size <= flags->width)
 		size = ft_fill_nbr_f(&save, size, flags, flag);
 	else if (!(save = ft_strnew(size)))
 		ft_error();

@@ -6,13 +6,17 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 15:18:16 by fsinged           #+#    #+#             */
-/*   Updated: 2019/05/30 16:26:49 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/18 13:53:13 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	ft_error()
+/*
+** for exit program, when we can't malloc something
+*/
+
+void	ft_error(void)
 {
 	exit(0);
 }

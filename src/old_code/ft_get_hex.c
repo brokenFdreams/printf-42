@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 16:19:37 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/10 14:05:47 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/18 13:14:57 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	ft_fill_hex_f(char **save, int size, t_flags *flags, int flag)
 static char	*ft_itoa_x(uintmax_t nbr, t_flags *flags, int flag)
 {
 	int		i;
-	int 	size;
+	int		size;
 	char	*save;
 	int		num;
 
@@ -102,7 +102,7 @@ static char	*ft_itoa_x(uintmax_t nbr, t_flags *flags, int flag)
 	return (save);
 }
 
-char	*ft_get_hex(va_list ap, t_flags *flags, int flag)
+char		*ft_get_hex(va_list ap, t_flags *flags, int flag)
 {
 	uintmax_t	nbr;
 

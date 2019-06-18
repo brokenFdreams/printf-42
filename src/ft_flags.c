@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:58:59 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/14 14:26:27 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/18 13:50:58 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_init_flags(t_flags *flags)
 
 /*
 ** Handle flags
+** +-#0 and space
 */
 
 int		ft_handle_flags(char **str, t_flags *flags)
@@ -53,6 +54,7 @@ int		ft_handle_flags(char **str, t_flags *flags)
 
 /*
 ** Handle min field width
+** {some text}nbr/*{some text}
 */
 
 int		ft_handle_width(char **str, t_flags *flags, va_list ap)
@@ -64,11 +66,9 @@ int		ft_handle_width(char **str, t_flags *flags, va_list ap)
 		if (**str == '*')
 		{
 			width = va_arg(ap, int);
-			if (width < 0)
-			{
-				flags->minus = 1;
+			if (width < 0 && (flags->minus = 1))
 				width *= -1;
-			}else if (width == 0)
+			else if (width == 0)
 				flags->zero = 1;
 			else if (width > flags->width)
 				flags->width = width;
@@ -78,11 +78,8 @@ int		ft_handle_width(char **str, t_flags *flags, va_list ap)
 			flags->zero = 1;
 		else if (width > flags->width)
 			flags->width = width;
-		while (width > 0)
-		{
-			width /= 10;
+		while (width > 0 && (width /= 10) >= 0)
 			(*str)++;
-		}
 		return (1);
 	}
 	return (0);
@@ -90,6 +87,7 @@ int		ft_handle_width(char **str, t_flags *flags, va_list ap)
 
 /*
 ** Handle precision
+** {some text}.nbr/*{some text}
 */
 
 int		ft_handle_precision(char **str, t_flags *flags, va_list ap)
@@ -122,6 +120,7 @@ int		ft_handle_precision(char **str, t_flags *flags, va_list ap)
 
 /*
 ** Handle length
+** {some text}length{some text}
 ** ft_length(char **str, t_flags *flags, int length, int size)
 */
 

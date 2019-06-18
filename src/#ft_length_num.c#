@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_length_flag.c                                   :+:      :+:    :+:   */
+/*   ft_length_num.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 14:04:54 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/18 13:52:23 by fsinged          ###   ########.fr       */
+/*   Created: 2019/06/18 14:37:30 by fsinged           #+#    #+#             */
+/*   Updated: 2019/06/18 14:37:30 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includese/ft_printf.h"
 
 /*
-** 5 functions, so few
-** code for ft_flags.c
+** Count length of nbr for allocate char* for it
 */
 
-void	ft_length(char **str, t_flags *flags, int length, int size)
-{
-	*str += size;
-	if (length > flags->length)
-		flags->length = length;
-}
+s

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 15:55:20 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/14 15:52:35 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/18 13:12:02 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_get_char(va_list ap, t_flags *flags, int flag)
 
 	if (flags->width == 0)
 		size = 1;
-	else 
+	else
 		size = flags->width;
 	if (!(save = ft_strnew(flags->width)))
 		ft_error();
