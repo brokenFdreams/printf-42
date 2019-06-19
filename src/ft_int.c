@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 15:10:24 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 16:56:46 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int			ft_int_width(char **save, int size, t_flags *flags, int sign)
 {
 	int i;
 
-	if ((sing == -1 || flags->plus) &&
+	if ((sign == -1 || flags->plus) &&
 		!flags->minus && flags->zero && !flags->space)
 		size--;
 	if (!(*save = ft_strnew(flags->width)))
 		ft_error();
-	i = 0;
+	i = 0;;
 	while (size + i < flags->width)
 		if (!flags->minus)
 			(*save)[i++] = (flags->zero && !flags->space) ? '0' : ' ';
@@ -51,7 +51,7 @@ char		*ft_int_flags(char *nbr, t_flags *flags, int sign)
 
 	length = ft_strlen(nbr);
 	size = length < flags->precision ? flags->precision : length;
-	size += (flags->plus || flag == -1 || flags->space) ? 1 : 0;
+	size += (flags->plus || sign == -1 || flags->space) ? 1 : 0;
 	i = 0;
 	if (size < flags->width)
 		i = ft_int_width(&save, size, flags, sign);
@@ -63,7 +63,7 @@ char		*ft_int_flags(char *nbr, t_flags *flags, int sign)
 		save[i++] = '+';
 	else if (flags->space)
 		save[0] = ' ';
-	while (length < flags->presicion && length++)
+	while (length < flags->precision && length++)
 		save[i++] = '0';
 	save = ft_strjoin(save, nbr);
 	ft_strdel(&nbr);
@@ -96,5 +96,5 @@ char		*ft_int(va_list ap, t_flags *flags)
 	else
 		nbr = (int)va_arg(ap, int);
 	sign = nbr < 0 ? -1 : 1;
-	return (ft_int_flags(ft_uint_itoa(nbr * sign), flags, sign));
+	return (ft_int_flags(ft_uint_itoa(nbr * sign, 10), flags, sign));
 }

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 14:58:06 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 16:37:16 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				ft_printf(char *str, ...);
 char			*ft_int(va_list ap, t_flags *flags);
 char			*ft_int_flags(char *nbr, t_flags *flags, int sign);
 char			*ft_uint(va_list ap, t_flags *flags, char c);
-char			*ft_uint_itoa(uintmax_t nbr);
+char			*ft_uint_itoa(uintmax_t nbr, int base);
 char			*ft_double(va_list ap, t_flags *flags);
 char			*ft_hex(va_list ap, t_flags *flags, int flag);
 char			*ft_str(va_list ap, t_flags *flags, int flag);

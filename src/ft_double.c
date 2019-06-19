@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 15:10:19 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 16:53:47 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ static char	*ft_double_flags(char *nbr, int sign, t_flags *flags)
 static void	ft_double_rounding(intmax_t *num, uintmax_t *rem, t_flags *flags)
 {
 	if ((flags->precision == 0 &&
-		((int)(nbr * 10) > 5 || ((int)(nbr * 10) == 5 && num % 2 != 0))) ||
-		(flags->precision > 0 && (ost + 1) % 10 == 0 &&
-		(((int)(nbr * 10) == 5 && ost % 2 != 0) || (int)(nbr * 10) > 5)))
+		((int)(nbr * 10) > 5 || ((int)(num * 10) == 5 && num % 2 != 0))) ||
+		(flags->precision > 0 && (rem + 1) % 10 == 0 &&
+		(((int)(nbr * 10) == 5 && rem % 2 != 0) || (int)(nbr * 10) > 5)))
 	{
 		(*num)++;
-		(*ost) = 0;
+		*rem = 0;
 	}
-	else if (flags->presicion > 0 &&
-			(((int)(nbr * 10) == 5 && ost % 2 != 0) || (int)(nbr * 10) > 5))
-		(*ost)++;
+	else if (flags->precision > 0 &&
+			(((int)(nbr * 10) == 5 && rem % 2 != 0) || (int)(nbr * 10) > 5))
+		(*rem)++;
 }
 
 /*
@@ -72,18 +72,19 @@ static char	*ft_double_itoa(intmax_t num, uintmax_t rem, t_flags *flags)
 	char	*nbr;
 	char	*integer;
 	char	*remainder;
+	int		size;
 
 	ft_double_rounding(&num, &rem, flags);
-	integer = num > 0 ? ft_uint_itoa(num) : ft_uint_itoa(num * -1);
-	remainder = ft_uint_itoa(rem);
+	integer = num > 0 ? ft_uint_itoa(num, 10) : ft_uint_itoa(-1 * num, 10);
+	remainder = ft_uint_itoa(rem, 10);
 	size = ft_strlen(integer) + flags->precision;
-	size += flags->presicion == 0 ? 0 : 1;
+	size += flags->precision == 0 ? 0 : 1;
 	nbr = ft_strnew(size);
-	nbr = ft_strjoin(integer);
+	nbr = ft_strjoin(nbr, integer);
 	if (flags->precision > 0)
 	{
-		nbr = ft_strjoin(".");
-		nbr = ft_strjoin(ft_remainder);
+		nbr = ft_strjoin(nbr, ".");
+		nbr = ft_strjoin(nbr, ft_remainder);
 	}
 	ft_strdel(&integer);
 	ft_strdel(&remainder);

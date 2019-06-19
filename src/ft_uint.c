@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:42:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 14:48:53 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 16:56:58 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 ** length of uint for allocate memory for this number
 */
 
-static int	ft_uint_length(unitmax_t nbr)
+static int	ft_uint_length(uintmax_t nbr, int base)
 {
 	int count;
 
 	count = 0;
 	if (nbr == 0)
 		return (1);
-	while (nbr / 10 || nbr % 10)
+	while (nbr / base || nbr % base)
 	{
 		count++;
-		nbr /= 10;
+		nbr /= base;
 	}
 	return (count);
 }
@@ -34,22 +34,24 @@ static int	ft_uint_length(unitmax_t nbr)
 /*
 ** itoa for uintmax_t type
 ** return only a number converting to string
-** also this function calls in ft_int and ft_double
+** also this function calls in ft_int, ft_hex and ft_double
 */
 
-char		*ft_uint_itoa(uintmax_t nbr)
+char		*ft_uint_itoa(uintmax_t nbr, int base)
 {
 	int		size;
 	char	*save;
+	int		rem;
 
-	size = ft_uint_length(nbr);
+	size = ft_uint_length(nbr, base);
 	if (!(save = ft_strnew(size)))
 		ft_error();
 	size--;
 	while (size >= 0)
 	{
-		save[size--] = nbr % 10 + '0';
-		nbr /= 10;
+		rem =  nbr % base;
+		save[size--] = rem >= 10 ? rem  + 'A' : rem + '0';
+		nbr /= base;
 	}
 	return (save);
 }
@@ -79,5 +81,5 @@ char		*ft_uint(va_list ap, t_flags *flags, char c)
 		nbr = va_arg(ap, size_t);
 	else
 		nbr = va_arg(ap, unsigned int);
-	return (ft_int_flags(ft_uint_itoa(nbr), flags, 1));
+	return (ft_int_flags(ft_uint_itoa(nbr, 10), flags, 1));
 }

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 14:53:01 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 15:27:22 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 	else if (**str == 'u' || **str == 'U')
 		return (ft_uint(ap, flags, **str));
 	else if (**str == 'x')
-		return (ft_hex(ap, flags, 0));
+		return (ft_hex(ap, flags, 'a' - 'A'));
 	else if (**str == 'X')
-		return (ft_hex(ap, flags, 1));
+		return (ft_hex(ap, flags, 0));
 	(*str)--;
 	return (ft_strnew(0));
 }

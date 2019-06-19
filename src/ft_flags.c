@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:58:59 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 14:54:03 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 16:48:16 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		ft_handle_flags(char **str, t_flags *flags)
 
 /*
 ** Handle min field width
-** {some text}nbr/*{some text}
+** {some text}nbr/ *{some text}
 */
 
 int		ft_handle_width(char **str, t_flags *flags, va_list ap)
@@ -87,7 +87,7 @@ int		ft_handle_width(char **str, t_flags *flags, va_list ap)
 
 /*
 ** Handle precision
-** {some text}.nbr/*{some text}
+** {some text}.nbr/ *{some text}
 */
 
 int		ft_handle_precision(char **str, t_flags *flags, va_list ap)
