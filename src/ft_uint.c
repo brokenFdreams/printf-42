@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:42:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/18 15:46:02 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 13:33:46 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** this function calls in ft_itoa_uint and ft_double
 */
 
-int		ft_length_uint(unitmax_t nbr)
+static int	ft_uint_length(unitmax_t nbr)
 {
 	int count;
 
@@ -38,12 +38,12 @@ int		ft_length_uint(unitmax_t nbr)
 ** also this function calls in ft_int and ft_double
 */
 
-char	*ft_itoa_uint(uintmax_t nbr)
+char		*ft_uint_itoa(uintmax_t nbr)
 {
 	int		size;
 	char	*save;
 
-	size = ft_length_uint(nbr);
+	size = ft_uint_length(nbr);
 	if (!(save = ft_strnew(size)))
 		ft_error();
 	size--;
@@ -60,7 +60,7 @@ char	*ft_itoa_uint(uintmax_t nbr)
 ** and return its value in the string using flags (result of ft_int_flags)
 */
 
-char	*ft_uint(va_list ap, t_flags *flags, char c)
+char		*ft_uint(va_list ap, t_flags *flags, char c)
 {
 	uintmax_t nbr;
 
@@ -80,5 +80,5 @@ char	*ft_uint(va_list ap, t_flags *flags, char c)
 		nbr = va_arg(ap, size_t);
 	else
 		nbr = va_arg(ap, unsigned int);
-	return (ft_int_flags(ft_itoa_uint(nbr), flags, 1));
+	return (ft_int_flags(ft_uint_itoa(nbr), flags, 1));
 }

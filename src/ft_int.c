@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/18 16:41:17 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 13:32:23 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_int_flags(char *nbr, t_flags *flags, int sign)
 	else if (flags->plus)
 		save[i++] = '+';
 	else if (flags->space)
-		save[i++] = ' ';
+		save[0] = ' ';
 	while (length < flags->presicion && length++)
 		save[i++] = '0';
 	save = ft_strjoin(save, nbr);
@@ -95,5 +95,5 @@ char	*ft_int(va_list ap, t_flags *flags)
 	else
 		nbr = (int)va_arg(ap, int);
 	sign = nbr < 0 ? -1 : 1;
-	return (ft_int_flags(ft_itoa_uint(nbr * sign), flags, sign));
+	return (ft_int_flags(ft_uint_itoa(nbr * sign), flags, sign));
 }
