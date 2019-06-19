@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/18 13:48:04 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 14:53:01 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Check specifier and run function for this specifier
 */
 
-char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
+static char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 {
 	if (**str == '%')
 		return (ft_percent(flags));
@@ -47,7 +47,7 @@ char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 ** [flags][min field width][precision][length][specifier]
 */
 
-char	*ft_handle(char **str, t_flags *flags, va_list ap)
+static char	*ft_handle(char **str, t_flags *flags, va_list ap)
 {
 	if (!(**str) || !(*str))
 	{
@@ -69,7 +69,7 @@ char	*ft_handle(char **str, t_flags *flags, va_list ap)
 ** handle string before %
 */
 
-char	*ft_handle_string(char **str)
+static char	*ft_handle_string(char **str)
 {
 	int		i;
 	char	*save;
@@ -88,7 +88,7 @@ char	*ft_handle_string(char **str)
 ** just for more space in ft_printf
 */
 
-void	ft_space(char **str, t_flags *flags, va_list ap)
+static void	ft_space(char **str, t_flags *flags, va_list ap)
 {
 	char	*save;
 	char	*tmp;
@@ -113,7 +113,7 @@ void	ft_space(char **str, t_flags *flags, va_list ap)
 	ft_strdel(&save);
 }
 
-int		ft_printf(char *str, ...)
+int			ft_printf(char *str, ...)
 {
 	va_list	ap;
 	t_flags	flags;

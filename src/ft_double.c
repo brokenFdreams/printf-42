@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 14:05:11 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 15:10:19 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,26 @@
 static char	*ft_double_flags(char *nbr, int sign, t_flags *flags)
 {
 	char	*save;
-	
+	int		size;
+	int		length;
+	int		i;
+
+	length = ft_strlen(nbr);
+	size = (sign == -1 || flags->plus || flags->space) ? length + 1 : length;
+	i = 0;
+	if (size < flags->width)
+		i = ft_int_width(&save, size, flags, sign);
+	else if (!(save = ft_strnew(size)))
+		ft_error();
+	if (sign == -1)
+		save[i] = '-';
+	else if (flags->plus)
+		save[i] = '+';
+	else if (flags->space)
+		save[0] = ' ';
+	save = ft_strjoin(save, nbr);
+	ft_strdel(&nbr);
+	return (save);
 }
 
 /*
@@ -57,7 +76,7 @@ static char	*ft_double_itoa(intmax_t num, uintmax_t rem, t_flags *flags)
 	ft_double_rounding(&num, &rem, flags);
 	integer = num > 0 ? ft_uint_itoa(num) : ft_uint_itoa(num * -1);
 	remainder = ft_uint_itoa(rem);
-	size = ft_strlen(integer) + ft_strlen(remainder);
+	size = ft_strlen(integer) + flags->precision;
 	size += flags->presicion == 0 ? 0 : 1;
 	nbr = ft_strnew(size);
 	nbr = ft_strjoin(integer);
@@ -106,7 +125,7 @@ static char	*ft_double_separation(long double nbr, t_flags *flags)
 ** flags - [+-# 0][width][precision][length(l, L)]
 */
 
-char		*ft_get_double(va_list ap, t_flags *flags)
+char		*ft_double(va_list ap, t_flags *flags)
 {
 	long double nbr;
 

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:42:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 13:33:46 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 14:48:53 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /*
 ** length of uint for allocate memory for this number
-** this function calls in ft_itoa_uint and ft_double
 */
 
 static int	ft_uint_length(unitmax_t nbr)

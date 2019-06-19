@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 13:32:23 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 15:10:24 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 /*
 ** Allocate new string, fill it '0'/' ' at the end/start width - size times
+** function also calls in ft_double
 ** return the index. where we're gona place our nbr
 */
 
-static char	*ft_int_width(char **save, int size, t_flags *flags, int sign)
+int			ft_int_width(char **save, int size, t_flags *flags, int sign)
 {
 	int i;
 
@@ -41,22 +42,22 @@ static char	*ft_int_width(char **save, int size, t_flags *flags, int sign)
 ** this function calls in ft_uint
 */
 
-char	*ft_int_flags(char *nbr, t_flags *flags, int sign)
+char		*ft_int_flags(char *nbr, t_flags *flags, int sign)
 {
 	char	*save;
 	int		size;
 	int		length;
 	int		i;
 
-	size = ft_strlen(nbr);
-	length = size;
-	size = size < flags->precision ? flags->precision : size;
-	if (flags->plus || flag == -1 || flags->space)
-		size++;
-	i = size < flags->width ? ft_int_width(&save, size, flags, sign) : 0;
+	length = ft_strlen(nbr);
+	size = length < flags->precision ? flags->precision : length;
+	size += (flags->plus || flag == -1 || flags->space) ? 1 : 0;
+	i = 0;
+	if (size < flags->width)
+		i = ft_int_width(&save, size, flags, sign);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
-	if (flag == -1)
+	if (sign == -1)
 		save[i++] = '-';
 	else if (flags->plus)
 		save[i++] = '+';
@@ -75,7 +76,7 @@ char	*ft_int_flags(char *nbr, t_flags *flags, int sign)
 ** ft_itoa_uint in file ft_uint.c
 */
 
-char	*ft_int(va_list ap, t_flags *flags)
+char		*ft_int(va_list ap, t_flags *flags)
 {
 	intmax_t	nbr;
 	int			sign;

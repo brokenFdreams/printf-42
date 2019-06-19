@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/14 16:35:40 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/19 14:58:06 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,16 @@ typedef struct	s_flags
 }				t_flags;
 
 int				ft_printf(char *str, ...);
-int				ft_fill_nbr_f(char **save, int size, t_flags *flags, int flag);
-int				ft_length_u(uintmax_t nbr);
-int				ft_length_d(intmax_t nbr);
-char			*ft_get_nbr(va_list ap, t_flags *flags);
-char			*ft_get_nbr_u(va_list ap, t_flags *flags, char c);
-char			*ft_get_double(va_list ap, t_flags *flags);
-char			*ft_get_hex(va_list ap, t_flags *flags, int flag);
-char			*ft_get_str(va_list ap, t_flags *flags, int flag);
-char			*ft_get_char(va_list ap, t_flags *flags, int flag);
-char			*ft_get_percent(t_flags *flags);
+char			*ft_int(va_list ap, t_flags *flags);
+char			*ft_int_flags(char *nbr, t_flags *flags, int sign);
+char			*ft_uint(va_list ap, t_flags *flags, char c);
+char			*ft_uint_itoa(uintmax_t nbr);
+char			*ft_double(va_list ap, t_flags *flags);
+char			*ft_hex(va_list ap, t_flags *flags, int flag);
+char			*ft_str(va_list ap, t_flags *flags, int flag);
+char			*ft_char(va_list ap, t_flags *flags, int flag);
+char			*ft_percent(t_flags *flags);
 void			ft_error();
-void			ft_strdel(char **as);
 void			ft_init_flags(t_flags *flags);
 int				ft_handle_flags(char **str, t_flags *flags);
 int				ft_handle_width(char **str, t_flags *flags, va_list ap);
