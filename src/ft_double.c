@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 16:53:47 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/20 17:03:46 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*ft_double_flags(char *nbr, int sign, t_flags *flags)
 		save[i] = '+';
 	else if (flags->space)
 		save[0] = ' ';
-	save = ft_strjoin(save, nbr);
+	save = ft_strcat(save, nbr);
 	ft_strdel(&nbr);
 	return (save);
 }
@@ -48,17 +48,17 @@ static char	*ft_double_flags(char *nbr, int sign, t_flags *flags)
 
 static void	ft_double_rounding(intmax_t *num, uintmax_t *rem, t_flags *flags)
 {
-	if ((flags->precision == 0 &&
-		((int)(nbr * 10) > 5 || ((int)(num * 10) == 5 && num % 2 != 0))) ||
-		(flags->precision > 0 && (rem + 1) % 10 == 0 &&
-		(((int)(nbr * 10) == 5 && rem % 2 != 0) || (int)(nbr * 10) > 5)))
+	if ((flags->precision == 0 && (*rem > 5 || (*rem == 5 && *num % 2 != 0)))
+		|| (flags->precision > 0 && *rem % 10 == 5 && (*rem + 5) % 100 == 0 &&
+		(*rem % 2 != 0 || *rem % 10 > 5)))
 	{
 		(*num)++;
 		*rem = 0;
 	}
 	else if (flags->precision > 0 &&
-			(((int)(nbr * 10) == 5 && rem % 2 != 0) || (int)(nbr * 10) > 5))
-		(*rem)++;
+			((*rem % 10 == 5 && *rem % 2 != 0) || *rem % 10 > 5))
+		*rem = *rem + 10;
+	*rem = *rem / 10;
 }
 
 /*
@@ -80,11 +80,11 @@ static char	*ft_double_itoa(intmax_t num, uintmax_t rem, t_flags *flags)
 	size = ft_strlen(integer) + flags->precision;
 	size += flags->precision == 0 ? 0 : 1;
 	nbr = ft_strnew(size);
-	nbr = ft_strjoin(nbr, integer);
+	nbr = ft_strcat(nbr, integer);
 	if (flags->precision > 0)
 	{
-		nbr = ft_strjoin(nbr, ".");
-		nbr = ft_strjoin(nbr, ft_remainder);
+		nbr = ft_strcat(nbr, ".");
+		nbr = ft_strcat(nbr, remainder);
 	}
 	ft_strdel(&integer);
 	ft_strdel(&remainder);
@@ -111,7 +111,7 @@ static char	*ft_double_separation(long double nbr, t_flags *flags)
 		flags->precision = 6;
 	precision = flags->precision;
 	nbr *= nbr < 0 ? -1 : 1;
-	while (precision-- > 0)
+	while (precision-- >= 0)
 	{
 		nbr = nbr * 10;
 		rem = rem * 10 + (unsigned int)nbr;
@@ -135,6 +135,6 @@ char		*ft_double(va_list ap, t_flags *flags)
 	else if (flags->length == LENGTH_LLL)
 		nbr = va_arg(ap, long double);
 	else
-		nbr = va_arg(ap, float);
+		nbr = (float)va_arg(ap, double);
 	return (ft_double_separation(nbr, flags));
 }

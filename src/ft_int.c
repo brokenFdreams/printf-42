@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 16:56:46 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/20 17:01:06 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			ft_int_width(char **save, int size, t_flags *flags, int sign)
 		size--;
 	if (!(*save = ft_strnew(flags->width)))
 		ft_error();
-	i = 0;;
+	i = 0;
 	while (size + i < flags->width)
 		if (!flags->minus)
 			(*save)[i++] = (flags->zero && !flags->space) ? '0' : ' ';
@@ -65,7 +65,7 @@ char		*ft_int_flags(char *nbr, t_flags *flags, int sign)
 		save[0] = ' ';
 	while (length < flags->precision && length++)
 		save[i++] = '0';
-	save = ft_strjoin(save, nbr);
+	save = ft_strcat(save, nbr);
 	ft_strdel(&nbr);
 	return (save);
 }

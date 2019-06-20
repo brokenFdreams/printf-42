@@ -6,11 +6,11 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 16:44:19 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 16:58:41 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/20 15:54:09 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#incldue "../includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 /*
 ** COSTIL'

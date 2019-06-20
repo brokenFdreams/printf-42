@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:42:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 16:56:58 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/20 17:01:57 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ char		*ft_uint_itoa(uintmax_t nbr, int base)
 	size--;
 	while (size >= 0)
 	{
-		rem =  nbr % base;
-		save[size--] = rem >= 10 ? rem  + 'A' : rem + '0';
+		rem = nbr % base;
+		save[size--] = rem >= 10 ? rem + 'A' - 10 : rem + '0';
 		nbr /= base;
 	}
 	return (save);
@@ -81,5 +81,7 @@ char		*ft_uint(va_list ap, t_flags *flags, char c)
 		nbr = va_arg(ap, size_t);
 	else
 		nbr = va_arg(ap, unsigned int);
+	flags->plus = 0;
+	flags->space = 0;
 	return (ft_int_flags(ft_uint_itoa(nbr, 10), flags, 1));
 }

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 15:27:22 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/20 17:07:46 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 		return (ft_char(ap, flags, 0));
 	else if (**str == 'C')
 		return (ft_char(ap, flags, 1));
-	else if (**str == 'f')
+	else if (**str == 'f' || **str == 'F')
 		return (ft_double(ap, flags));
 	else if (**str == 'u' || **str == 'U')
 		return (ft_uint(ap, flags, **str));
 	else if (**str == 'x')
-		return (ft_hex(ap, flags, 'a' - 'A'));
+		return (ft_hex(ap, flags, 32));
 	else if (**str == 'X')
 		return (ft_hex(ap, flags, 0));
 	(*str)--;
@@ -103,10 +103,10 @@ static void	ft_space(char **str, t_flags *flags, va_list ap)
 	(*str)++;
 	tmp = flags->output;
 	flags->bytes += ft_strlen(save);
-	flags->output = ft_strnew(flags->bytes + 1);
+	flags->output = ft_strnew(flags->bytes);
 	if (tmp)
 	{
-		flags->output = ft_strjoin(flags->output, save);
+		flags->output = ft_strjoin(flags->output, tmp);
 		ft_strdel(&tmp);
 	}
 	flags->output = ft_strjoin(flags->output, save);

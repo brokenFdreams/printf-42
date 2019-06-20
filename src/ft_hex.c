@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:10:58 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/19 17:00:09 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/20 16:50:37 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ static char	*ft_hex_flags(char *nbr, t_flags *flags, int flag)
 		save[i++] = '0';
 		save[i++] = !flag ? 'X' : 'x';
 	}
-		while (!falg && nbr[i])
-		{
-			nbr[i] += ft_isalpha(nbr[i]) ? flag : 0;
-			i++;
-		}
-	save = ft_strjoin(save, nbr);
+	save = ft_strcat(save, nbr);
+	while (flag && save[i])
+	{
+		save[i] += ft_isalpha(save[i]) ? flag : 0;
+		i++;
+	}
 	ft_strdel(&nbr);
 	return (save);
 }
