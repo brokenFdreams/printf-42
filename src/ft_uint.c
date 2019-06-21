@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:42:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/20 17:01:57 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/21 13:42:14 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,13 @@ char		*ft_uint_itoa(uintmax_t nbr, int base)
 
 /*
 ** Read uint, conver it to the desired type (check length flag)
-** and return its value in the string using flags (result of ft_int_flags)
+** return it value
 */
 
-char		*ft_uint(va_list ap, t_flags *flags, char c)
+uintmax_t	ft_get_uint(va_list ap, t_flags *flags)
 {
 	uintmax_t nbr;
 
-	if (c == 'U')
-		flags->length = LENGTH_L;
 	if (flags->length == LENGTH_HH)
 		nbr = (unsigned char)va_arg(ap, unsigned int);
 	else if (flags->length == LENGTH_H)
@@ -81,7 +79,18 @@ char		*ft_uint(va_list ap, t_flags *flags, char c)
 		nbr = va_arg(ap, size_t);
 	else
 		nbr = va_arg(ap, unsigned int);
+	return (nbr);
+}
+
+/*
+** return uint value in the string using flags
+*/
+
+char		*ft_uint(va_list ap, t_flags *flags, char c)
+{
 	flags->plus = 0;
 	flags->space = 0;
-	return (ft_int_flags(ft_uint_itoa(nbr, 10), flags, 1));
+	if (c == 'U')
+		flags->length = LENGTH_L;
+	return (ft_int_flags(ft_uint_itoa(ft_get_uint(ap, flags), 10), flags, 1));
 }

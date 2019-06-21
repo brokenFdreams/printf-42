@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:58:59 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/20 17:15:49 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/21 12:47:48 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ int		ft_handle_precision(char **str, t_flags *flags, va_list ap)
 		precision = va_arg(ap, int);
 	else
 		precision = ft_atoi(*str);
-	flags->precision = precision;
-	if (flags->precision < 0 && flags->precision != -1)
-		flags->precision = 0;
+	flags->precision = precision > 0 ? precision : 0;
+	flags->minus = precision > 0 ? flags->minus : 1;
+	precision *= precision > 0 ? 1 : -1;
 	if (**str == '*')
 		precision = 1;
 	else if (precision == 0)

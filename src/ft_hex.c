@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:10:58 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/20 16:50:37 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/21 15:13:14 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,22 @@ static char	*ft_hex_flags(char *nbr, t_flags *flags, int flag)
 	int		i;
 
 	length = ft_strlen(nbr);
-	size = flags->hash ? length + 2 : length;
+	size = flags->hash && nbr[0] != '0' ? length + 2 : length;
 	i = 0;
 	if (size < flags->width)
 		i = ft_hex_width(&save, size, flags);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
-	if (flags->hash)
+	if (flags->hash && nbr[0] != '0')
 	{
 		save[i++] = '0';
 		save[i++] = !flag ? 'X' : 'x';
 	}
+	if (flags->precision == 0 && nbr[0] == '0')
+		nbr[0] = '\0';
 	save = ft_strcat(save, nbr);
-	while (flag && save[i])
-	{
+	while (flag && save[i++])
 		save[i] += ft_isalpha(save[i]) ? flag : 0;
-		i++;
-	}
 	ft_strdel(&nbr);
 	return (save);
 }
@@ -74,21 +73,6 @@ static char	*ft_hex_flags(char *nbr, t_flags *flags, int flag)
 
 char		*ft_hex(va_list ap, t_flags *flags, int flag)
 {
-	uintmax_t nbr;
-
-	if (flags->length == LENGTH_HH)
-		nbr = (unsigned char)va_arg(ap, unsigned int);
-	else if (flags->length == LENGTH_H)
-		nbr = (unsigned short int)va_arg(ap, unsigned int);
-	else if (flags->length == LENGTH_LL)
-		nbr = (unsigned long long int)va_arg(ap, unsigned long long int);
-	else if (flags->length == LENGTH_L)
-		nbr = (unsigned long int)va_arg(ap, unsigned long int);
-	else if (flags->length == LENGTH_J)
-		nbr = va_arg(ap, uintmax_t);
-	else if (flags->length == LENGTH_Z)
-		nbr = va_arg(ap, size_t);
-	else
-		nbr = va_arg(ap, unsigned int);
-	return (ft_hex_flags(ft_uint_itoa(nbr, 16), flags, flag));
+	return (ft_hex_flags(ft_uint_itoa(ft_get_uint(ap, flags), 16),
+					flags, flag));
 }
