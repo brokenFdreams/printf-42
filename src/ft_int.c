@@ -59,7 +59,9 @@ char		*ft_int_flags(char *nbr, t_flags *flags, int sign)
 		i = ft_int_width(&save, size, flags, sign);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
-	else if (sign == -1)
+	if (flags->precision == 0 && nbr[0] = '0') //<- new code!!
+		nbr[0] = '\0'; //<-new code!!
+	else if (sign == -1) //<- HERE
 		save[i++] = '-';
 	else if (flags->plus)
 		save[i++] = '+';
