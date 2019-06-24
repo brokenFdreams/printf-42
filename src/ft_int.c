@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/24 15:18:54 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 15:52:54 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char		*ft_int_flags(char *nbr, t_flags *flags, int sign)
 		save[0] = ' ';
 	while (length < flags->precision && length++)
 		save[i++] = '0';
-	save = ft_strcat(save, nbr);
+	save = ft_strncat(save, nbr, length);
 	ft_strdel(&nbr);
 	return (save);
 }
