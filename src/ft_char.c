@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 16:38:31 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/24 15:01:13 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:13:06 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 char	*ft_char(va_list ap, t_flags *flags, int flag)
 {
 	char	*save;
+	char	c;
 
+	c = (char)va_arg(ap, int);
 	save = ft_strnew(1);
-	save[0] = (char)va_arg(ap, int);
+	save[0] = c;
 	return (ft_int_flags(save, flags, 1));
 }

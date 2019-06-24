@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/24 16:00:08 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 16:16:35 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 int	main(void)
 {
 
-	ft_printf("%05o\n", 42);
+	printf("ft_printf: %d\n", ft_printf("%c\n", 0));
+	printf("printf: %d\n", printf("%c\n", 0));
 /*
 	printf("ft_printf - %d\n", ft_printf("[% 10.5d]", 4242));
 	printf("printf - %d\n", printf("[% 10.5d]", 4242));

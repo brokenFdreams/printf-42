@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 16:44:19 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/20 15:54:09 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 16:41:52 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ char	*ft_percent(t_flags *flags)
 
 	save = ft_strnew(1);
 	save[0] = '%';
-	return (save);
+	flags->space = 0;
+	return (ft_int_flags(save, flags, 1));
 }

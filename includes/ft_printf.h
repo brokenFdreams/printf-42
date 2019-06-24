@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/21 13:41:26 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:04:38 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ uintmax_t		ft_get_uint(va_list ap, t_flags *flags);
 char			*ft_double(va_list ap, t_flags *flags);
 char			*ft_hex(va_list ap, t_flags *flags, int flag);
 char			*ft_octal(va_list ap, t_flags *flags);
+char			*ft_binary(va_list ap, t_flags *flags);
 char			*ft_str(va_list ap, t_flags *flags, int flag);
 char			*ft_char(va_list ap, t_flags *flags, int flag);
 char			*ft_percent(t_flags *flags);
