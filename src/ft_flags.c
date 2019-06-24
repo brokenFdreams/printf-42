@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:58:59 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/21 12:47:48 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 12:28:05 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int		ft_handle_width(char **str, t_flags *flags, va_list ap)
 {
 	int	width;
 
+	flags->zero = **str == '0' ? 1 : flags->zero;
+	flags->minus = **str == '-' ? 1 : flags->minus;
 	if ((width = ft_atoi(*str)) > 0 || **str == '*')
 	{
 		if (**str == '*')
@@ -74,8 +76,6 @@ int		ft_handle_width(char **str, t_flags *flags, va_list ap)
 				flags->width = width;
 			width = 1;
 		}
-		else if (width == 0 && (width = 1))
-			flags->zero = 1;
 		else if (width > flags->width)
 			flags->width = width;
 		while (width > 0 && (width /= 10) >= 0)
@@ -97,14 +97,13 @@ int		ft_handle_precision(char **str, t_flags *flags, va_list ap)
 	if (**str != '.')
 		return (0);
 	(*str)++;
-	if (!ft_isdigit(**str) && **str != '*')
+	if (!ft_isdigit(**str) && !(**str == '*') && !(flags->precision = 0))
 		return (1);
 	if (**str == '*')
 		precision = va_arg(ap, int);
 	else
 		precision = ft_atoi(*str);
 	flags->precision = precision > 0 ? precision : 0;
-	flags->minus = precision > 0 ? flags->minus : 1;
 	precision *= precision > 0 ? 1 : -1;
 	if (**str == '*')
 		precision = 1;

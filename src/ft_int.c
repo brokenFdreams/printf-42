@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/21 15:07:48 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 12:13:27 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ char		*ft_int_flags(char *nbr, t_flags *flags, int sign)
 		i = ft_int_width(&save, size, flags, sign);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
-	if (flags->precision == 0 && nbr[0] = '0') //<- new code!!
-		nbr[0] = '\0'; //<-new code!!
-	else if (sign == -1) //<- HERE
+	if (flags->precision == 0 && nbr[0] == '0')
+		nbr[0] = '\0';
+	else if (sign == -1)
 		save[i++] = '-';
 	else if (flags->plus)
 		save[i++] = '+';
