@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:10:58 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/21 15:13:14 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 15:36:39 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,22 @@
 ** return the index, where we're gona place our nbr
 */
 
-static int	ft_hex_width(char **save, int size, t_flags *flags)
+static int	ft_hex_width(char **save, int length, t_flags *flags)
 {
 	int i;
 
-	size -= flags->hash ? 2 : 0;
 	if (!(*save = ft_strnew(flags->width)))
 		ft_error();
-	i = 0;
-	while (size + i < flags->width)
+	i = flags->zero && !flags->minus && flags->hash ? 2 : 0;
+	if ((!flags->zero && !flags->minus && flags->hash) ||
+		(flags->minus && flags->hash))
+		length += 2;
+	while (length + i < flags->width)
 		if (flags->minus)
-			(*save)[size++] = ' ';
+			(*save)[length++] = ' ';
 		else
 			(*save)[i++] = flags->zero ? '0' : ' ';
-	return (flags->hash && !flags->minus ? i - 2 : i);
+	return (flags->zero && !flags->minus && flags->hash ? 0 : i);
 }
 
 /*
@@ -45,23 +47,29 @@ static char	*ft_hex_flags(char *nbr, t_flags *flags, int flag)
 	int		length;
 	int		i;
 
+	if (flags->precision == 0 && nbr[0] == '0')
+		ft_strdel(&nbr);
+	else if (nbr[0] == '0')
+		flags->hash = 0;
 	length = ft_strlen(nbr);
-	size = flags->hash && nbr[0] != '0' ? length + 2 : length;
-	i = 0;
-	if (size < flags->width)
-		i = ft_hex_width(&save, size, flags);
+	size = flags->hash && nbr != NULL ? length + 2 : length;
+	if (!(i = 0) && size < flags->width)
+		i = ft_hex_width(&save, length, flags);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
-	if (flags->hash && nbr[0] != '0')
+	if (nbr == NULL)
+		return (save);
+	if (flags->hash)
 	{
 		save[i++] = '0';
 		save[i++] = !flag ? 'X' : 'x';
 	}
-	if (flags->precision == 0 && nbr[0] == '0')
-		nbr[0] = '\0';
 	save = ft_strcat(save, nbr);
-	while (flag && save[i++])
+	while (flag && save[i])
+	{
 		save[i] += ft_isalpha(save[i]) ? flag : 0;
+		i++;
+	}
 	ft_strdel(&nbr);
 	return (save);
 }

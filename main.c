@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/20 16:57:31 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 14:20:48 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 int	main(void)
 {
+	printf("ft_printf - %d\n", ft_printf("[% 10.5d]", 4242));
+	printf("printf - %d\n", printf("[% 10.5d]", 4242));
+	printf("ft_printf - %d\n", ft_printf("[%10.5d]", 4242));
+    printf("printf - %d\n", printf("[%10.5d]", 4242));
+	/*
 	unsigned char c = 0x64;
 	double l = 3.14;
 	int k = 100;
@@ -67,7 +72,7 @@ int	main(void)
 	printf("original 0x64 %-#7x [%#7X]\n", -100, -100);
 	ft_printf("mine 100 %x [%X]\n", k, k);
 	printf("original 100 %x [%X]\n", k, k);
-
+	*/
 //	ft_printf("mine %s", "loool\n");
 //	printf("original %s", "loool\n");
 //	ft_printf("mine %+-0# 4.7s\n", "ll");

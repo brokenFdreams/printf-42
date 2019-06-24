@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/24 12:13:27 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/24 15:18:54 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,25 @@
 ** return the index. where we're gona place our nbr
 */
 
-int			ft_int_width(char **save, int size, t_flags *flags, int sign)
+int			ft_int_width(char **save, int length, t_flags *flags, int sign)
 {
 	int i;
 
-	if ((sign == -1 || flags->plus) && !flags->minus && !flags->space
-		&& flags->zero && flags->precision == -1)
-		size--;
+	length = length > flags->precision ? length : flags->precision;
 	if (!(*save = ft_strnew(flags->width)))
 		ft_error();
 	i = 0;
-	while (size + i < flags->width)
+	while (length + i < flags->width)
 		if (!flags->minus)
 			(*save)[i++] = (flags->zero && !flags->space &&
 							flags->precision == -1) ? '0' : ' ';
 		else
-			(*save)[size++] = ' ';
-	if (flags->zero && !flags->space && flags->precision == -1)
+			(*save)[length++] = ' ';
+	if ((flags->zero && !flags->space && flags->precision == -1)
+		|| flags->minus)
 		return (0);
+	else if (sign == -1 || flags->plus)
+		return (i - 1);
 	return (i);
 }
 
@@ -52,20 +53,18 @@ char		*ft_int_flags(char *nbr, t_flags *flags, int sign)
 	int		length;
 	int		i;
 
-	length = ft_strlen(nbr);
+	length = flags->precision == 0 && nbr[0] == '0' ? 0 : ft_strlen(nbr);
 	size = length < flags->precision ? flags->precision : length;
-	size += (flags->plus || sign == -1 || flags->space) ? 1 : 0;
+	size += (flags->plus || sign == -1 || flags->space) && size ? 1 : 0;
 	if (!(i = 0) && size < flags->width)
-		i = ft_int_width(&save, size, flags, sign);
+		i = ft_int_width(&save, length, flags, sign);
 	else if (!(save = ft_strnew(size)))
 		ft_error();
-	if (flags->precision == 0 && nbr[0] == '0')
-		nbr[0] = '\0';
-	else if (sign == -1)
+	if (length && sign == -1)
 		save[i++] = '-';
-	else if (flags->plus)
+	else if (length && flags->plus)
 		save[i++] = '+';
-	else if (flags->space)
+	else if (length && flags->space)
 		save[0] = ' ';
 	while (length < flags->precision && length++)
 		save[i++] = '0';
