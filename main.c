@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 14:55:52 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 17:30:42 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,39 @@
 
 int	main(void)
 {
+/*
+	printf("printf:%d\n", printf("{%.*s}", -5, "42"));
+	printf("ft_printf:%d\n", ft_printf("{%.*s}", -5, "42"));
+	printf("printf:%d\n", printf("{%#o}", 0));
+	printf("ft_printf:%d\n", ft_printf("{%#o}", 0));
+	printf("printf:%d\n", printf("{%.5c}", 42));
+	printf("ft_printf:%d\n", ft_printf("{%.5c}", 42));
+	printf(".4x:printf:%d\n", printf("{%.4x}", 42));
+	printf(".4x:ft_printf:%d\n", ft_printf("{%.4x}", 42));
+	printf("15.4x:printf:%d\n", printf("{%15.4x}", 42));
+	printf("15.4x:ft_printf:%d\n", ft_printf("{%15.4x}", 42));
+	printf("4.15x:printf:%d\n", printf("{%4.15x}", 42));
+	printf("4.15x:ft_printf:%d\n", ft_printf("{%4.15x}", 42));
+	printf("4.15x:printf:%d\n", printf("{%.4x}", 42424242));
+	printf("4.15x:ft_printf:%d\n", ft_printf("{%.4x}", 42424242));
+	printf(".4X:printf:%d\n", printf("{%.4X}", 42));
+	printf(".4X:ft_printf:%d\n", ft_printf("{%.4X}", 42));
+	printf(".4x:printf:%d\n", printf("{%.4x}", 42));
+	printf(".4x:ft_printf:%d\n", ft_printf("{%.4x}", 42));
+	printf("printf:%d\n", printf("{% 03d}", 0));
+	printf("ft_printf:%d\n", ft_printf("{% 03d}", 0));
+
+	int i = 2147483647;
+	long l = 2147483647;
+	long long ll = 9223372036854775807;
+	intmax_t im = 9223372036854775807;
+
+	ft_printf("j:%jd, z:%zd, u:%u, i:%i, l:%ld, ll:%lld\n", im, (size_t)i, i, i, l, ll);
+	printf("j:%jd, z:%zd, u:%u, i:%i, l:%ld, ll:%lld\n", im, (size_t)i, i, i, l, ll);
 
 	printf("ft_printf: %d\n", ft_printf("{%*3d}", 5, 0));
 	printf("printf: %d\n", printf("{%*3d}", 5, 0));
-/*	char i;
+	char i;
 
 	i = 0;
 	printf("%d:ft_printf: %d\n", i, ft_printf("null %c and text", i));

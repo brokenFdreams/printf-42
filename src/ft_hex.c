@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:10:58 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 15:06:45 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 17:25:46 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	ft_hex_width(char **save, int length, t_flags *flags)
 {
 	int i;
 
+	length = length > flags->precision ? length : flags->precision;
 	if (!(*save = ft_strnew(flags->width)))
 		ft_error();
 	i = flags->zero && !flags->minus && flags->hash ? 2 : 0;
@@ -48,7 +49,8 @@ static int	ft_hex_flags(char **nbr, t_flags *flags, int flag, char **save)
 
 	flags->hash = (*nbr)[0] == '0' ? 0 : flags->hash;
 	length = flags->precision == 0 && (*nbr)[0] == '0' ? 0 : ft_strlen(*nbr);
-	size = flags->hash && length ? length + 2 : length;
+	size = length < flags->precision ? flags->precision : length;
+	size += flags->hash && size ? 2 : 0;
 	if (!(i = 0) && size < flags->width)
 		i = ft_hex_width(save, length, flags);
 	else if (!(*save = ft_strnew(size)))
@@ -58,6 +60,8 @@ static int	ft_hex_flags(char **nbr, t_flags *flags, int flag, char **save)
 		(*save)[i++] = '0';
 		(*save)[i++] = !flag ? 'X' : 'x';
 	}
+	while (length < flags->precision && length++)
+		(*save)[i++] = '0';
 	*save = ft_strnjoin(*save, *nbr, length, i);
 	while (flag && (*save)[i++])
 		(*save)[i - 1] += ft_isalpha((*save)[i - 1]) ? flag : 0;

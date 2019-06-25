@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 14:48:14 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 17:28:15 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ int	ft_int_width(char **save, int length, t_flags *flags, int sign)
 	i = 0;
 	while (length + i < flags->width)
 		if (!flags->minus)
-			(*save)[i++] = (flags->zero && !flags->space &&
-							flags->precision == -1) ? '0' : ' ';
+			(*save)[i++] = (flags->zero && flags->precision < 0) ? '0' : ' ';
 		else
 			(*save)[length++] = ' ';
-	if ((flags->zero && !flags->space && flags->precision == -1)
+	if ((flags->zero && !flags->space && flags->precision <= 0)
 		|| flags->minus)
 		return (0);
 	else if (sign == -1 || flags->plus)

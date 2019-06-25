@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 15:09:19 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 15:28:22 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,26 @@
 */
 
 static int	ft_check_specifier(char **str, t_flags *flags, va_list ap,
-							  char **save)
+		char **save)
 {
-	if (**str == '%')
-		return (ft_percent(flags, save));
-	else if (**str == 's')
-		return (ft_str(ap, flags, 0, save));
-	else if (**str == 'S')
-		return (ft_str(ap, flags, 1, save));
-	else if (**str == 'd' || **str == 'i')
-		return (ft_int(ap, flags, save));
-	else if (**str == 'c')
-		return (ft_char(ap, flags, 0, save));
-	else if (**str == 'C')
-		return (ft_char(ap, flags, 1, save));
-	else if (**str == 'f' || **str == 'F')
-		return (ft_double(ap, flags, save));
-	else if (**str == 'u' || **str == 'U')
-		return (ft_uint(ap, flags, **str, save));
-	else if (**str == 'x')
-		return (ft_hex(ap, flags, 32, save));
-	else if (**str == 'X')
-		return (ft_hex(ap, flags, 0, save));
-	else if (**str == 'o')
-		return (ft_octal(ap, flags, save));
-	else if (**str == 'b')
-		return (ft_binary(ap, flags, save));
+	int bytes;
+
+	bytes = -1;
+	bytes = **str == '%' ? ft_percent(flags, save) : bytes;
+	bytes = **str == 's' ? ft_str(ap, flags, 0, save) : bytes;
+	bytes = **str == 'S' ? ft_str(ap, flags, 1, save) : bytes;
+	bytes = **str == 'd' || **str == 'i' ? ft_int(ap, flags, save) : bytes;
+	bytes = **str == 'c' ? ft_char(ap, flags, 0, save) : bytes;
+	bytes = **str == 'C' ? ft_char(ap, flags, 1, save) : bytes;
+	bytes = **str == 'f' || **str == 'F' ? ft_double(ap, flags, save) : bytes;
+	bytes = **str == 'u' || **str == 'U' ? ft_uint(ap, flags, **str, save)
+		: bytes;
+	bytes = **str == 'x' ? ft_hex(ap, flags, 32, save) : bytes;
+	bytes = **str == 'X' ? ft_hex(ap, flags, 0, save) : bytes;
+	bytes = **str == 'o' ? ft_octal(ap, flags, save) : bytes;
+	bytes = **str == 'b' ? ft_binary(ap, flags, save) : bytes;
+	if (bytes != -1)
+		return (bytes);
 	(*str)--;
 	*save = ft_strnew(0);
 	return (0);
