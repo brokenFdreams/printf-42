@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/24 17:04:38 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 14:39:26 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ typedef struct	s_flags
 }				t_flags;
 
 int				ft_printf(char *str, ...);
-char			*ft_int(va_list ap, t_flags *flags);
-char			*ft_int_flags(char *nbr, t_flags *flags, int sign);
+int				ft_int(va_list ap, t_flags *flags, char **save);
+int				ft_int_flags(char **nbr, t_flags *flags, int sign, char **save);
 int				ft_int_width(char **save, int size, t_flags *flags, int sign);
-char			*ft_uint(va_list ap, t_flags *flags, char c);
+int				ft_uint(va_list ap, t_flags *flags, char c, char **save);
 char			*ft_uint_itoa(uintmax_t nbr, int base);
 uintmax_t		ft_get_uint(va_list ap, t_flags *flags);
-char			*ft_double(va_list ap, t_flags *flags);
-char			*ft_hex(va_list ap, t_flags *flags, int flag);
-char			*ft_octal(va_list ap, t_flags *flags);
-char			*ft_binary(va_list ap, t_flags *flags);
-char			*ft_str(va_list ap, t_flags *flags, int flag);
-char			*ft_char(va_list ap, t_flags *flags, int flag);
-char			*ft_percent(t_flags *flags);
+int				ft_double(va_list ap, t_flags *flags, char **save);
+int				ft_hex(va_list ap, t_flags *flags, int flag, char **save);
+int				ft_octal(va_list ap, t_flags *flags, char **save);
+int				ft_binary(va_list ap, t_flags *flags, char **save);
+int				ft_str(va_list ap, t_flags *flags, int flag, char **save);
+int				ft_char(va_list ap, t_flags *flags, int flag, char **save);
+int				ft_percent(t_flags *flags, char **save);
 void			ft_error();
 void			ft_init_flags(t_flags *flags);
 int				ft_handle_flags(char **str, t_flags *flags);
@@ -65,5 +65,6 @@ int				ft_handle_width(char **str, t_flags *flags, va_list ap);
 int				ft_handle_precision(char **str, t_flags *flags, va_list ap);
 int				ft_handle_length(char **str, t_flags *flags);
 void			ft_length(char **str, t_flags *flags, int length, int size);
+char			*ft_strnjoin(char *s1, const char *s2, size_t n, size_t pos);
 
 #endif

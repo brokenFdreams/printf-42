@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_octal.c                                         :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/21 13:06:06 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 13:17:13 by fsinged          ###   ########.fr       */
+/*   Created: 2019/06/25 12:05:34 by fsinged           #+#    #+#             */
+/*   Updated: 2019/06/25 14:42:22 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
 /*
-** return octal convert to string using flags
+** for more speed
+** Copy of strncat, but more faster
 */
 
-int	ft_octal(va_list ap, t_flags *flags, char **save)
+char	*ft_strnjoin(char *s1, const char *s2, size_t n, size_t pos)
 {
-	char	*num;
-	int		size;
+	size_t j;
 
-	num = ft_uint_itoa(ft_get_uint(ap, flags), 8);
-	size = ft_strlen(num);
-	if (flags->precision && flags->precision < size)
-		flags->precision = flags->hash ? size + 1 : flags->precision;
-	else
-		flags->precision += flags->hash;
-	flags->hash = 0;
-	flags->space = 0;
-	flags->plus = 0;
-	return (ft_int_flags(&num, flags, 1, save));
+	j = 0;
+	while (s1[pos] != '\0')
+		pos++;
+	if (s2[j] == '\0' && n == 1)
+		s1[pos] = '\0';
+	while (s2[j] != '\0' && j < n)
+	{
+		s1[pos + j] = s2[j];
+		j++;
+	}
+	return (s1);
 }

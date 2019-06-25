@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/24 16:16:35 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 14:55:52 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@
 int	main(void)
 {
 
-	printf("ft_printf: %d\n", ft_printf("%c\n", 0));
-	printf("printf: %d\n", printf("%c\n", 0));
-/*
+	printf("ft_printf: %d\n", ft_printf("{%*3d}", 5, 0));
+	printf("printf: %d\n", printf("{%*3d}", 5, 0));
+/*	char i;
+
+	i = 0;
+	printf("%d:ft_printf: %d\n", i, ft_printf("null %c and text", i));
+	printf("%d:printf: %d\n", i, printf("null %c and text", i));
+
+
 	printf("ft_printf - %d\n", ft_printf("[% 10.5d]", 4242));
 	printf("printf - %d\n", printf("[% 10.5d]", 4242));
 	printf("ft_printf - %d\n", ft_printf("[%10.5d]", 4242));

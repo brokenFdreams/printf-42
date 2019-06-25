@@ -6,13 +6,16 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 16:48:23 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/24 16:53:56 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 13:20:52 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char		*ft_binary(va_list ap, t_flags *flags)
+int	ft_binary(va_list ap, t_flags *flags, char **save)
 {
-	return (ft_int_flags(ft_uint_itoa(ft_get_uint(ap, flags), 2), flags, 1));
+	char *num;
+
+	num = ft_uint_itoa(ft_get_uint(ap, flags), 2);
+	return (ft_int_flags(&num, flags, 1, save));
 }

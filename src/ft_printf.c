@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/24 16:54:45 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 15:09:19 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,36 @@
 ** Check specifier and run function for this specifier
 */
 
-static char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
+static int	ft_check_specifier(char **str, t_flags *flags, va_list ap,
+							  char **save)
 {
 	if (**str == '%')
-		return (ft_percent(flags));
+		return (ft_percent(flags, save));
 	else if (**str == 's')
-		return (ft_str(ap, flags, 0));
+		return (ft_str(ap, flags, 0, save));
 	else if (**str == 'S')
-		return (ft_str(ap, flags, 1));
+		return (ft_str(ap, flags, 1, save));
 	else if (**str == 'd' || **str == 'i')
-		return (ft_int(ap, flags));
+		return (ft_int(ap, flags, save));
 	else if (**str == 'c')
-		return (ft_char(ap, flags, 0));
+		return (ft_char(ap, flags, 0, save));
 	else if (**str == 'C')
-		return (ft_char(ap, flags, 1));
+		return (ft_char(ap, flags, 1, save));
 	else if (**str == 'f' || **str == 'F')
-		return (ft_double(ap, flags));
+		return (ft_double(ap, flags, save));
 	else if (**str == 'u' || **str == 'U')
-		return (ft_uint(ap, flags, **str));
+		return (ft_uint(ap, flags, **str, save));
 	else if (**str == 'x')
-		return (ft_hex(ap, flags, 32));
+		return (ft_hex(ap, flags, 32, save));
 	else if (**str == 'X')
-		return (ft_hex(ap, flags, 0));
+		return (ft_hex(ap, flags, 0, save));
 	else if (**str == 'o')
-		return (ft_octal(ap, flags));
+		return (ft_octal(ap, flags, save));
 	else if (**str == 'b')
-		return (ft_binary(ap, flags));
+		return (ft_binary(ap, flags, save));
 	(*str)--;
-	return (ft_strnew(0));
+	*save = ft_strnew(0);
+	return (0);
 }
 
 /*
@@ -51,41 +53,42 @@ static char	*ft_check_specifier(char **str, t_flags *flags, va_list ap)
 ** [flags][min field width][precision][length][specifier]
 */
 
-static char	*ft_handle(char **str, t_flags *flags, va_list ap)
+static int	ft_handle(char **str, t_flags *flags, va_list ap, char **save)
 {
 	if (!(**str) || !(*str))
 	{
 		(*str)--;
-		return (ft_strnew(0));
+		*save = ft_strnew(0);
+		return (0);
 	}
 	ft_init_flags(flags);
 	while (ft_handle_flags(str, flags) || ft_handle_width(str, flags, ap) ||
 			ft_handle_precision(str, flags, ap) || ft_handle_length(str, flags))
 		;
 	if (**str && (ft_isalpha(**str) || **str == '%'))
-		return (ft_check_specifier(str, flags, ap));
+		return (ft_check_specifier(str, flags, ap, save));
 	if (!(**str) || !(*str))
 		(*str)--;
-	return (ft_strnew(0));
+	*save = ft_strnew(0);
+	return (0);
 }
 
 /*
 ** handle string before %
 */
 
-static char	*ft_handle_string(char **str)
+static int	ft_handle_string(char **str, char **save)
 {
 	int		i;
-	char	*save;
 
 	i = 0;
 	while ((*str)[i] && (*str)[i] != '%')
 		i++;
-	if (!(save = ft_strnew(i)))
+	if (!(*save = ft_strnew(i)))
 		ft_error();
-	save = ft_strncpy(save, *str, i);
+	*save = ft_strncpy(*save, *str, i);
 	*str = (*str) + i - 1;
-	return (save);
+	return (i);
 }
 
 /*
@@ -96,24 +99,22 @@ static void	ft_space(char **str, t_flags *flags, va_list ap)
 {
 	char	*save;
 	char	*tmp;
+	int		bytes;
 
 	if (**str == '%')
 	{
 		(*str)++;
-		save = ft_handle(str, flags, ap);
+		bytes = ft_handle(str, flags, ap, &save);
 	}
 	else
-		save = ft_handle_string(str);
+		bytes = ft_handle_string(str, &save);
 	(*str)++;
 	tmp = flags->output;
-	flags->bytes += ft_strlen(save);
-	flags->output = ft_strnew(flags->bytes);
-	if (tmp)
-	{
-		flags->output = ft_strjoin(flags->output, tmp);
-		ft_strdel(&tmp);
-	}
-	flags->output = ft_strjoin(flags->output, save);
+	flags->output = ft_strnew(flags->bytes + bytes);
+	flags->output = ft_strnjoin(flags->output, tmp, flags->bytes, 0);
+	ft_strdel(&tmp);
+	flags->output = ft_strnjoin(flags->output, save, bytes, flags->bytes);
+	flags->bytes += bytes;
 	ft_strdel(&save);
 }
 

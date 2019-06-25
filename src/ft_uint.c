@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:42:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/21 13:42:14 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 13:47:34 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@ static int	ft_uint_length(uintmax_t nbr, int base)
 char		*ft_uint_itoa(uintmax_t nbr, int base)
 {
 	int		size;
-	char	*save;
+	char	*num;
 	int		rem;
 
 	size = ft_uint_length(nbr, base);
-	if (!(save = ft_strnew(size)))
+	if (!(num = ft_strnew(size)))
 		ft_error();
 	size--;
 	while (size >= 0)
 	{
 		rem = nbr % base;
-		save[size--] = rem >= 10 ? rem + 'A' - 10 : rem + '0';
+		num[size--] = rem >= 10 ? rem + 'A' - 10 : rem + '0';
 		nbr /= base;
 	}
-	return (save);
+	return (num);
 }
 
 /*
@@ -86,11 +86,14 @@ uintmax_t	ft_get_uint(va_list ap, t_flags *flags)
 ** return uint value in the string using flags
 */
 
-char		*ft_uint(va_list ap, t_flags *flags, char c)
+int			ft_uint(va_list ap, t_flags *flags, char c, char **save)
 {
+	char *num;
+
 	flags->plus = 0;
 	flags->space = 0;
 	if (c == 'U')
 		flags->length = LENGTH_L;
-	return (ft_int_flags(ft_uint_itoa(ft_get_uint(ap, flags), 10), flags, 1));
+	num = ft_uint_itoa(ft_get_uint(ap, flags), 10);
+	return (ft_int_flags(&num, flags, 1, save));
 }

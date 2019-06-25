@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 16:38:31 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/24 17:26:19 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 14:51:41 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,19 @@
 ** return string with char and editing by flags
 */
 
-char	*ft_char(va_list ap, t_flags *flags, int flag)
+int	ft_char(va_list ap, t_flags *flags, int flag, char **save)
 {
-	char	*save;
-	char	c;
+	char	*num;
+	int		c;
 
-	c = (char)va_arg(ap, int);
-	save = ft_strnew(1);
-	save[0] = c;
-	return (ft_int_flags(save, flags, 1));
+	c = va_arg(ap, int);
+	num = ft_strnew(2);
+	if (c == 0)
+	{
+		flags->space = 0;
+		flags->precision = -1;
+		num[1] = 127;
+	}
+	num[0] = c;
+	return (ft_int_flags(&num, flags, 1, save));
 }

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/20 17:03:46 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/25 13:16:52 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,28 @@
 ** Allocate new string, fill flags, join our double to it and return result
 */
 
-static char	*ft_double_flags(char *nbr, int sign, t_flags *flags)
+static int	ft_double_flags(char **nbr, int sign, t_flags *flags, char **save)
 {
-	char	*save;
 	int		size;
 	int		length;
 	int		i;
 
-	length = ft_strlen(nbr);
+	length = ft_strlen(*nbr);
 	size = (sign == -1 || flags->plus || flags->space) ? length + 1 : length;
 	i = 0;
 	if (size < flags->width)
-		i = ft_int_width(&save, size, flags, sign);
-	else if (!(save = ft_strnew(size)))
+		i = ft_int_width(save, size, flags, sign);
+	else if (!(*save = ft_strnew(size)))
 		ft_error();
 	if (sign == -1)
-		save[i] = '-';
+		(*save)[i] = '-';
 	else if (flags->plus)
-		save[i] = '+';
+		(*save)[i] = '+';
 	else if (flags->space)
-		save[0] = ' ';
-	save = ft_strcat(save, nbr);
-	ft_strdel(&nbr);
-	return (save);
+		(*save)[0] = ' ';
+	*save = ft_strnjoin(*save, *nbr, length, i);
+	ft_strdel(nbr);
+	return (size < flags->width ? flags->width : size);
 }
 
 /*
@@ -96,12 +95,13 @@ static char	*ft_double_itoa(intmax_t num, uintmax_t rem, t_flags *flags)
 ** then return result of ft_double_itoa
 */
 
-static char	*ft_double_separation(long double nbr, t_flags *flags)
+static int	ft_double_separation(long double nbr, t_flags *flags, char **save)
 {
 	intmax_t	num;
 	uintmax_t	rem;
 	int			precision;
 	int			sign;
+	char		*snum;
 
 	sign = nbr > 0 ? 1 : -1;
 	num = (intmax_t)nbr;
@@ -117,7 +117,8 @@ static char	*ft_double_separation(long double nbr, t_flags *flags)
 		rem = rem * 10 + (unsigned int)nbr;
 		nbr -= (int)nbr;
 	}
-	return (ft_double_flags(ft_double_itoa(num, rem, flags), sign, flags));
+	snum = ft_double_itoa(num, rem, flags);
+	return (ft_double_flags(&snum, sign, flags, save));
 }
 
 /*
@@ -126,7 +127,7 @@ static char	*ft_double_separation(long double nbr, t_flags *flags)
 ** flags - [+-# 0][width][precision][length(l, L)]
 */
 
-char		*ft_double(va_list ap, t_flags *flags)
+int			ft_double(va_list ap, t_flags *flags, char **save)
 {
 	long double nbr;
 
@@ -136,5 +137,5 @@ char		*ft_double(va_list ap, t_flags *flags)
 		nbr = va_arg(ap, long double);
 	else
 		nbr = (float)va_arg(ap, double);
-	return (ft_double_separation(nbr, flags));
+	return (ft_double_separation(nbr, flags, save));
 }
