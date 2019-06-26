@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 15:28:22 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/26 11:59:36 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	ft_check_specifier(char **str, t_flags *flags, va_list ap,
 	bytes = **str == 'X' ? ft_hex(ap, flags, 0, save) : bytes;
 	bytes = **str == 'o' ? ft_octal(ap, flags, save) : bytes;
 	bytes = **str == 'b' ? ft_binary(ap, flags, save) : bytes;
+	bytes = **str == 'p' ? ft_pointer(ap, flags, save) : bytes;
 	if (bytes != -1)
 		return (bytes);
 	(*str)--;

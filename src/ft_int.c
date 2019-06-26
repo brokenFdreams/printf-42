@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 17:28:15 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/26 12:02:59 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_int_width(char **save, int length, t_flags *flags, int sign)
 }
 
 /*
-** Allocate new string, fill flags and return result
+** Allocate new string, fill flags and return size of save
 ** size = full size of string (nbr + sign)
 ** this function calls in ft_uint
 */
@@ -74,7 +74,7 @@ int	ft_int_flags(char **nbr, t_flags *flags, int sign, char **save)
 
 /*
 ** Read int, convert it to the desired type (check length flag)
-** and return its value in the string (ft_itoa_uint) using flags
+** and return size of save
 ** ft_itoa_uint in file ft_uint.c
 */
 

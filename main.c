@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 17:30:42 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/26 12:59:13 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,36 @@
 
 int	main(void)
 {
+	int i;
+	unsigned long l;
+	char *str;
+
+	printf("printf:%d\n", printf("{%f}{%lf}", -1444565444646.6465424242242454654,
+			    -1444565444646.6465424242242454654l));
+	printf("ft_printf:%d\n", ft_printf("{%f}{%lf}",
+	-1444565444646.6465424242242454654, -1444565444646.6465424242242454654l));
+	printf("printf:%d\n", printf("{%f}{%lf}", 1444565444646.6465424242242, 
+			   1444565444646.6465424242242l));
+	printf("ft_printf:%d\n", ft_printf("{%f}{%lf}", 1444565444646.6465424242242,
+								 1444565444646.6465424242242l));
+
 /*
+	printf("printf:%d\n", printf("{%#.3o}", 1));
+	printf("ft_printf:%d\n", ft_printf("{%#.3o}", 1));
+	printf("printf:%d\n", printf("{%p}", &i));
+	printf("ft_printf:%d\n", ft_printf("{%p}", &i));
+	printf("printf:%d\n", printf("{%p}", &l));
+	printf("ft_printf:%d\n", ft_printf("{%p}", &l));
+	printf("printf:%d\n", printf("{%p}", &str));
+	printf("ft_printf:%d\n", ft_printf("{%p}", &str));
+	printf("printf:%d\n", printf("{%.0p, %.p}", 0, 0));
+	printf("ft_printf:%d\n", ft_printf("{%.0p, %.p}", 0, 0));
+	printf("printf:%d\n", printf("{%05p}", 0));
+	printf("ft_printf:%d\n", ft_printf("{%05p}", 0));
+	printf("printf:%d\n", printf("{%5p}", 0));
+	printf("ft_printf:%d\n", ft_printf("{%5p}", 0));
+	printf("printf:%d\n", printf("{%p}", 0));
+	printf("ft_printf:%d\n", ft_printf("{%p}", 0));
 	printf("printf:%d\n", printf("{%.*s}", -5, "42"));
 	printf("ft_printf:%d\n", ft_printf("{%.*s}", -5, "42"));
 	printf("printf:%d\n", printf("{%#o}", 0));

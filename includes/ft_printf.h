@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 14:39:26 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/26 12:18:37 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ char			*ft_uint_itoa(uintmax_t nbr, int base);
 uintmax_t		ft_get_uint(va_list ap, t_flags *flags);
 int				ft_double(va_list ap, t_flags *flags, char **save);
 int				ft_hex(va_list ap, t_flags *flags, int flag, char **save);
+int				ft_hex_flags(char **nbr, t_flags *flags, int flag, char **save);
 int				ft_octal(va_list ap, t_flags *flags, char **save);
 int				ft_binary(va_list ap, t_flags *flags, char **save);
 int				ft_str(va_list ap, t_flags *flags, int flag, char **save);
 int				ft_char(va_list ap, t_flags *flags, int flag, char **save);
 int				ft_percent(t_flags *flags, char **save);
+int				ft_pointer(va_list ap, t_flags *flags, char **save);
 void			ft_error();
 void			ft_init_flags(t_flags *flags);
 int				ft_handle_flags(char **str, t_flags *flags);
