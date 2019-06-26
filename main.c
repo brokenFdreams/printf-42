@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/26 12:59:13 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/26 13:26:12 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	main(void)
 {
+/*
 	int i;
 	unsigned long l;
 	char *str;
@@ -27,8 +28,6 @@ int	main(void)
 			   1444565444646.6465424242242l));
 	printf("ft_printf:%d\n", ft_printf("{%f}{%lf}", 1444565444646.6465424242242,
 								 1444565444646.6465424242242l));
-
-/*
 	printf("printf:%d\n", printf("{%#.3o}", 1));
 	printf("ft_printf:%d\n", ft_printf("{%#.3o}", 1));
 	printf("printf:%d\n", printf("{%p}", &i));
@@ -89,7 +88,6 @@ int	main(void)
     printf("printf - %d\n", printf("[%10.5d]", 4242));
 
 	unsigned char c = 0x64;
-	double l = 3.14;
 	int k = 100;
 
     printf("% u\n", 4294967295);
@@ -100,6 +98,7 @@ int	main(void)
 	ft_printf("%-5d\n", -42);
 	ft_printf("%-15jd\n", -4294967295);
 
+	double l = 3.14;
 
 	ft_printf("mine double %7.10lf\n", l);
 	ft_printf("mine float %7.1f\n", (float)l);
@@ -129,7 +128,6 @@ int	main(void)
 	printf("origin 3.75 %.1f\n", 0.75);
 	printf("origin 3.85 %.1f\n", 0.85);
 	printf("origin 3.95 %.1f\n", 0.95);
-
 
 
 	ft_printf("mine %5hhu\n", 300);
