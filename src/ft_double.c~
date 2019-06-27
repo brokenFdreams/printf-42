@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/27 15:46:01 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/06/26 13:19:53 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int	ft_double_separation(long double nbr, t_flags *flags, char **save)
 	rem = 0;
 	if (flags->precision == -1)
 		flags->precision = 6;
-	precision = flags->precision + 1;
+	precision = flags->precision;
 	nbr *= nbr < 0 ? -1 : 1;
 	while (precision-- >= 0)
 	{
