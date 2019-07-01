@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/01 13:39:31 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/01 14:20:25 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,30 @@ static int	ft_double_flags(char **nbr, int sign, t_flags *flags, char **save)
 }
 
 /*
+** Get remainder of double in binary system
+** Return its value in string
+*/
+
+static char	*ft_double_rem_binary(long double rem, int length)
+{
+	char	*remainder;
+	int		i;
+	int		size;
+
+	i = 0;
+	size = 64 - length;
+	if (!(remainder = ft_strnew(size)))
+		ft_error();
+	while (i < size)
+	{
+		rem *= 2;
+		remainder[i++] = rem >= 1 ? '1' : '0';
+		rem = rem >= 1 ? rem - 1 : rem;
+	}
+	return (remainder);
+}
+
+/*
 ** Get double in binary system
 ** Return its value in string
 */
@@ -51,16 +75,18 @@ static char	*ft_double_tobinary(long double nbr)
 	char	*tmp;
 	int		i;
 	int		size;
-	int		expression;
 
 	i = 0;
 	size = 65;
 	if (!(binary = ft_strnew(size)))
 		ft_error();
-	tmp = ft_uint_itoa((uintmax_t)nbr)
+	tmp = ft_uint_itoa((uintmax_t)nbr, 2)
 	binary = ft_strcpy(binary, tmp);
 	ft_strdel(&tmp);
-	
+	tmp = ft_double_rem_binary(nbr - (uintmax_t) nbr, ft_strlen(binary));
+	binary = ft_strcat(binary, ".");
+	binary = ft_strcat(binary, tmp);
+	ft_strdel(&tmp);
 	return (binary);
 }
 
@@ -71,9 +97,13 @@ static char	*ft_double_tobinary(long double nbr)
 
 static char *ft_double_itoa(long double nbr)
 {
-	char	*num;
-	int		i;
-	int		size;
+	char		*binary;
+	char		*num;
+	int			i;
+	int			size;
+	uintmax_t	rem;
+
+	
 	
 }
 
