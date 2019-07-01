@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/26 13:26:12 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/01 12:56:18 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 int	main(void)
 {
+
+	printf("printf: %d\n", printf("{%f}{%lf}", 1.42, 1.42l));
+	ft_printf("ft_printf: %d\n", ft_printf("{%f}{%lf}", 1.42, 1.42l));
 /*
 	int i;
 	unsigned long l;

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/26 11:59:36 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/01 12:59:38 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,13 @@ static int	ft_handle(char **str, t_flags *flags, va_list ap, char **save)
 ** handle string before %
 */
 
-static int	ft_handle_string(char **str, char **save)
+static int	ft_handle_string(char **str, t_flags *flags)
 {
 	int		i;
 
 	i = 0;
 	while ((*str)[i] && (*str)[i] != '%')
 		i++;
-	if (!(*save = ft_strnew(i)))
-		ft_error();
-	*save = ft_strncpy(*save, *str, i);
-	*str = (*str) + i - 1;
 	return (i);
 }
 
@@ -96,21 +92,25 @@ static void	ft_space(char **str, t_flags *flags, va_list ap)
 	char	*tmp;
 	int		bytes;
 
+	tmp = flags->output;
 	if (**str == '%')
 	{
 		(*str)++;
 		bytes = ft_handle(str, flags, ap, &save);
+		flags->output = ft_strjoin(flags->output, save);
+		ft_strdel(&save);
+		(*str)++;
 	}
 	else
-		bytes = ft_handle_string(str, &save);
-	(*str)++;
-	tmp = flags->output;
-	flags->output = ft_strnew(flags->bytes + bytes);
-	flags->output = ft_strnjoin(flags->output, tmp, flags->bytes, 0);
+	{
+		bytes = ft_handle_string(str, flags);
+		flags->output = ft_strnew(flags->bytes + bytes);
+		flags->output = ft_strnjoin(flags->output, tmp, flags->bytes, 0);
+		flags->output = ft_strnjoin(flags->output, *str, bytes, flags->bytes);
+		*str = (*str) + bytes;
+	}
 	ft_strdel(&tmp);
-	flags->output = ft_strnjoin(flags->output, save, bytes, flags->bytes);
 	flags->bytes += bytes;
-	ft_strdel(&save);
 }
 
 int			ft_printf(char *str, ...)

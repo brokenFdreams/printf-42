@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/26 13:19:53 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/01 13:00:15 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,6 @@ int			ft_double(va_list ap, t_flags *flags, char **save)
 	else if (flags->length == LENGTH_LLL)
 		nbr = va_arg(ap, long double);
 	else
-		nbr = /*(float)*/va_arg(ap, double);
+		nbr = va_arg(ap, double);
 	return (ft_double_separation(nbr, flags, save));
 }
