@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/01 14:20:25 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/02 12:42:10 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,5 @@ int			ft_double(va_list ap, t_flags *flags, char **save)
 	else
 		nbr = va_arg(ap, double);
 	sign = nbr >= 0 ? 1 : -1;
-	return (ft_double_flags(ft_double_itoa(nbr * sign), sign, flags, save));
+	return (ft_double_flags(ft_double_itoa(nbr), sign, flags, save));
 }
