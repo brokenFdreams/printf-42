@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_exponentiation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/03 13:05:48 by fsinged          ###   ########.fr       */
+/*   Created: 2019/07/03 13:01:11 by fsinged           #+#    #+#             */
+/*   Updated: 2019/07/03 13:02:55 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-#include <stdio.h>
+#include "../includes/ft_printf.h"
 
-int	main(void)
+uintmax_t	ft_exponentiation(int exponent, int base)
 {
-	ft_printf("%f\n", 1);
-	return (0);
+	uintmax_t power;
+
+	power = 1;
+	while (exponent > 0)
+	{
+		power *= base;
+		exponent--;
+	}
+	return (power);
 }

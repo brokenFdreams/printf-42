@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/26 12:18:37 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/03 13:04:12 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int				ft_uint(va_list ap, t_flags *flags, char c, char **save);
 char			*ft_uint_itoa(uintmax_t nbr, int base);
 uintmax_t		ft_get_uint(va_list ap, t_flags *flags);
 int				ft_double(va_list ap, t_flags *flags, char **save);
+char			*ft_double_itoa(char *mantissa, int exponent);
 int				ft_hex(va_list ap, t_flags *flags, int flag, char **save);
 int				ft_hex_flags(char **nbr, t_flags *flags, int flag, char **save);
 int				ft_octal(va_list ap, t_flags *flags, char **save);
@@ -68,5 +69,6 @@ int				ft_handle_precision(char **str, t_flags *flags, va_list ap);
 int				ft_handle_length(char **str, t_flags *flags);
 void			ft_length(char **str, t_flags *flags, int length, int size);
 char			*ft_strnjoin(char *s1, const char *s2, size_t n, size_t pos);
+uintmax_t		ft_exponentiation(int exponent, int base);
 
 #endif

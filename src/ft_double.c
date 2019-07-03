@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/02 12:42:10 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/03 12:53:11 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,70 +41,82 @@ static int	ft_double_flags(char **nbr, int sign, t_flags *flags, char **save)
 }
 
 /*
-** Get remainder of double in binary system
-** Return its value in string
+** Count remainder of double in binary system
+** return its value in string
 */
 
-static char	*ft_double_rem_binary(long double rem, int length)
+static char	*ft_double_rembinary(long double nbr, size_t size)
 {
-	char	*remainder;
-	int		i;
-	int		size;
+	char	*rem;
+	size_t	i;
 
-	i = 0;
-	size = 64 - length;
-	if (!(remainder = ft_strnew(size)))
+	if (!(rem = ft_strnew(size)))
 		ft_error();
+	nbr = nbr - (intmax_t)nbr;
+	i = 0;
 	while (i < size)
 	{
-		rem *= 2;
-		remainder[i++] = rem >= 1 ? '1' : '0';
-		rem = rem >= 1 ? rem - 1 : rem;
+		nbr *= 2;
+		rem[i++] = nbr >= 1 ? '1' : '0';
+		nbr = nbr >= 1 ? nbr - 1 : nbr;
 	}
-	return (remainder);
+	return (rem);
 }
 
 /*
-** Get double in binary system
-** Return its value in string
+** Count mantissa
+** Return exponent
 */
 
-static char	*ft_double_tobinary(long double nbr)
+static int	ft_double_mantissa(long double nbr, char **mantissa)
 {
-	char	*binary;
-	char	*tmp;
-	int		i;
-	int		size;
+	size_t	size;
+	int		exponent;
+	char	*integer;
+	char	*remnder;
+
+	if (!(*mantissa = ft_strnew(65)))
+		ft_error();
+	integer = ft_uint_itoa(nbr, 2);
+	if (integer[0] == '1')
+		*mantissa = ft_strcat(*mantissa, integer);
+	size = integer[0] == '1' ? ft_strlen(integer) : 0;
+	remnder = ft_double_rembinary(nbr, 65 - size);
+	*mantissa = ft_strnjoin(*mantissa, remnder, 65 - size, size);
+	ft_strdel(&integer);
+	ft_strdel(&remnder);
+	if (size)
+		return (size);
+	while ((*mantissa)[size] == '0')
+	{
+		exponent--;
+		size++;
+	}
+	return (exponent);
+}
+
+/*
+** check for +/-inf, +/-0 and NaN
+** Return if fond anuthing from list upper ^
+*/
+
+static void	ft_double_except(char *binary, char **num, int exp)
+{
+	int	i;
+	int	mantissa;
 
 	i = 0;
-	size = 65;
-	if (!(binary = ft_strnew(size)))
-		ft_error();
-	tmp = ft_uint_itoa((uintmax_t)nbr, 2)
-	binary = ft_strcpy(binary, tmp);
-	ft_strdel(&tmp);
-	tmp = ft_double_rem_binary(nbr - (uintmax_t) nbr, ft_strlen(binary));
-	binary = ft_strcat(binary, ".");
-	binary = ft_strcat(binary, tmp);
-	ft_strdel(&tmp);
-	return (binary);
-}
-
-/*
-** 
-** return double as string
-*/
-
-static char *ft_double_itoa(long double nbr)
-{
-	char		*binary;
-	char		*num;
-	int			i;
-	int			size;
-	uintmax_t	rem;
-
-	
-	
+	while (i < 65 && binary[i] == '0')
+		i++;
+	mantissa = i == 65 ? 0 : -1;
+	i = 0;
+	while (i < 65 && binary[i] == '1')
+		i++;
+	mantissa = i == 65 ? 1 : mantissa;
+	if (exp == 0 && mantissa == 0)
+		*num = ft_strjoin("", "0");
+	else if (exp == 1 && mantissa == 0)
+		*num = ft_strjoin("", "INF");
 }
 
 /*
@@ -117,6 +129,9 @@ int			ft_double(va_list ap, t_flags *flags, char **save)
 {
 	long double nbr;
 	int			sign;
+	int			exponent;
+	char		*mantissa;
+	char		*num;
 
 	if (flags->length == LENGTH_L)
 		nbr = va_arg(ap, double);
@@ -125,5 +140,15 @@ int			ft_double(va_list ap, t_flags *flags, char **save)
 	else
 		nbr = va_arg(ap, double);
 	sign = nbr >= 0 ? 1 : -1;
-	return (ft_double_flags(ft_double_itoa(nbr), sign, flags, save));
+	exponent = ft_double_mantissa(nbr, &mantissa);
+	if (exponent == 0)
+		ft_double_except(mantissa, save, 0);
+	else if (exponent == 16383)
+		ft_double_except(mantissa, save, 1);
+	if (nbr != nbr)
+		*save = ft_strjoin("", "NaN");
+	if (!num)
+		num = ft_double_itoa(mantissa, exponent);
+	ft_strdel(&mantissa);
+	return (ft_double_flags(&num, sign, flags, save));
 }
