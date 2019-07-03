@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 13:45:25 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/03 12:53:11 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/03 13:31:33 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,11 @@ int			ft_double(va_list ap, t_flags *flags, char **save)
 	sign = nbr >= 0 ? 1 : -1;
 	exponent = ft_double_mantissa(nbr, &mantissa);
 	if (exponent == 0)
-		ft_double_except(mantissa, save, 0);
+		ft_double_except(mantissa, &num, 0);
 	else if (exponent == 16383)
-		ft_double_except(mantissa, save, 1);
+		ft_double_except(mantissa, &num, 1);
 	if (nbr != nbr)
-		*save = ft_strjoin("", "NaN");
+		*save = ft_strjoin("", "NaN")
 	if (!num)
 		num = ft_double_itoa(mantissa, exponent);
 	ft_strdel(&mantissa);
