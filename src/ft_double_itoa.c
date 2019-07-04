@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:33:26 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/03 15:40:54 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/04 15:06:26 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@
 ** Check exceptions as +/-inf, +/-0
 */
 
-static void	*ft_double_except(char *mantissa, char **num, int exp)
+static void ft_double_except(char *mantissa, char **num, int exp)
 {
 	int i;
-	int mantisaa;
+	int mant;
 
 	i = 0;
 	while (i < 65 && mantissa[i] == '0')
 		i++;
-	mantissa = i == 65 ? 0 : -1;
+	mant = i == 65 ? 0 : -1;
 	i = 0;
 	while (i < 65 && mantissa[i] == '1')
 		i++;
-	mantissa = i == 65 ? 1 : mantissa;
-	if (exp == 0 && mantissa == 0)
+	mant = i == 65 ? 1 : mant;
+	if (exp == 0 && mant == 0)
 		*num = ft_strjoin("", "0");
-	else if (exp == 1 && mantissa == 0)
+	else if (exp == 1 && mant == 0)
 		*num = ft_strjoin("", "INF");
 }
 

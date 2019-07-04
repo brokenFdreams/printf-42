@@ -6,7 +6,7 @@
 #    By: fsinged <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/17 15:47:32 by fsinged           #+#    #+#              #
-#    Updated: 2019/07/03 13:03:42 by fsinged          ###   ########.fr        #
+#    Updated: 2019/07/04 14:54:17 by fsinged          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,7 +15,8 @@ FLAGS = -Wall -Wextra -Werror
 SRCS_PATH = ./src/
 SRCS_FILES = ft_printf.c ft_error.c ft_flags.c ft_length_flag.c ft_octal.c \
 	ft_double.c ft_hex.c ft_int.c ft_uint.c ft_str.c ft_char.c ft_percent.c \
-	ft_binary.c ft_pointer.c ft_strnjoin.c ft_double_itoa.c ft_exponentiation.c
+	ft_binary.c ft_pointer.c ft_strnjoin.c ft_double_itoa.c \
+	ft_double_convert.c ft_exponentiation.c
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 OBJS_PATH = ./OBJS/
 OBJS_FILES = $(SRCS_FILES:.c=.o)

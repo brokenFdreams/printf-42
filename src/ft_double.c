@@ -6,11 +6,11 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:14:52 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/03 15:16:42 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/04 15:02:17 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#includes "../includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 /*
 ** Allocate new string, fill flags, join our double to it and return result
@@ -57,5 +57,5 @@ int			ft_double(va_list ap, t_flags *flags, char **save)
 	sign = nbr >= 0 ? 1 : -1;
 	flags->precision = flags->precision == -1 ? 6 : flags->precision;
 	num = ft_double_itoa(nbr * sign, flags->precision);
-	return (ft_double_flags(&num, flags, sign, save);
+	return (ft_double_flags(&num, sign, flags, save));
 }
