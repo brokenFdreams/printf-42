@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/05 16:27:46 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/05 17:03:47 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int ft_double_mantissa(long double nbr, char **mantissa);
 void    ft_double_r(char *mantissa, char **remainder, int precision, int exp);
 int ft_double_i(char *mantissa, char **integer, int exponent);
+void ft_double_plusrem(char *num, int size);
 /*
 static void ft_double_r(char *mantissa, char **remainder, int precision, int exp)
 {
@@ -81,14 +82,18 @@ printf("%s\n", ft_double_itoa(1.13, 3));
 	char *mantissa;
 	char *integer;
 	char *remainder;
-	long double nbr = 122.12;
+	long double nbr = 0.12;
 	int exponent = ft_double_mantissa(nbr, &mantissa);
 	uintmax_t power = ft_exponentiation(exponent, 2);
 
+	printf("exp:%d mantissa:%s\n", exponent, mantissa);
 	mantissa += ft_double_i(mantissa, &integer, exponent);
-	ft_double_r(mantissa, &remainder, 4, exponent);
+	ft_double_r(mantissa, &remainder, 2, exponent);
+	if (remainder[0] == '1')
+		ft_double_plusrem(integer, ft_strlen(integer) - 1);
 	remainder++;
 	printf("%s.%s\n", integer, remainder);
+	printf("%.10lf\n", 0.12);
 */
 	return (0);
 }
