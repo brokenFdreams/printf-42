@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/04 15:05:47 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/05 13:50:08 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	ft_double_plusrem(char *num, int size)
 	}
 	else if (num[size] == '.')
 		ft_double_plusrem(num, size - 1);
+	else if (num[size] == '\0')
+		num[size] = '1';
 	else
 		num[size] += 1;
 }
@@ -47,7 +49,7 @@ static void	ft_double_addition(char *num, char **tmp, int size, int len)
 			a = 0;
 		b += (*tmp)[len--] - '0';
 		a = a + b;
-		b = a > 10 ? 1 : 0;
+		b = a >= 10 ? 1 : 0;
 		num[size--] = a > 10 ? a % 10 + '0' : a + '0';
 	}
 	if (b)
@@ -59,7 +61,7 @@ static void	ft_double_addition(char *num, char **tmp, int size, int len)
 ** Revert integer of double to decemical using string
 */
 
-static int	ft_double_i(char *mantissa, char **integer, int exponent)
+int	ft_double_i(char *mantissa, char **integer, int exponent)
 {
 	uintmax_t	power;
 	char		*tmp;
@@ -69,17 +71,18 @@ static int	ft_double_i(char *mantissa, char **integer, int exponent)
 
 	i = 0;
 	power = ft_exponentiation(exponent, 2);
-	tmp = ft_uint_itoa(power * (mantissa[i] - '0'), 10);
+	tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
 	size = ft_strlen(tmp);
 	if (!(*integer = ft_strnew(size + 1)))
 		ft_error();
 	ft_double_addition(*integer, &tmp, size, size - 1);
+	power /= 2;
 	while (power > 0)
 	{
-		power /= 2;
 		tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
 		len = ft_strlen(tmp);
 		ft_double_addition(*integer, &tmp, size, len - 1);
+		power /= 2;
 	}
 	return (i);
 }
@@ -100,15 +103,15 @@ static void	ft_double_r(char *mantissa, char **remainder, int precision)
 	power = 5;
 	if (!(*remainder = ft_strnew(652)))
 		ft_error();
-	tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
-	size = ft_strlen(tmp);
+	size = 0;
 	while (mantissa[i])
 	{
+		tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
 		len = ft_strlen(tmp) - 1;
+		size = len + 1 > size ? len + 1 : size;
 		ft_double_addition(*remainder, &tmp, size, len);
 		size++;
 		power *= 5;
-		ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
 	}
 	i = precision + 1;
 	if ((*remainder)[i] == '5')
@@ -140,8 +143,9 @@ void	ft_double_revert(char *mantissa, char **num, int exponent, int precision)
 	if (!(*num = ft_strnew(size)))
 		ft_error();
 	*num = exponent >= 0 ? ft_strcat(*num, integer) : ft_strcat(*num, "0");
+	if (exponent >= 0)
+		ft_strdel(&integer);
 	*num = ft_strcat(*num, ".");
-	ft_strdel(&integer);
 	ft_double_r(mantissa, &remainder, precision);
 	if (remainder[0] != '\0')
 		ft_double_plusrem(*num, ft_strlen(*num) - 2);
