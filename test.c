@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/05 13:45:23 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/05 14:05:21 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,16 @@ int	main(void)
 //	integer = ft_uint_itoa((uintmax_t)nbr, 2);
 //	mantissa = ft_strnew(65);
 //	mantissa = ft_strnjoin(mantissa, integer, ft_strlen(integer), 0);
+	printf("exp:%d ", exponent);
+	printf("%s\n", mantissa);
+	printf("exp:%d ", ft_double_mantissa(0.00005, &mantissa));
 	printf("%s\n", mantissa);
 //	printf("%d\n", exponent);
-	mantissa += ft_double_i(mantissa, &integer, exponent);
-	printf("%s\n", mantissa);
-	ft_double_r(mantissa, &remainder, 2);
+//	mantissa += ft_double_i(mantissa, &integer, exponent);
+//	printf("%s\n", mantissa);
+//	ft_double_r(mantissa, &remainder, 2);
 //	printf("%d\n", ft_double_i(mantissa, &integer, exponent));
 //	printf("%ju\n", power);
-	printf("%s.%s\n", integer, remainder);
+//	printf("%s.%s\n", integer, remainder);
 	return (0);
 }

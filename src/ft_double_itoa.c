@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:33:26 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/05 13:55:38 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/05 14:06:14 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void ft_double_except(char *mantissa, char **num, int exp)
 ** Get remainder in binary system to add to mantissa
 */
 
-static char	*ft_double_remnder(long double nbr, int size)
+static char	*ft_double_remnder(long double nbr, int size, int *exponent)
 {
 	char	*rem;
 	int		i;
@@ -53,6 +53,7 @@ static char	*ft_double_remnder(long double nbr, int size)
 		nbr *= 2;
 		rem[i++] = nbr >= 1 ? '1' : '0';
 		i = size == 65 && i == 1 && nbr < 1 ? 0 : i;//new code
+		*exponent -= size == 65 && i == 0 && nbr < 1 ? 1 : 0;//new code
 		nbr = nbr >= 1 ? nbr - 1.0 : nbr;
 	}
 	return (rem);
@@ -74,19 +75,12 @@ int	ft_double_mantissa(long double nbr, char **mantissa)
 		ft_error();
 	integer = ft_uint_itoa((uintmax_t)nbr, 2);
 	size = integer[0] == '1' ? ft_strlen(integer) : 0;
+	exponent = size - 1;
 	*mantissa = ft_strnjoin(*mantissa, integer, size, 0);
-	remnder = ft_double_remnder(nbr - (uintmax_t)nbr, 65 - size);
+	remnder = ft_double_remnder(nbr - (uintmax_t)nbr, 65 - size, &exponent);
 	*mantissa = ft_strnjoin(*mantissa, remnder, 65 - size, size);
 	ft_strdel(&integer);
 	ft_strdel(&remnder);
-	if (size)
-		return (size - 1);
-	exponent = 0;
-	while ((*mantissa)[size] == '0')
-	{
-		exponent--;
-		size++;
-	}
 	return (exponent);
 }
 
