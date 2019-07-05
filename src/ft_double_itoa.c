@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:33:26 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/05 14:06:14 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/05 16:10:57 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static char	*ft_double_remnder(long double nbr, int size, int *exponent)
 	{
 		nbr *= 2;
 		rem[i++] = nbr >= 1 ? '1' : '0';
-		i = size == 65 && i == 1 && nbr < 1 ? 0 : i;//new code
-		*exponent -= size == 65 && i == 0 && nbr < 1 ? 1 : 0;//new code
+		i = size == 65 && i == 1 && nbr < 1 ? 0 : i;
+		*exponent -= size == 65 && i == 0 && nbr < 1 ? 1 : 0;
 		nbr = nbr >= 1 ? nbr - 1.0 : nbr;
 	}
 	return (rem);
