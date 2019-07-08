@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/08 14:04:50 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 15:52:53 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ void ft_double_plusrem(char *num, int size);
 int	main(void)
 {
 
+	printf(":printf:%d\n", printf("%.09s", "hi low"));
+	ft_printf(":ft_printf:%d\n", ft_printf("%.09s", "hi low"));
 
+/*
 //  CHECK FT_DOUBLE_ITOA FUCCNTION
 	printf("%s\n", ft_double_itoa(1.13, 3));
-
-
+*/
 /*
 //  CHECK FT_DOUBLE_REVERT FUNCTION
 	char *num;

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:10:58 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/08 17:18:47 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 17:09:40 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static int	ft_hex_width(char **save, int length, t_flags *flags)
 			(*save)[length++] = ' ';
 		else
 			(*save)[i++] = flags->zero && flags->precision < 0 ? '0' : ' ';
-	return (flags->zero && !flags->minus && flags->hash ? 0 : i);
+	return (flags->zero && !flags->minus && flags->hash && flags->precision < 0
+			? 0 : i);
 }
 
 /*

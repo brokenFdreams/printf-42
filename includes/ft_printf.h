@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/08 14:33:15 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 14:37:57 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ uintmax_t		ft_get_uint(va_list ap, t_flags *flags);
 int				ft_double(va_list ap, t_flags *flags, char **save);
 char			*ft_double_itoa(long double nbr, int exponent);
 void			ft_double_revert(char *mantissa, char **num, int exp,
-								  int precision);
+								int precision);
 void			ft_double_rounding(char *rem, int precision);
 int				ft_double_ispace(char **integer);
 void			ft_double_plusrem(char *num, int size);

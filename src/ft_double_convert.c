@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/08 14:30:38 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 14:36:10 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,6 @@ static int	ft_double_i(char *mantissa, char **integer, int exponent)
 	int			size;
 
 	i = 0;
-/*
-	if (exponent < 0)
-	{
-		if (!(*integer = ft_strnew(1)))
-			ft_error();
-		(*integer)[0] = '0';
-		return (i);
-	}
-*/
 	power = ft_exponentiation(exponent, 2);
 	tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
 	size = ft_strlen(tmp);

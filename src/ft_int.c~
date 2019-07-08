@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/08 17:04:41 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 16:18:28 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	ft_int_width(char **save, int length, t_flags *flags, int sign)
 	int i;
 
 	length = length > flags->precision ? length : flags->precision;
-	length += flags->minus && (flags->plus || sign == -1 || flags->space) ? 1 : 0;
 	if (!(*save = ft_strnew(flags->width)))
 		ft_error();
 	i = 0;
@@ -51,28 +50,24 @@ int	ft_int_flags(char **nbr, t_flags *flags, int sign, char **save)
 	int		size;
 	int		length;
 	int		i;
-	int		lengthcopy;
 
 	length = flags->precision == 0 && (*nbr)[0] == '0' ? 0 : ft_strlen(*nbr);
 	length = (*nbr)[0] == '\0' && (*nbr)[1] == 127 ? 1 : length;
 	size = length < flags->precision ? flags->precision : length;
-	size += (flags->plus || sign == -1 || flags->space) ? 1 : 0;
+	size += (flags->plus || sign == -1 || flags->space) && size ? 1 : 0;
 	if (!(i = 0) && size < flags->width)
 		i = ft_int_width(save, length, flags, sign);
 	else if (!(*save = ft_strnew(size)))
 		ft_error();
-	if (sign == -1)
+	if (length && sign == -1)
 		(*save)[i++] = '-';
-	else if (flags->plus)
+	else if (length && flags->plus)
 		(*save)[i++] = '+';
-	else if (flags->space && i == 0)
-		(*save)[i++] = ' ';
-	else if (flags->space)
+	else if (length && flags->space)
 		(*save)[0] = ' ';
-	lengthcopy = length;
 	while ((*nbr)[0] != '\0' && length < flags->precision && length++)
 		(*save)[i++] = '0';
-	*save = ft_strnjoin(*save, *nbr, lengthcopy, i);
+	*save = ft_strnjoin(*save, *nbr, length, i);
 	ft_strdel(nbr);
 	return (size < flags->width ? flags->width : size);
 }
