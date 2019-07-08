@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:33:26 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/05 16:10:57 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 14:11:16 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Check exceptions as +/-inf, +/-0
 */
 
-static void ft_double_except(char *mantissa, char **num, int exp)
+static void	ft_double_except(char *mantissa, char **num, int exp)
 {
 	int i;
 	int mant;
@@ -64,7 +64,7 @@ static char	*ft_double_remnder(long double nbr, int size, int *exponent)
 ** return exponent
 */
 
-int	ft_double_mantissa(long double nbr, char **mantissa)
+static int	ft_double_mantissa(long double nbr, char **mantissa)
 {
 	int		size;
 	int		exponent;
@@ -88,7 +88,7 @@ int	ft_double_mantissa(long double nbr, char **mantissa)
 ** Itoa for double
 */
 
-char	*ft_double_itoa(long double nbr, int precision)
+char		*ft_double_itoa(long double nbr, int precision)
 {
 	char	*mantissa;
 	char	*num;

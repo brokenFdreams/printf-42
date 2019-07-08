@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/05 17:03:47 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 14:04:50 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,66 +17,26 @@ int ft_double_mantissa(long double nbr, char **mantissa);
 void    ft_double_r(char *mantissa, char **remainder, int precision, int exp);
 int ft_double_i(char *mantissa, char **integer, int exponent);
 void ft_double_plusrem(char *num, int size);
-/*
-static void ft_double_r(char *mantissa, char **remainder, int precision, int exp)
-{
-	uintmax_t	power;
-	char		*tmp;
-	int			size;
-	int			len;
-	int			i;
-
-	i = 0;
-	power = 5;
-	if (!(*remainder = ft_strnew(652)))
-		ft_error();
-	size = 1;
-	while (exp++ <= 0)
-		(*remainder)[size++] = '0';
-	while (mantissa[i])
-	{
-		tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
-		len = ft_strlen(tmp) - 1;
-		printf("tmp:%s rem:%s\n", tmp, *remainder + 1);
-		ft_double_addition(*remainder, &tmp, size, len);
-		size++;
-		power *= 5;
-	}
-	while (size <= precision + 1)
-		(*remainder)[size++] = '0';
-	i = precision + 1;
-	if ((*remainder)[i] == '5')
-	{
-		i++;
-		while ((*remainder)[i] && (*remainder)[i] == '0')
-			i++;
-		if ((*remainder)[i] && (*remainder)[i] != '0')
-			ft_double_plusrem(*remainder, precision);
-	}
-	else if ((*remainder)[i] > '5' && (*remainder)[i] <= '9')
-			ft_double_plusrem(*remainder, precision);
-	(*remainder)[precision + 1] = '\0';
-}
-*/
 
 int	main(void)
 {
 
-/*
-  CHECK FT_DOUBLE_ITOA FUCCNTION
-printf("%s\n", ft_double_itoa(1.13, 3));
-*/
 
+//  CHECK FT_DOUBLE_ITOA FUCCNTION
+	printf("%s\n", ft_double_itoa(1.13, 3));
+
+
+/*
 //  CHECK FT_DOUBLE_REVERT FUNCTION
 	char *num;
 	char *mantissa;
-	long double nbr = 122.132;
+	long double nbr = 1.13;
 	int	exponent = ft_double_mantissa(nbr, &mantissa);
 
 	printf("exp:%d mantissa:%s\n", exponent, mantissa);
 	ft_double_revert(mantissa, &num, exponent, 3);
 	printf("%s\n", num);
-
+*/
 /*
 //  CHECK ALL FUNCITONS IN FT_DOUBLE_CONVERT EXCEPT REVERT
 	char *mantissa;

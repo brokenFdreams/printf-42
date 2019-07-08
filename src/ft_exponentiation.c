@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:01:11 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/04 13:47:09 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 13:42:25 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ uintmax_t	ft_exponentiation(int exponent, int base)
 {
 	uintmax_t power;
 
-	power = exponent ? 1 : 0;
+	power = 1;
 	while (exponent > 0)
 	{
 		power *= base;

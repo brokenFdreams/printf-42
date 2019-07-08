@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/05 17:11:55 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 14:30:38 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Plus remainder
 */
 
-static void	ft_double_plusrem(char *num, int size)
+void		ft_double_plusrem(char *num, int size)
 {
 	if (num[size] == '9')
 	{
@@ -70,6 +70,15 @@ static int	ft_double_i(char *mantissa, char **integer, int exponent)
 	int			size;
 
 	i = 0;
+/*
+	if (exponent < 0)
+	{
+		if (!(*integer = ft_strnew(1)))
+			ft_error();
+		(*integer)[0] = '0';
+		return (i);
+	}
+*/
 	power = ft_exponentiation(exponent, 2);
 	tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
 	size = ft_strlen(tmp);
@@ -116,50 +125,39 @@ static void	ft_double_r(char *mantissa, char **rem, int precision, int exp)
 	}
 	while (size <= precision + 1)
 		*rem[size++] = '0';
-	i = precision + 1;
-	if ((*rem)[i] == '5')
-	{
-		i++;
-		while ((*rem)[i] && (*rem)[i] == '0')
-			i++;
-		if (((*rem)[i] && (*rem)[i] != '0') ||
-			((*rem)[precision] - '0') % 2 != 0)
-			ft_double_plusrem(*rem, precision);
-	}
-	else if ((*rem)[i] > '5' && (*rem)[i] <= '9')
-			ft_double_plusrem(*rem, precision);
-	(*rem)[precision + 1] = '\0';
+	ft_double_rounding(*rem, precision);
 }
 
 /*
 ** Revert double to decemical using string
 */
 
-void		ft_double_revert(char *mantissa, char **num, int exponent,
-							 int precision)
+void		ft_double_revert(char *mantissa, char **num, int exp,
+							int precision)
 {
-	char	*tmp;
-	int		i;
+	char	*integer;
+	char	*remnder;
 	int		size;
+	int		i;
 
-	i = exponent >= 0 ? ft_double_i(mantissa, &tmp, exponent) : 0;
-	mantissa = exponent >= 0 ? mantissa + i : mantissa;
-	tmp = exponent >= 0 && tmp[i] == '\0' ? tmp + 1 : NULL;
-	size = exponent >= 0 ? ft_strlen(tmp) + precision : precision + 1;
-	size = precision ? size + 1 : size;
+	i = exp >= 0 ? ft_double_i(mantissa, &integer, exp) :
+		ft_double_ispace(&integer);
+	mantissa = mantissa + i;
+	size = integer[0] == '\0' ? ft_strlen(integer + 1) : ft_strlen(integer);
+	size = exp >= 0 ? precision : precision + 1;
+	size += precision ? 1 : 0;
 	if (!(*num = ft_strnew(size)))
 		ft_error();
-	*num = tmp ? ft_strcat(*num, tmp) : ft_strcat(*num, "0");
-	if (tmp)
-		ft_strdel(&tmp);
+	*num = !integer[0] ? ft_strcat(*num, integer + 1) :
+		ft_strcat(*num, integer);
+	ft_strdel(&integer);
 	if (precision > 0)
 	{
 		*num = ft_strcat(*num, ".");
-		ft_double_r(mantissa, &tmp, precision, exponent);
-		if (tmp[0] != '\0')
+		ft_double_r(mantissa, &remnder, precision, exp);
+		if (remnder[0] != '\0')
 			ft_double_plusrem(*num, ft_strlen(*num) - 2);
-		tmp++;
-		*num = ft_strcat(*num, tmp);
-		ft_strdel(&tmp);
+		*num = ft_strcat(*num, remnder + 1);
+		ft_strdel(&remnder);
 	}
 }

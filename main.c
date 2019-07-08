@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:53:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/01 12:56:18 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/08 14:06:26 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 int	main(void)
 {
 
-	printf("printf: %d\n", printf("{%f}{%lf}", 1.42, 1.42l));
-	ft_printf("ft_printf: %d\n", ft_printf("{%f}{%lf}", 1.42, 1.42l));
+//	printf("printf: %d\n", printf("{%12.4f}{%+-12lf}", 1.42, 1.42l));
+//	ft_printf("ft_printf: %d\n", ft_printf("{%12.4f}{%+-12lf}", 1.42, 1.42l));
 /*
 	int i;
 	unsigned long l;
@@ -110,7 +110,7 @@ int	main(void)
 	printf("origin float %7.1f\n", (float)l);
 	printf("origin long double %7.1Lf\n", (long double)l);
 
-
+*/
 	ft_printf("mine 3.15 %.1f\n", 0.15);
 	ft_printf("mine 3.25 %.1f\n", 0.25);
     ft_printf("mine 3.35 %.1f\n", 0.35);
@@ -131,7 +131,7 @@ int	main(void)
 	printf("origin 3.75 %.1f\n", 0.75);
 	printf("origin 3.85 %.1f\n", 0.85);
 	printf("origin 3.95 %.1f\n", 0.95);
-
+/*
 
 	ft_printf("mine %5hhu\n", 300);
 	printf("origin %5hhu\n", 300);
