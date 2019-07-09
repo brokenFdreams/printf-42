@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:10:58 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/08 17:18:47 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/09 12:39:45 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ static int	ft_hex_width(char **save, int length, t_flags *flags)
 	length = length > flags->precision ? length : flags->precision;
 	if (!(*save = ft_strnew(flags->width)))
 		ft_error();
-	i = flags->zero && !flags->minus && flags->hash ? 2 : 0;
-	if ((!flags->zero && !flags->minus && flags->hash) ||
-		(flags->minus && flags->hash))
+	i = flags->zero && !flags->minus && flags->hash && flags->precision < 0
+		? 2 : 0;
+	if (!(flags->zero && !flags->minus && flags->precision < 0) && flags->hash)
 		length += 2;
 	while (length + i < flags->width)
 		if (flags->minus)
 			(*save)[length++] = ' ';
 		else
 			(*save)[i++] = flags->zero && flags->precision < 0 ? '0' : ' ';
-	return (flags->zero && !flags->minus && flags->hash ? 0 : i);
+	return (flags->zero && !flags->minus && flags->precision < 0 ? 0 : i);
 }
 
 /*

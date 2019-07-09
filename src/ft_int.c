@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/08 17:04:41 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/09 12:42:49 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_int_width(char **save, int length, t_flags *flags, int sign)
 	int i;
 
 	length = length > flags->precision ? length : flags->precision;
-	length += flags->minus && (flags->plus || sign == -1 || flags->space) ? 1 : 0;
+	length += flags->minus && (flags->plus || sign == -1 || flags->space)
+		? 1 : 0;
 	if (!(*save = ft_strnew(flags->width)))
 		ft_error();
 	i = 0;
@@ -65,10 +66,8 @@ int	ft_int_flags(char **nbr, t_flags *flags, int sign, char **save)
 		(*save)[i++] = '-';
 	else if (flags->plus)
 		(*save)[i++] = '+';
-	else if (flags->space && i == 0)
-		(*save)[i++] = ' ';
 	else if (flags->space)
-		(*save)[0] = ' ';
+		(*save)[i == 0 ? i++ : 0] = ' ';
 	lengthcopy = length;
 	while ((*nbr)[0] != '\0' && length < flags->precision && length++)
 		(*save)[i++] = '0';

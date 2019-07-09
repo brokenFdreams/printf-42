@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 13:06:06 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/26 13:07:01 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/09 13:08:33 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	ft_octal(va_list ap, t_flags *flags, char **save)
 	size = ft_strlen(num);
 	if (flags->hash && num[0] != '0')
 		flags->precision = flags->precision < size ? size + 1 :
-			flags->precision;
-	else if (flags->hash && num[0] == '0')
-		flags->precision = flags->precision == -1 ? 1 : flags->precision + 1;
+			flags->precision++;
+	else if (flags->hash && num[0] == '0' && flags->precision == 0)
+		flags->precision = 1;
 	flags->hash = 0;
 	flags->space = 0;
 	flags->plus = 0;
