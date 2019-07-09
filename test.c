@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/09 13:54:45 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/09 15:23:46 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,19 @@ void ft_double_plusrem(char *num, int size);
 
 int	main(void)
 {
-	printf(":printf:%d\n", printf("%-5c", '\0'));
+	char *mantissa;
+	char *num;
+	int exp;
+
+	printf("%ju\n", ft_exponentiation(65, 2));
+	printf("%s\n", ft_uint_itoa(2818306651739822853, 2));
+	exp = ft_double_mantissa(3.85, &mantissa);
+	printf("exp:%d mantissa:%s\n", exp, mantissa);
+	ft_double_revert(mantissa, &num, exp, 8);
+	printf("num:%s\n", num); 
+	ft_printf("%.8f\n", -3.85);
+/*	printf(":printf:%d\n", printf("%-5c", '\0'));
 	printf(":ft_printf:%d\n", ft_printf("%-5c", '\0'));
-/*
 	printf(":printf:%d\n", printf("%.09s", "hi low"));
 	ft_printf(":ft_printf:%d\n", ft_printf("%.09s", "hi low"));
 */
