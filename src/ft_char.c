@@ -6,15 +6,11 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 16:38:31 by fsinged           #+#    #+#             */
-/*   Updated: 2019/06/25 17:27:41 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/09 13:32:15 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-/*
-**__________________FIX____It________________
-*/
 
 /*
 ** Allocate new string, put there char with flags
