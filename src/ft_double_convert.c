@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/10 13:40:46 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/10 17:01:44 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,58 +51,60 @@ static void	ft_double_rounding(char *rem, int precision)
 ** Revert integer of double to decemical using string
 */
 
-static int	ft_double_i(char *mantissa, char **integer, int exponent)
+/*static */void	ft_double_i(char *mantissa, char **integer, int exponent)
 {
-	uintmax_t	power;
-	char		*tmp;
-	int			i;
-	int			len;
-	int			size;
+	char	*power;
+	char	*tmp;
+	int		len;
+	int		size;
 
-	i = 0;
-	power = ft_exponentiation(exponent, 2);
-	tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
-	size = ft_strlen(tmp);
-	if (!(*integer = ft_strnew(size + 1)))
-		ft_error();
-	ft_double_addition(*integer, &tmp, size, size - 1);
-	power /= 2;
-	while (power > 0)
+	if (exponent < 0)
+		ft_double_ispace(integer);
+	else
 	{
-		tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
-		len = ft_strlen(tmp);
-		ft_double_addition(*integer, &tmp, size, len - 1);
-		power /= 2;
+		len = ft_double_exp(exponent, 2, &power);
+		size = ft_strlen(power + len);
+		if (!(*integer = ft_strnew(size + 1)))
+			ft_error();
+		ft_double_addition(*integer, &power, size, len);
+		len = ft_double_exp(0, 2, &power);
+		while (exponent > 0)
+		{
+			tmp = mantissa[exponent--] == '0' ? ft_strjoin("", "0") :
+				ft_strjoin("", power + len);
+			len = ft_strlen(tmp) - 1;
+			ft_double_addition(*integer, &tmp, size, len);
+			len = ft_double_multi(power, 2);
+		}
 	}
-	return (i);
 }
 
 /*
 ** Revert remainder of double to decemical using string
 */
 
-static void	ft_double_r(char *mantissa, char **rem, int precision, int exp)
+/*static */void	ft_double_r(char *mantissa, char **rem, int precision, int exp)
 {
-	uintmax_t	power;
-	char		*tmp;
-	int			size;
-	int			len;
-	int			i;
+	char	*power;
+	char	*tmp;
+	int		size;
+	int		len;
+	int		i;
 
 	i = 0;
-	power = exp < 0 ? ft_exponentiation(exp * -1, 5) : 5;
-	if (!(*rem = ft_strnew(652)))
+	if (!(*rem = ft_strnew(1024)))
 		ft_error();
 	size = 1;
-	while (size < (exp * -1))
+	while (size < exp)
 		(*rem)[size++] = '0';
+	len = ft_double_exp(exp, 5, &power);
 	while (mantissa[i])
 	{
-		tmp = ft_uint_itoa(power * (mantissa[i++] - '0'), 10);
+		tmp = mantissa[i++] == '0' ? ft_strjoin("", "0") :
+			ft_strjoin("", power + len);
 		len = ft_strlen(tmp) - 1;
-		ft_double_addition(*rem, &tmp, size, len);
-		size++;
-		power *= 5;
+		ft_double_addition(*rem, &tmp, size++, len);
+		len = ft_double_multi(power, 5);
 	}
 	while (size <= precision + 1)
 		*rem[size++] = '0';
@@ -121,8 +123,8 @@ void		ft_double_revert(char *mantissa, char **num, int exp,
 	int		size;
 	int		i;
 
-	i = exp >= 0 ? ft_double_i(mantissa, &integer, exp) :
-		ft_double_ispace(&integer);
+	ft_double_i(mantissa, &integer, exp);
+	i = exp >= 0 ? exp : 0;
 	mantissa = mantissa + i;
 	size = integer[0] == '\0' ? ft_strlen(integer + 1) : ft_strlen(integer);
 	size = exp >= 0 ? precision : precision + 1;
@@ -134,6 +136,7 @@ void		ft_double_revert(char *mantissa, char **num, int exp,
 	ft_strdel(&integer);
 	if (precision > 0)
 	{
+		exp = exp >= 0 ? -1 : exp;
 		*num = ft_strcat(*num, ".");
 		ft_double_r(mantissa, &remnder, precision, exp);
 		if (remnder[0] != '\0')

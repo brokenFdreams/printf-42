@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:33:26 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/09 14:27:54 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/10 16:22:05 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*ft_double_remnder(long double nbr, int size, int *exponent)
 ** return exponent
 */
 
-/*static*/int	ft_double_mantissa(long double nbr, char **mantissa)
+/*static */int	ft_double_mantissa(long double nbr, char **mantissa)
 {
 	int		size;
 	int		exponent;

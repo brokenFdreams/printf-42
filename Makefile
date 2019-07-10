@@ -6,7 +6,7 @@
 #    By: fsinged <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/17 15:47:32 by fsinged           #+#    #+#              #
-#    Updated: 2019/07/10 13:41:09 by fsinged          ###   ########.fr        #
+#    Updated: 2019/07/10 15:04:20 by fsinged          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,7 @@ SRCS_PATH = ./src/
 SRCS_FILES = ft_printf.c ft_error.c ft_flags.c ft_length_flag.c ft_octal.c \
 	ft_double.c ft_hex.c ft_int.c ft_uint.c ft_str.c ft_char.c ft_percent.c \
 	ft_binary.c ft_pointer.c ft_strnjoin.c ft_double_itoa.c \
-	ft_double_convert.c ft_exponentiation.c
+	ft_double_convert.c ft_double_exp.c
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 OBJS_PATH = ./OBJS/
 OBJS_FILES = $(SRCS_FILES:.c=.o)
@@ -34,7 +34,7 @@ LIB_SRCS_FILES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 	ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c \
 	ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c \
 	ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_itoa_base.c \
-	ft_max.c ft_min.c ft_sqrt.c ft_strpcat.c
+	ft_max.c ft_min.c ft_sqrt.c ft_strpcat.c ft_strrev.c ft_strddel.c
 LIB_OBJS_FILES = $(LIB_SRCS_FILES:.c=.o)
 LIB_OBJS = $(addprefix $(LIB_PATH), $(LIB_OBJS_FILES))
 HEADER = -I ./includes/ft_printf.h

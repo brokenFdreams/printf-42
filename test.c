@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/09 15:23:46 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/10 16:57:22 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,38 @@
 
 int ft_double_mantissa(long double nbr, char **mantissa);
 void    ft_double_r(char *mantissa, char **remainder, int precision, int exp);
-int ft_double_i(char *mantissa, char **integer, int exponent);
+void ft_double_i(char *mantissa, char **integer, int exponent);
 void ft_double_plusrem(char *num, int size);
 
 int	main(void)
 {
+
+
 	char *mantissa;
 	char *num;
+	char *frt;
+	char *rem;
 	int exp;
+	int size;
 
-	printf("%ju\n", ft_exponentiation(65, 2));
-	printf("%s\n", ft_uint_itoa(2818306651739822853, 2));
 	exp = ft_double_mantissa(3.85, &mantissa);
 	printf("exp:%d mantissa:%s\n", exp, mantissa);
+/*
+//	size =  ft_double_exp(exp, 2, &num);
+//	printf("size:%d num:%s:size:%d:\n", size, num + size, ft_strlen(num + size));
+//	ft_double_i(mantissa, &frt, exp);
+	mantissa += exp >= 0 ? exp + 1 : 0;
+	exp = exp >= 0 ? 1 : exp * -1;
+	ft_double_r(mantissa, &rem, 9, exp);
+//	frt = frt[0] == '\0' ? frt + 1 : frt;
+	printf("%s\n", rem + 1);
+*/
 	ft_double_revert(mantissa, &num, exp, 8);
 	printf("num:%s\n", num); 
-	ft_printf("%.8f\n", -3.85);
-/*	printf(":printf:%d\n", printf("%-5c", '\0'));
+
+//	ft_printf("%.8f\n", -3.85);
+/*
+	printf(":printf:%d\n", printf("%-5c", '\0'));
 	printf(":ft_printf:%d\n", ft_printf("%-5c", '\0'));
 	printf(":printf:%d\n", printf("%.09s", "hi low"));
 	ft_printf(":ft_printf:%d\n", ft_printf("%.09s", "hi low"));
@@ -58,10 +73,10 @@ int	main(void)
 	char *remainder;
 	long double nbr = 0.12;
 	int exponent = ft_double_mantissa(nbr, &mantissa);
-	uintmax_t power = ft_exponentiation(exponent, 2);
 
 	printf("exp:%d mantissa:%s\n", exponent, mantissa);
-	mantissa += ft_double_i(mantissa, &integer, exponent);
+	ft_double_i(mantissa, &integer, exponent);
+	mantissa += exponent >= 0 ? exponent + 1 : 0;
 	ft_double_r(mantissa, &remainder, 2, exponent);
 	if (remainder[0] == '1')
 		ft_double_plusrem(integer, ft_strlen(integer) - 1);
