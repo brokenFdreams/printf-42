@@ -6,11 +6,30 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:01:11 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/09 16:06:59 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/10 13:44:09 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+/*
+** Plus remainder
+*/
+
+void		ft_double_plusrem(char *num, int size)
+{
+	if (num[size] == '9')
+	{
+		num[size] = '0';
+		ft_double_plusrem(num, size - 1);
+	}
+	else if (num[size] == '.')
+		ft_double_plusrem(num, size - 1);
+	else if (num[size] == '\0')
+		num[size] = '1';
+	else
+		num[size] += 1;
+}
 
 /*
 ** Addition numbers in strings
@@ -42,38 +61,37 @@ void		ft_double_addition(char *num, char **tmp, int size, int len)
 ** Multiplication number in string
 */
 
-void		ft_double_multi(char *exp, int base)
+static int	ft_double_multi(char *exp, int base)
 {
-	char **tmp;
-	char *i;
+	
+	char	**tmp;
+	int		i;
+	int		j;
+	int		k;
 
-	if (!(i = ft_strnew(4)));
-	i[0] = 651; //tmp[j]
-	i[1] = 651; //tmp[j][k]
-	i[2] = 651; //tmp[j][k] - k when we're create new string
-	i[3] = 651; //exp[i]
-	if (!(tmp = (char**)malloc(sizeof(char*))))
+	i = 1023;
+	j = 0;
+	if (!(tmp = (char**)malloc(sizeof(char*) * 1024)))
 		ft_error();
 	while (exp[i])
 	{
-		i[2] = i[3];
-		if (!(tmp[i[1]] = ft_strnew(652)))
-			ft_error();
-		l = (rem[i[0]] - '0') * base;
-		while (l / 10 && l % 10)
-		{
-			tmp[i[1]][i[2]--] = l % 10 + '0';
-			l /= 10;
-		}
-		i[0]--;
-		i[1]--;
-		i[3]--;
+		if (!(tmp[j] = ft_strnew(2)))
+			ft_error(0);
+		tmp[j][1] = ((exp[i] - '0') * base) % 10 + '0';
+		tmp[j][0] = ((exp[i] - '0') * base) / 10 + '0';
+		tmp[j][0] = tmp[j][0] == '0' ? '\0' : tmp[j][0];
+		j++;
+		i--;
 	}
-	i[2] = 651;
-	i[1] = 650;
-	i[0] = 651;
-	while (i[2] >= i[3])
-		ft_double_addition(rem, &exp[i[1]--], i[3]--, i[2]--);
+	k = 0;
+	i = 1023;
+	ft_bzero(exp, 1024);
+	while (k < j)
+		ft_double_addition(exp, &tmp[k++], i--, 1);
+	ft_strdel(tmp);
+	while (i >= 0 && exp[i])
+		i--;
+	return (i + 1);
 }
 
 char		*ft_double_power(int exponent, int base)
@@ -82,15 +100,19 @@ char		*ft_double_power(int exponent, int base)
 	char	*ret;
 	int		i;
 
-	if (!(exp = ft_strnew(652)))
+	if (!(exp = ft_strnew(1024)))
 		ft_error();
-	exp[651] = base + '0';
+	exp[1023] = '1';
 	while(exponent > 0)
 	{
-		ft_expomulti(exp, base);
+		i = ft_double_multi(exp, base);
 		exponent--;
 	}
-	return (exp);
+	if (!(ret = ft_strnew(i)))
+		ft_error();
+	ret = ft_strcpy(ret, exp + i);
+	ft_strdel(&exp);
+	return (ret);
 }
 
 uintmax_t	ft_exponentiation(int exponent, int base)

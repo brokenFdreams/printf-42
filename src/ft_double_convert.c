@@ -6,55 +6,45 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/08 14:36:10 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/10 13:40:46 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
 /*
-** Plus remainder
+** Just some code from function ft_double_i, because there 25 lines
 */
 
-void		ft_double_plusrem(char *num, int size)
+static int	ft_double_ispace(char **integer)
 {
-	if (num[size] == '9')
-	{
-		num[size] = '0';
-		ft_double_plusrem(num, size - 1);
-	}
-	else if (num[size] == '.')
-		ft_double_plusrem(num, size - 1);
-	else if (num[size] == '\0')
-		num[size] = '1';
-	else
-		num[size] += 1;
+	if (!(*integer = ft_strnew(1)))
+		ft_error();
+	(*integer)[0] = '0';
+	return (0);
 }
 
 /*
-** Addition number in string
+** Rounding number remainder (used in ft_double_convert.c)
 */
 
-static void	ft_double_addition(char *num, char **tmp, int size, int len)
+static void	ft_double_rounding(char *rem, int precision)
 {
-	int a;
-	int b;
+	int i;
 
-	b = 0;
-	while (size >= 0 && len >= 0 && num[size] != '.')
+	i = precision + 1;
+	if (rem[i] == '5')
 	{
-		if (ft_isdigit(num[size]))
-			a = num[size] - '0';
-		else
-			a = 0;
-		b += (*tmp)[len--] - '0';
-		a = a + b;
-		b = a >= 10 ? 1 : 0;
-		num[size--] = a >= 10 ? a % 10 + '0' : a + '0';
+		i++;
+		while (rem[i] && rem[i] == '0')
+			i++;
+		if ((rem[i] && rem[i] != '0') ||
+			(rem[precision] - '0') % 2 != 0)
+			ft_double_plusrem(rem, precision);
 	}
-	if (b)
-		ft_double_plusrem(num, size);
-	ft_strdel(tmp);
+	else if (rem[i] > '5' && rem[i] <= '9')
+		ft_double_plusrem(rem, precision);
+	rem[precision + 1] = '\0';
 }
 
 /*
