@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:01:18 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/10 16:35:54 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/11 16:07:55 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		ft_double_plusrem(char *num, int size)
 ** Addition numbers in strings
 */
 
-void		ft_double_addition(char *num, char **tmp, int size, int len)
+void		ft_double_addition(char *num, char *tmp, int size, int len)
 {
 	int a;
 	int b;
@@ -47,14 +47,25 @@ void		ft_double_addition(char *num, char **tmp, int size, int len)
 			a = num[size] - '0';
 		else
 			a = 0;
-		b += (*tmp)[len--] - '0';
+		b += tmp[len--] - '0';
 		a = a + b;
 		b = a >= 10 ? 1 : 0;
 		num[size--] = a >= 10 ? a % 10 + '0' : a + '0';
 	}
 	if (b)
 		ft_double_plusrem(num, size);
-	ft_strdel(tmp);
+}
+
+static void	ft_double_multispace(char *exp, char **tmp, int i, int j)
+{
+	int k;
+
+	k = 0;
+	while (k < j)
+	{
+		ft_double_addition(exp, tmp[k], i--, 1);
+		ft_strdel(&(tmp[k++]));
+	}
 }
 
 /*
@@ -66,7 +77,6 @@ int			ft_double_multi(char *exp, int base)
 	char	**tmp;
 	int		i;
 	int		j;
-	int		k;
 
 	i = 1023;
 	if (!(tmp = (char**)malloc(sizeof(char*) * 1024)))
@@ -80,10 +90,8 @@ int			ft_double_multi(char *exp, int base)
 		tmp[j][0] = tmp[j][0] == '0' ? '\0' : tmp[j][0];
 		j++;
 	}
-	k = 0;
 	ft_bzero(exp, (i = 1023) + 1);
-	while (k < j)
-		ft_double_addition(exp, &(tmp[k++]), i--, 1);
+	ft_double_multispace(exp, tmp, i, j);
 	ft_strddel(&tmp);
 	while (i >= 0 && exp[i])
 		i--;
@@ -104,5 +112,5 @@ int			ft_double_exp(int exponent, int base, char **exp)
 		exponent--;
 	}
 	*exp = i == -1 ? ft_strcpy(*exp, "1") : *exp;
-	return (i == -1 ? 1 : i);
+	return (i == -1 ? 0 : i);
 }

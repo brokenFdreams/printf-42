@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:33:26 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/10 16:22:05 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/11 14:51:03 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*ft_double_remnder(long double nbr, int size, int *exponent)
 ** return exponent
 */
 
-/*static */int	ft_double_mantissa(long double nbr, char **mantissa)
+static int	ft_double_mantissa(long double nbr, char **mantissa)
 {
 	int		size;
 	int		exponent;
@@ -88,7 +88,7 @@ static char	*ft_double_remnder(long double nbr, int size, int *exponent)
 ** Itoa for double
 */
 
-char		*ft_double_itoa(long double nbr, int precision)
+char		*ft_double_itoa(long double nbr, t_flags *flags)
 {
 	char	*mantissa;
 	char	*num;
@@ -103,7 +103,7 @@ char		*ft_double_itoa(long double nbr, int precision)
 	else if (nbr != nbr)
 		num = ft_strjoin("", "NAN");
 	if (!num)
-		ft_double_revert(mantissa, &num, exponent, precision);
+		ft_double_revert(mantissa, &num, exponent, flags);
 	ft_strdel(&mantissa);
 	return (num);
 }

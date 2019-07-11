@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/10 16:18:45 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/11 16:12:16 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int				ft_uint(va_list ap, t_flags *flags, char c, char **save);
 char			*ft_uint_itoa(uintmax_t nbr, int base);
 uintmax_t		ft_get_uint(va_list ap, t_flags *flags);
 int				ft_double(va_list ap, t_flags *flags, char **save);
-char			*ft_double_itoa(long double nbr, int exponent);
+char			*ft_double_itoa(long double nbr, t_flags *flags);
 void			ft_double_revert(char *mantissa, char **num, int exp,
-								int precision);
-void			ft_double_addition(char *num, char **tmp, int size, int len);
+								t_flags *flags);
+void			ft_double_addition(char *num, char *tmp, int size, int len);
 void			ft_double_plusrem(char *num, int size);
 int				ft_double_exp(int exponent, int base, char **exp);
 int				ft_double_multi(char *exp, int base);
@@ -75,6 +75,6 @@ int				ft_handle_precision(char **str, t_flags *flags, va_list ap);
 int				ft_handle_length(char **str, t_flags *flags);
 void			ft_length(char **str, t_flags *flags, int length, int size);
 char			*ft_strnjoin(char *s1, const char *s2, size_t n, size_t pos);
-//uintmax_t		ft_exponentiation(int exponent, int base);
+void			ft_strspace(char **power, char **tmp);
 
 #endif

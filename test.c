@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/10 16:57:22 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/11 15:18:00 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +23,9 @@ int	main(void)
 {
 
 
+	ft_printf("%.10f\n", 123.456);
+
+/*
 	char *mantissa;
 	char *num;
 	char *frt;
@@ -29,9 +33,9 @@ int	main(void)
 	int exp;
 	int size;
 
-	exp = ft_double_mantissa(3.85, &mantissa);
+	exp = ft_double_mantissa(312.6, &mantissa);
 	printf("exp:%d mantissa:%s\n", exp, mantissa);
-/*
+
 //	size =  ft_double_exp(exp, 2, &num);
 //	printf("size:%d num:%s:size:%d:\n", size, num + size, ft_strlen(num + size));
 //	ft_double_i(mantissa, &frt, exp);
@@ -40,11 +44,11 @@ int	main(void)
 	ft_double_r(mantissa, &rem, 9, exp);
 //	frt = frt[0] == '\0' ? frt + 1 : frt;
 	printf("%s\n", rem + 1);
-*/
-	ft_double_revert(mantissa, &num, exp, 8);
+	ft_double_revert(mantissa, &num, exp, 0);
 	printf("num:%s\n", num); 
-
+	printf("%.8f\n", 312.15);
 //	ft_printf("%.8f\n", -3.85);
+*/
 /*
 	printf(":printf:%d\n", printf("%-5c", '\0'));
 	printf(":ft_printf:%d\n", ft_printf("%-5c", '\0'));
