@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/12 15:47:24 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/12 16:37:17 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,9 @@ void		ft_double_revert(char *mantissa, char **num, int exp,
 	char	*integer;
 	char	*remnder;
 	int		size;
-	int		i;
 
 	ft_double_i(mantissa, &integer, exp);
-	i = exp >= 0 ? exp + 1 : 0;
-	mantissa = mantissa + i;
+	mantissa += exp >= 0 ? exp + 1 : 0;
 	size = integer[0] ? ft_strlen(integer) : ft_strlen(integer + 1);
 	ft_double_r(mantissa, &remnder, flags->precision, exp >= 0 ? 1 : exp * -1);
 	if (remnder[0] != '\0')
