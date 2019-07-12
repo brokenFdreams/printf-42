@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,12 +6,13 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/11 15:18:00 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/12 15:55:00 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
 #include <stdio.h>
+#include <float.h>
 
 int ft_double_mantissa(long double nbr, char **mantissa);
 void    ft_double_r(char *mantissa, char **remainder, int precision, int exp);
@@ -21,10 +21,23 @@ void ft_double_plusrem(char *num, int size);
 
 int	main(void)
 {
-
-
-	ft_printf("%.10f\n", 123.456);
-
+	double max = DBL_MAX;
+	double min = DBL_MIN;
+	
+	printf("max:%f\n", DBL_MAX);
+	printf("min:%.1024f\n", DBL_MIN);
+	ft_printf("mmax:%f\n", DBL_MAX);
+	ft_printf("mmin:%.1024f\n", DBL_MIN);
+//	printf("%f\n", 99368744177664.25);
+//	ft_printf("%f\n", 99368744177664.25);
+//	long double l = 1234.56;
+//	ft_printf("%Lf\n", l);
+//	printf("%Lf\n", l);
+//	ft_printf("%f\n", 123321432523454.25);
+//	ft_printf("ft_printf{%f}{%lf}{%Lf}\n", 1444565444646.6465424242242,
+//		1444565444646.6465424242242, 1444565444646.6465424242242l);
+//	printf("printf{%f}{%lf}{%Lf}", 1444565444646.6465424242242,
+//		1444565444646.6465424242242, 1444565444646.6465424242242l);
 /*
 	char *mantissa;
 	char *num;

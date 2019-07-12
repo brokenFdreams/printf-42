@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strspace.c                                      :+:      :+:    :+:   */
+/*   ft_strrdel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 16:10:55 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/11 16:12:25 by fsinged          ###   ########.fr       */
+/*   Created: 2019/07/11 16:30:37 by fsinged           #+#    #+#             */
+/*   Updated: 2019/07/11 16:32:11 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	ft_strspace(char **power, char **tmp)
+void	ft_strrdel(char **power, char **tmp)
 {
-	ft_strdel(power);
-	ft_strdel(tmp);
+	if (power && *power)
+	{
+		free(*power);
+		*power = NULL;
+	}
+	if (tmp && *tmp)
+	{
+		free(*tmp);
+		*tmp = NULL;
+	}
 }

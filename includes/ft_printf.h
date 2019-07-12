@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/11 16:12:16 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/11 16:32:38 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ int				ft_handle_precision(char **str, t_flags *flags, va_list ap);
 int				ft_handle_length(char **str, t_flags *flags);
 void			ft_length(char **str, t_flags *flags, int length, int size);
 char			*ft_strnjoin(char *s1, const char *s2, size_t n, size_t pos);
-void			ft_strspace(char **power, char **tmp);
+void			ft_strrdel(char **power, char **tmp);
 
 #endif
