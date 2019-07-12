@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:33:26 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/12 16:22:41 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/12 16:48:08 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char		*ft_double_itoa(long double nbr, t_flags *flags)
 	else if (exponent == 16383)
 		ft_double_except(mantissa, &num, 1);
 	else if (nbr != nbr)
-		num = ft_strjoin("", "NAN");
+		num = ft_strjoin("", "nan");
 	if (!num)
 		ft_double_revert(mantissa, &num, exponent, flags);
 	ft_strdel(&mantissa);
