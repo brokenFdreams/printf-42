@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/12 16:37:17 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/15 15:44:47 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,14 @@ static void	ft_double_i(char *mantissa, char **integer, int exponent)
 		if (!(*integer = ft_strnew(size + 1)))
 			ft_error();
 		ft_double_addition(*integer, tmp, size, size + len - 1);
+//		printf("tmp:%s:\n", tmp + len);
 		ft_bzero(tmp + len, ft_strlen(tmp + len));
 		len = ft_double_exp(0, 2, &power);
 		while (exponent > 0)
 		{
 			tmp = mantissa[exponent--] == '0' ? ft_strcpy(tmp, "0") :
 				ft_strcpy(tmp, power + len);
+//			printf("tmp:%s:\n", tmp);
 			ft_double_addition(*integer, tmp, size, ft_strlen(tmp) - 1);
 			len = ft_double_multi(power, 2);
 		}
@@ -92,13 +94,13 @@ static void	ft_double_r(char *mantissa, char **rem, int precision, int exp)
 	int		len;
 	int		i;
 
-	if (!(*rem = ft_strnew(precision > 1022 ? precision + 2 : 1024)))
+	if (!(*rem = ft_strnew(precision > 16384 ? precision + 2 : 16384)))
 		ft_error();
 	size = 1;
 	while (!(i = 0) && size < exp)
 		(*rem)[size++] = '0';
 	len = ft_double_exp(exp, 5, &power);
-	if (!(tmp = ft_strnew(precision > 1024 ? precision : 1024)))
+	if (!(tmp = ft_strnew(precision > 16384 ? precision : 16384)))
 		ft_error();
 	while (mantissa[i])
 	{

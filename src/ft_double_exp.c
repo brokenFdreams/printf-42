@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:01:18 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/11 16:07:55 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/15 14:58:36 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int			ft_double_multi(char *exp, int base)
 	int		i;
 	int		j;
 
-	i = 1023;
-	if (!(tmp = (char**)malloc(sizeof(char*) * 1024)))
+	i = 11452;
+	if (!(tmp = (char**)malloc(sizeof(char*) * 11452)))
 		ft_error();
-	while (exp[i] && ((j = i == 1023 ? 0 : j) == 0 || 1))
+	while (exp[i] && ((j = i == 11452 ? 0 : j) == 0 || 1))
 	{
 		if (!(tmp[j] = ft_strnew(2)))
 			ft_error(0);
@@ -90,7 +90,7 @@ int			ft_double_multi(char *exp, int base)
 		tmp[j][0] = tmp[j][0] == '0' ? '\0' : tmp[j][0];
 		j++;
 	}
-	ft_bzero(exp, (i = 1023) + 1);
+	ft_bzero(exp, (i = 11452) + 1);
 	ft_double_multispace(exp, tmp, i, j);
 	ft_strddel(&tmp);
 	while (i >= 0 && exp[i])
@@ -102,9 +102,9 @@ int			ft_double_exp(int exponent, int base, char **exp)
 {
 	int		i;
 
-	if (!(*exp = ft_strnew(1024)))
+	if (!(*exp = ft_strnew(11452)))
 		ft_error();
-	(*exp)[1023] = '1';
+	(*exp)[11452] = '1';
 	i = -1;
 	while (exponent > 0)
 	{
