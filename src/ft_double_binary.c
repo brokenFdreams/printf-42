@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 10:55:41 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/15 15:24:03 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 11:04:41 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_double_exponent(char **exponent)
 ** Write double in string
 */
 
-int			ft_double_binary(long double nbr, char **mantissa)
+int			ft_double_binary(long double nbr, char **mantissa, int *sign)
 {
 	__uint128_t	nb;
 	__uint128_t	one;
@@ -55,6 +55,7 @@ int			ft_double_binary(long double nbr, char **mantissa)
 	if (!(*mantissa = ft_strnew(63)))
 		ft_error();
 	ft_memcpy(&nb, &nbr, 16);
+	*sign = ((__uint128_t)(one & (nb << j)) >> 127) ? -1 : 1;
 	while (++j && i < 15)
 		exponent[i++] = ((__uint128_t)(one & (nb << j)) >> 127) + '0';
 	i = 0;

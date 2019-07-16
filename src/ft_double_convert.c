@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/15 15:44:47 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 11:28:00 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ static void	ft_double_i(char *mantissa, char **integer, int exponent)
 		if (!(*integer = ft_strnew(size + 1)))
 			ft_error();
 		ft_double_addition(*integer, tmp, size, size + len - 1);
-//		printf("tmp:%s:\n", tmp + len);
 		ft_bzero(tmp + len, ft_strlen(tmp + len));
 		len = ft_double_exp(0, 2, &power);
 		while (exponent > 0)
 		{
 			tmp = mantissa[exponent--] == '0' ? ft_strcpy(tmp, "0") :
 				ft_strcpy(tmp, power + len);
-//			printf("tmp:%s:\n", tmp);
 			ft_double_addition(*integer, tmp, size, ft_strlen(tmp) - 1);
 			len = ft_double_multi(power, 2);
 		}
@@ -131,7 +129,7 @@ void		ft_double_revert(char *mantissa, char **num, int exp,
 	size = integer[0] ? ft_strlen(integer) : ft_strlen(integer + 1);
 	ft_double_r(mantissa, &remnder, flags->precision, exp >= 0 ? 1 : exp * -1);
 	if (remnder[0] != '\0')
-		ft_double_plusrem(integer, integer[0] ? size : size + 1);
+		ft_double_plusrem(integer, integer[0] ? size - 1 : size);
 	size += exp >= 0 ? flags->precision : flags->precision + 1;
 	size += flags->precision > 0 || flags->hash ? 1 : 0;
 	if (!(*num = ft_strnew(size)))

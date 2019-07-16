@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/15 12:45:53 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 11:05:03 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int				ft_uint(va_list ap, t_flags *flags, char c, char **save);
 char			*ft_uint_itoa(uintmax_t nbr, int base);
 uintmax_t		ft_get_uint(va_list ap, t_flags *flags);
 int				ft_double(va_list ap, t_flags *flags, char **save);
-char			*ft_double_itoa(long double nbr, t_flags *flags);
-int				ft_double_binary(long double nbr, char **mantissa);
+char			*ft_double_itoa(long double nbr, t_flags *flags, int *sign);
+int				ft_double_binary(long double nbr, char **mantissa, int *sign);
 void			ft_double_revert(char *mantissa, char **num, int exp,
 								t_flags *flags);
 void			ft_double_addition(char *num, char *tmp, int size, int len);

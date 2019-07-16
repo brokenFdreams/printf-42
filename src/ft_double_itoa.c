@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:33:26 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/15 15:14:33 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 11:01:55 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static void	ft_double_except(char *mantissa, char **num, int exp)
 ** Itoa for double
 */
 
-char		*ft_double_itoa(long double nbr, t_flags *flags)
+char		*ft_double_itoa(long double nbr, t_flags *flags, int *sign)
 {
 	char	*mantissa;
 	char	*num;
 	int		exponent;
 
-	exponent = ft_double_binary(nbr, &mantissa);
+	exponent = ft_double_binary(nbr, &mantissa, sign);
 	num = NULL;
 	if (exponent == 0)
 		ft_double_except(mantissa, &num, 0);

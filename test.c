@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/15 15:40:18 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/15 15:51:02 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(void)
 	double min = DBL_MIN;
 
 //	ft_printf("%f", 123.25);
-	printf("max:%lf\n", DBL_MAX);
+//	printf("max:%lf\n", DBL_MAX);
 //	printf("min:%.1024f\n", DBL_MIN);
 //	printf("min:%.16383Lf\n", LDBL_MIN);
 	ft_printf("mmax:%lf\n", DBL_MAX);

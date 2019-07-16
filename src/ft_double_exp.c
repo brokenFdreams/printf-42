@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:01:18 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/15 14:58:36 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 11:28:21 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void		ft_double_plusrem(char *num, int size)
 		num[size] = '0';
 		ft_double_plusrem(num, size - 1);
 	}
-	else if (num[size] == '.')
-		ft_double_plusrem(num, size - 1);
 	else if (num[size] == '\0')
 		num[size] = '1';
 	else

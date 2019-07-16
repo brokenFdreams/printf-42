@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:14:52 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/12 16:48:40 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 11:04:19 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int			ft_double(va_list ap, t_flags *flags, char **save)
 		nbr = va_arg(ap, long double);
 	else
 		nbr = va_arg(ap, double);
-	sign = nbr >= 0 ? 1 : -1;
+//	sign = nbr >= 0 ? 1 : -1;
 	flags->precision = flags->precision == -1 ? 6 : flags->precision;
-	num = ft_double_itoa(nbr * sign, flags);
-	if (!ft_strcmp(num, "nan"))
-		sign = 1;
+	num = ft_double_itoa(nbr, flags, &sign);
+//	if (!ft_strcmp(num, "nan"))
+//		sign = 1;
 	return (ft_double_flags(&num, sign, flags, save));
 }
