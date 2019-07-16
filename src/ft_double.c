@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:14:52 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/16 13:03:10 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 14:20:40 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Allocate new string, fill flags, join our double to it and return result
 */
 
-static int	ft_double_flags(char **nbr, int sign, t_flags *flags, char **save)
+static int	ft_double_flags(char **nbr, t_flags *flags, int sign, char **save)
 {
 	int	size;
 	int	length;
@@ -26,7 +26,7 @@ static int	ft_double_flags(char **nbr, int sign, t_flags *flags, char **save)
 	size = (sign == -1 || flags->plus || flags->space) ? length + 1 : length;
 	i = 0;
 	if (size < flags->width)
-		i = ft_int_width(save, size, flags, sign);
+		i = ft_int_width(save, length, flags, sign);
 	else if (!(*save = ft_strnew(size)))
 		ft_error();
 	if (sign == -1)
@@ -56,5 +56,6 @@ int			ft_double(va_list ap, t_flags *flags, char **save)
 		nbr = va_arg(ap, double);
 	flags->precision = flags->precision == -1 ? 6 : flags->precision;
 	num = ft_double_itoa(nbr, flags, &sign);
-	return (ft_double_flags(&num, sign, flags, save));
+	flags->precision = -1;
+	return (ft_double_flags(&num, flags, sign, save));
 }
