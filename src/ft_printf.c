@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/01 12:59:38 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 15:20:17 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ static void	ft_space(char **str, t_flags *flags, va_list ap)
 	{
 		(*str)++;
 		bytes = ft_handle(str, flags, ap, &save);
-		flags->output = ft_strjoin(flags->output, save);
+		flags->output = ft_strnew(flags->bytes + bytes);
+		flags->output = ft_strmjoin(flags->output, tmp, flags->bytes, 0);
+		flags->output = ft_strmjoin(flags->output, save, bytes, flags->bytes);
 		ft_strdel(&save);
 		(*str)++;
 	}
