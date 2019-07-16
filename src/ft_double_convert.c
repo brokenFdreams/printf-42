@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/16 13:00:30 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 13:10:22 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,11 @@ static void	ft_double_i(char *mantissa, char **integer, int exponent)
 		ft_double_addition(*integer, tmp, size, size + len - 1);
 		ft_bzero(tmp + len, ft_strlen(tmp + len));
 		len = ft_double_exp(exponent > 62 ? exponent - 62 : 0, 2, &power);
-		exponent = exponent > 62 ? 62 : exponent;
-		while (exponent > 0)
+		while ((exponent = exponent > 62 ? 62 : exponent))
 		{
 			tmp = mantissa[exponent--] == '0' ? ft_strcpy(tmp, "0") :
 				ft_strcpy(tmp, power + len);
 			ft_double_addition(*integer, tmp, size, ft_strlen(tmp) - 1);
-			ft_bzero(tmp, ft_strlen(tmp));
 			len = ft_double_multi(power, 2);
 		}
 		ft_strrdel(&power, &tmp);

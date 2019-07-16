@@ -6,18 +6,14 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 13:59:30 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/16 13:01:09 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 13:54:00 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
 #include <stdio.h>
 #include <float.h>
-
-int ft_double_mantissa(long double nbr, char **mantissa);
-void    ft_double_r(char *mantissa, char **remainder, int precision, int exp);
-void ft_double_i(char *mantissa, char **integer, int exponent);
-void ft_double_plusrem(char *num, int size);
+#include <math.h>
 
 int	main(void)
 {
@@ -25,14 +21,15 @@ int	main(void)
 	double min = DBL_MIN;
 
 //	ft_printf("%f", 123.25);
-	printf("max:%f\n", DBL_MAX);
-	printf("max:%Lf\n", LDBL_MAX);
+//	printf("max:%f\n", DBL_MAX);
+//	printf("max:%Lf\n", LDBL_MAX);
 //	printf("min:%.1024f\n", DBL_MIN);
 //	printf("min:%.16383Lf\n", LDBL_MIN);
-	ft_printf("mmax:%f\n", DBL_MAX);
-	ft_printf("mmax:%Lf\n", LDBL_MAX);
+//	ft_printf("mmax:%f\n", DBL_MAX);
+//	ft_printf("mmax:%Lf\n", LDBL_MAX);
 //	ft_printf("mmin:%.1024f\n", DBL_MIN);
 //	ft_printf("mmin:%.16383Lf\n", LDBL_MIN);
+	ft_printf("%f\n", DBL_INF);
 
 //	printf("%f\n", 99368744177664.25);
 //	ft_printf("%f\n", 99368744177664.25);
