@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 14:42:49 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/16 11:28:00 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/16 13:00:30 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,14 @@ static void	ft_double_i(char *mantissa, char **integer, int exponent)
 			ft_error();
 		ft_double_addition(*integer, tmp, size, size + len - 1);
 		ft_bzero(tmp + len, ft_strlen(tmp + len));
-		len = ft_double_exp(0, 2, &power);
+		len = ft_double_exp(exponent > 62 ? exponent - 62 : 0, 2, &power);
+		exponent = exponent > 62 ? 62 : exponent;
 		while (exponent > 0)
 		{
 			tmp = mantissa[exponent--] == '0' ? ft_strcpy(tmp, "0") :
 				ft_strcpy(tmp, power + len);
 			ft_double_addition(*integer, tmp, size, ft_strlen(tmp) - 1);
+			ft_bzero(tmp, ft_strlen(tmp));
 			len = ft_double_multi(power, 2);
 		}
 		ft_strrdel(&power, &tmp);
@@ -92,13 +94,13 @@ static void	ft_double_r(char *mantissa, char **rem, int precision, int exp)
 	int		len;
 	int		i;
 
-	if (!(*rem = ft_strnew(precision > 16384 ? precision + 2 : 16384)))
+	if (!(*rem = ft_strnew(precision > 16382 ? precision + 2 : 16384)))
 		ft_error();
 	size = 1;
 	while (!(i = 0) && size < exp)
 		(*rem)[size++] = '0';
 	len = ft_double_exp(exp, 5, &power);
-	if (!(tmp = ft_strnew(precision > 16384 ? precision : 16384)))
+	if (!(tmp = ft_strnew(precision > 16382 ? precision : 16384)))
 		ft_error();
 	while (mantissa[i])
 	{
@@ -125,7 +127,8 @@ void		ft_double_revert(char *mantissa, char **num, int exp,
 	int		size;
 
 	ft_double_i(mantissa, &integer, exp);
-	mantissa += exp >= 0 ? exp + 1 : 0;
+	mantissa += exp >= 0 && exp < 62 ? exp + 1 : 0;
+	mantissa += exp > 62 ? 62 : 0;
 	size = integer[0] ? ft_strlen(integer) : ft_strlen(integer + 1);
 	ft_double_r(mantissa, &remnder, flags->precision, exp >= 0 ? 1 : exp * -1);
 	if (remnder[0] != '\0')
