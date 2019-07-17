@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 15:01:18 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/16 11:28:21 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/17 11:27:40 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void		ft_double_addition(char *num, char *tmp, int size, int len)
 		ft_double_plusrem(num, size);
 }
 
+/*
+** Some space from double_multi (25 lines)
+*/
+
 static void	ft_double_multispace(char *exp, char **tmp, int i, int j)
 {
 	int k;
@@ -77,9 +81,10 @@ int			ft_double_multi(char *exp, int base)
 	int		j;
 
 	i = 11452;
-	if (!(tmp = (char**)malloc(sizeof(char*) * 11452)))
+	if (!(tmp = (char**)malloc(sizeof(char*) * i)))
 		ft_error();
-	while (exp[i] && ((j = i == 11452 ? 0 : j) == 0 || 1))
+	j = 0;
+	while (exp[i])
 	{
 		if (!(tmp[j] = ft_strnew(2)))
 			ft_error(0);
@@ -88,8 +93,8 @@ int			ft_double_multi(char *exp, int base)
 		tmp[j][0] = tmp[j][0] == '0' ? '\0' : tmp[j][0];
 		j++;
 	}
-	ft_bzero(exp, (i = 11452) + 1);
-	ft_double_multispace(exp, tmp, i, j);
+	ft_bzero(exp, 11453);
+	ft_double_multispace(exp, tmp, 11452, j);
 	ft_strddel(&tmp);
 	while (i >= 0 && exp[i])
 		i--;
@@ -100,15 +105,11 @@ int			ft_double_exp(int exponent, int base, char **exp)
 {
 	int		i;
 
-	if (!(*exp = ft_strnew(11452)))
+	if (!(*exp = ft_strnew(11453)))
 		ft_error();
 	(*exp)[11452] = '1';
 	i = -1;
-	while (exponent > 0)
-	{
+	while (exponent-- > 0)
 		i = ft_double_multi(*exp, base);
-		exponent--;
-	}
-	*exp = i == -1 ? ft_strcpy(*exp, "1") : *exp;
-	return (i == -1 ? 0 : i);
+	return (i == -1 ? 11452 : i);
 }
