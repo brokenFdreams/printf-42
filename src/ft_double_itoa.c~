@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 13:33:26 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/25 14:46:35 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 14:40:13 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_double_except(char *mantissa, char **num, int exp,
 ** Itoa for double
 */
 
-char		*ft_double_itoa(long double nbr, t_flags *flags, int *sign)
+char		*ft_double_itoa(long double nbr, t_flags *flags, int *sign, char c)
 {
 	char	*mantissa;
 	char	*num;

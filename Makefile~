@@ -6,7 +6,7 @@
 #    By: fsinged <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/17 15:47:32 by fsinged           #+#    #+#              #
-#    Updated: 2019/09/25 15:08:42 by fsinged          ###   ########.fr        #
+#    Updated: 2019/09/25 15:08:28 by fsinged          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -30,7 +30,7 @@ all:$(NAME)
 
 $(NAME):$(LIB)
 	@mkdir $(OBJS_PATH)
-	@gcc -c $(SRCS) $(HEADER)
+	@gcc -c $(SRCS) $(HEADER) $(LIB)
 	@mv $(OBJS_FILES) $(OBJS_PATH)
 	@ar rc $(NAME) $(OBJS) $(LIB)
 	@ranlib $(NAME)

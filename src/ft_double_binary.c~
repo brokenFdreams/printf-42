@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 10:55:41 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/25 15:09:30 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/07/17 13:20:08 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int			ft_double_binary(long double nbr, char **mantissa, int *sign)
 		(*mantissa)[i++] = ((__uint128_t)(one & (nb << j)) >> 127) + '0';
 		j++;
 	}
+	printf("%c %s %s", *sign == -1 ? 1 : 0, exponent, *mantissa);
 	return (ft_double_exponent(&exponent));
 }

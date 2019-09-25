@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/25 15:04:42 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 14:57:35 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdint.h>
-# include "../libft/libft.h"
+# include "libft.h"
 
 # include <stdio.h>
 
