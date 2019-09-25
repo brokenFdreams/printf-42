@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:32:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/25 14:38:27 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 15:24:46 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	ft_check_specifier(char **str, t_flags *flags, va_list ap,
 	bytes = **str == '%' ? ft_percent(flags, save) : bytes;
 	bytes = **str == 's' ? ft_str(ap, flags, 0, save) : bytes;
 	bytes = **str == 'S' ? ft_str(ap, flags, 1, save) : bytes;
-	bytes = **str == 'd' || **str == 'i' ? ft_int(ap, flags, save) : bytes;
+	bytes = **str == 'd' || **str == 'i' || **str == 'D' || **str == 'I'
+		? ft_int(ap, flags, save, **str) : bytes;
 	bytes = **str == 'c' ? ft_char(ap, flags, 0, save) : bytes;
 	bytes = **str == 'C' ? ft_char(ap, flags, 1, save) : bytes;
 	bytes = **str == 'f' ? ft_double(ap, flags, save, 'f') : bytes;

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/25 15:04:42 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 15:24:21 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct	s_flags
 }				t_flags;
 
 int				ft_printf(char *str, ...);
-int				ft_int(va_list ap, t_flags *flags, char **save);
+int				ft_int(va_list ap, t_flags *flags, char **save, char c);
 int				ft_int_flags(char **nbr, t_flags *flags, int sign, char **save);
 int				ft_int_width(char **save, int size, t_flags *flags, int sign);
 int				ft_uint(va_list ap, t_flags *flags, char c, char **save);

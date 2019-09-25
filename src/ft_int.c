@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:32:43 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/16 14:53:31 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 15:22:01 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,14 @@ int	ft_int_flags(char **nbr, t_flags *flags, int sign, char **save)
 ** ft_itoa_uint in file ft_uint.c
 */
 
-int	ft_int(va_list ap, t_flags *flags, char **save)
+int	ft_int(va_list ap, t_flags *flags, char **save, char c)
 {
 	intmax_t	nbr;
 	int			sign;
 	char		*num;
 
+	if (c == 'D' || c == 'I')
+		flags->length = flags->length == 0 ? LENGTH_L : flags->length + 1;
 	if (flags->length == LENGTH_HH)
 		nbr = (char)va_arg(ap, int);
 	else if (flags->length == LENGTH_H)

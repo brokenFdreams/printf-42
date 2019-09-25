@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:42:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/07/08 15:14:02 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 15:22:10 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int			ft_uint(va_list ap, t_flags *flags, char c, char **save)
 	flags->plus = 0;
 	flags->space = 0;
 	if (c == 'U')
-		flags->length = LENGTH_L;
+		flags->length = flags->length == 0 ? LENGTH_L : flags->length + 1;
 	num = ft_uint_itoa(ft_get_uint(ap, flags), 10);
 	return (ft_int_flags(&num, flags, 1, save));
 }
