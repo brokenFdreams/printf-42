@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 14:37:32 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/26 13:57:55 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 15:24:21 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int				ft_double_multi(char *exp, int base);
 int				ft_hex(va_list ap, t_flags *flags, int flag, char **save);
 int				ft_hex_flags(char **nbr, t_flags *flags, int flag, char **save);
 int				ft_octal(va_list ap, t_flags *flags, char **save);
-int				ft_binary(va_list ap, t_flags *flags, char **save, char c);
+int				ft_binary(va_list ap, t_flags *flags, char **save);
 int				ft_str(va_list ap, t_flags *flags, int flag, char **save);
 int				ft_char(va_list ap, t_flags *flags, int flag, char **save);
 int				ft_percent(t_flags *flags, char **save);
